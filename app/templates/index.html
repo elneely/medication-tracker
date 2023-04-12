@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>Hello, {{ user.username }}!</h1>
+    {% for med in meds %}
+    <div><p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}</p></div>
+    {% endfor %}
+{% endblock %} 

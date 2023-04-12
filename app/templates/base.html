@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Medication Tracker</title>
+        {% else %}
+        <title>Welcome to Your Medication Tracker</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Medication Tracker: 
+            <a href="/index">Home</a>
+            <a href="/login">Login</a>
+        </div>
+        <hr> {% block content %}{% endblock %}
+    </body>
+</html>
