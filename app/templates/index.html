@@ -3,10 +3,11 @@
 {% block content %} 
     {% if current_user.is_anonymous %} 
     <h1 class="header">Welcome to the Medication Tracker!</h1>
-    
+    <hr>
     <p>Please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.register') }}">register</a> to continue.
     {% else %} 
     <h1 class="header">Hello, {{ current_user.display_name }}!</h1>
+    <hr>
     {% endif %} 
 
     <div class="notifications">
