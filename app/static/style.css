@@ -1,0 +1,39 @@
+nav {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top:0;
+    padding-top: 20px;
+    background-color: darkblue;
+    color:antiquewhite;
+}
+nav h1 {
+    padding-left: 20%;
+    font-size: 24px;
+}
+nav ul {
+    list-style-type: none;
+}
+nav a {
+    display: block;
+    color:antiquewhite;
+    padding: 8px;
+    font-size: 24px;
+    text-decoration: none;  
+}
+
+nav a:hover {
+    background-color: cornflowerblue;
+}
+
+.body-text h1 {
+    text-align: center;
+}
+.body-text {
+    margin-left: 20%;
+    font-size: 18px;
+    padding-left: 20px;
+}

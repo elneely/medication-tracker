@@ -1,18 +1,40 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
-        {% if title %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% if title %} 
         <title>{{ title }} - Medication Tracker</title>
-        {% else %}
-        <title>Welcome to Your Medication Tracker</title>
-        {% endif %}
+        {% else %} 
+        <title>Medication Tracker</title>
+        {% endif %} 
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <div>
-            Medication Tracker: 
-            <a href="/index">Home</a>
-            <a href="/login">Login</a>
+        <nav>
+            <h1>Menu</h1>
+            <hr>
+            <ul> 
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                {% if current_user.is_anonymous %} 
+                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                {% else %} 
+                <li><a href="{{ url_for('profile.user_profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                {% endif %} 
+            </ul>
+        </nav>
+        <div class="notifications">
+            {% with messages = get_flashed_messages() %} 
+            {% if messages %} 
+                {% for message in messages %} 
+                <div class="alert">{{ message }}</div>
+                {% endfor %} 
+            {% endif %} 
+            {% endwith %} 
         </div>
-        <hr> {% block content %}{% endblock %}
+        <div class="body-text"> 
+        {% block content %}{% endblock %} 
+        </div>
     </body>
 </html>

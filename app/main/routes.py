@@ -1,11 +1,9 @@
 from flask import render_template
-from app import app
-from app.forms import LoginForm
+from app.main import bp
 
-@app.route('/')
-@app.route('/index')
+@bp.route('/')
+@bp.route('/index')
 def index():
-    user = {'username': 'Erica'}
     meds = [
         {
             'medication_name': 'Naproxen',
@@ -62,9 +60,5 @@ def index():
             'notes': 'Smells bad',
         }
     ]
-    return render_template('index.html', title='Home', user=user, meds=meds)
+    return render_template('index.html', title='Home', meds=meds)
 
-@app.route('/login')
-def login():
-    form = LoginForm()
-    return render_template('login.html', title="Sign In", form=form)
