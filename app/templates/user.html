@@ -1,0 +1,54 @@
+{% extends "base.html" %} 
+
+{% block header %} 
+    {% if current_user.display_name %}
+        <h1 class="header">Medication Summary for {{ current_user.display_name }}</h1>
+    {% else %} 
+        <h1 class="header">Medication Summary</h1>
+    {% endif %} 
+{% endblock %} 
+
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+                <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
+{% block content %} 
+    <div class="main-container">
+        
+        <div class="reminder-container">
+            <h2 class="reminders-title">Reminders</h2>
+            <div class="reminders">Reminders go here.</div>
+        </div>
+        <div class="short-term-container">
+            <h2 class="short-term-title">Short-term Medications</h2>
+            <div class="short-term-medications">
+                {% for med in meds %}
+                    {% if med.short_term %}
+                        <div class="medication-summary">
+                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}, {{med.length }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="long-term-container">
+            <h2 class="long-term-title">Long-term Medications</h2>
+            <div class="long-term-medications">
+                {% for med in meds %} 
+                    {% if not med.short_term %} 
+                        <div class="medication-summary">
+                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+
+{% endblock %} 

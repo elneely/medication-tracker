@@ -14,10 +14,7 @@ nav {
     background-color: darkblue;
     color:antiquewhite;
 }
-nav h1 {
-    padding-left: 15%;
-    font-size: 24px;
-}
+
 nav ul {
     list-style-type: none;
     padding-top: 4%;
@@ -34,22 +31,40 @@ nav a:hover {
     background-color: cornflowerblue;
 }
 
-.body-text h1 {
- 
-    text-align: center;
-
-}
-.body-text {
+.container {
+    display: flex;
+    flex-direction: column;
     margin-left: 15%;
-    font-size: 18px;
     padding-left: 50px;
     padding-right: 50px;
+}
+.header {
+    text-align: center;
+    order: 1;
+}
 
+.header hr {
+    margin-top: 2%;
+    padding: 0;
+}
 
+.body-text {
+    font-size: 18px;
+    order: 3;
 }
 
 .body-text hr {
     margin-top: 2%;
     padding: 0;
+}
 
+.notifications {
+    color: red;
+    order: 2;
+
+}
+
+.error {
+    color: red; 
+    font-size:medium;
 }

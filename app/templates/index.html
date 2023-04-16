@@ -1,25 +1,10 @@
 {% extends "base.html" %}
 
-{% block content %} 
-    {% if current_user.is_anonymous %} 
-    <h1 class="header">Welcome to the Medication Tracker!</h1>
-    <hr>
-    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.register') }}">register</a> to continue.
-    {% else %} 
-    <h1 class="header">Hello, {{ current_user.display_name }}!</h1>
-    <hr>
-    {% endif %} 
+{% block header %}
+<h1 class="header">Welcome to the Medication Tracker!</h1>
 
-    <div class="notifications">
-        {% with messages = get_flashed_messages() %} 
-        {% if messages %} 
-            {% for message in messages %} 
-            <div class="alert">{{ message }}</div>
-            {% endfor %} 
-        {% endif %} 
-        {% endwith %} 
-    </div>
-    {% for med in meds %}
-    <div><p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}</p></div>
-    {% endfor %}
+{% endblock %} 
+
+{% block content %} 
+    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.register') }}">register</a> to continue.
 {% endblock %} 
