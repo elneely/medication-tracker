@@ -82,9 +82,10 @@ def user_profile(username):
     return render_template('user_profile.html', title="User Profile", user=user, form=form)
 
 
-@bp.route('/add_medication', methods=['GET', 'POST'])
+@bp.route('/user/<username>/add_medication', methods=['GET', 'POST'])
 @login_required
-def add_medication():
+def add_medication(username):
+    user = User.query.filter_by(username=username).first_or_404()
     form = MedicationForm()
     if form.validate_on_submit():
         medication = Medication(user_id = current_user.id,
@@ -102,15 +103,16 @@ def add_medication():
             length=form.length.data,
             reason=form.reason.data,
             notes=form.notes.data,
-
-
         )
- 
-    
- 
+        db.session.add(medication)
+        db.session.commit()
+        flash(f'You have successfully added {form.medication_name.data} to your medication list.')
+        return redirect(url_for('main.user', username=username))
+    return render_template('add_medication.html', title='Add Medication', user=user, form=form)
+
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
     pharmacy_id = db.Column(db.Integer, db.ForeignKey('pharmacy.id'))
   
 
 
-    return render_template('add_medication.html', title='Add Medication', meds=meds)
+    

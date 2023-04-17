@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
-    IntegerField,StringField, SubmitField, TelField, TextAreaField
-from wtforms.validators import DataRequired, Length, ValidationError
+    IntegerField, StringField, SubmitField, TelField, TextAreaField
+from wtforms.validators import DataRequired, Length, ValidationError, Optional, NumberRange, Regexp
+from wtforms.widgets import TextInput
 
 class ProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -11,7 +12,7 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, original_email, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
+        super(ProfileForm, self).__init__(*args, **kwargs)
         self.original_username = original_username
         self.original_email = original_email
 
@@ -32,19 +33,19 @@ class MedicationForm(FlaskForm):
     brand_name = StringField('Brand name (optional)', validators=[Length(max=64)])
     dose = StringField('Dosage', validators=[Length(max=64)])
     frequency = StringField('Frequency', validators=[Length(max=64)])
-    prescription_date = DateField('Prescription Date', format='%m/%d/%Y')
-    last_filled = DateField('Last Filled', format='%m/%d/%Y')
+    prescription_date = DateField('Prescription Date', format='%m/%d/%Y', validators=[Optional()])
+    last_filled = DateField('Last Filled', format='%m/%d/%Y', validators=[Optional()])
     short_term = BooleanField('Short term medication?')
-    length = IntegerField('Length of prescription?')
+    length = IntegerField('Length of prescription?', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
-    reminder_length = IntegerField('How many days in advance do you want to be reminded?')
+    reminder_length = IntegerField('How many days in advance do you want to be reminded?', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])
     doctor_id = HiddenField('Prescribing doctor')
     pharmacy_id = HiddenField('Pharmacy')
     doctor_first_name = StringField('First name', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[Length(max=64)])
     pharmacy_name = StringField('Pharmacy name', validators=[Length(max=64)])
-    refills_remaining = IntegerField('Number of refills remaining')
-    refills_expiration = DateField('Expiration Date', format='%m/%d/%Y')
+    refills_remaining = IntegerField('Number of refills remaining', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
+    refills_expiration = DateField('Expiration Date', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking', validators=[Length(max=128)])
     notes = TextAreaField('Notes', validators=[Length(max=1024)])
     submit = SubmitField('Submit')

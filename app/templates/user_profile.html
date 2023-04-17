@@ -2,4 +2,5 @@
 
 {% block content %} 
     <p>This is currently a placeholder.</p>
+    <p><a href="{{ url_for('main.add_medication', username=current_user.username) }}">Add Medication</a></p>
 {% endblock %} 
