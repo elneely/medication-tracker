@@ -9,6 +9,9 @@ class User(UserMixin, db.Model):
     display_name = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    doctors = db.relationship("Doctor", backref="user")
+    pharmacies = db.relationship("Pharmacy", backref="user")
+    meds = db.relationship("Medication", backref="user")
     # Not 100% sure I did the back_populates thing right here
  #   medications = db.relationship('Medication', back_populates='patient') 
 
@@ -45,13 +48,14 @@ class Medication(db.Model):
     length = db.Column(db.Integer, index=True)
     reason = db.Column(db.String(128))
     notes = db.Column(db.String(1024))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))   
+ #   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))   
 
     def __repr__(self):
         return self.medication_name
 
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+  #  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     first_name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
     # for now only dealing with US addresses/phone numbers
@@ -68,6 +72,7 @@ class Doctor(db.Model):
 
 class Pharmacy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+ #   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String(64))
     # for now only dealing with US addresses/phone numbers
     phone_number = db.Column(db.String(10))

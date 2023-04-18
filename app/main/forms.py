@@ -54,7 +54,7 @@ class MedicationForm(FlaskForm):
  #       self.id = 
 
     
-class DoctorForm(FlaskForm):
+class AddDoctorForm(FlaskForm):
     first_name = StringField('First name (optional)', validators=[Length(max=64)])
     last_name = StringField('Last name', validators=[Length(max=64), DataRequired()])
     phone_number = TelField('Telephone number') #not sure I have this input working with model
@@ -66,7 +66,13 @@ class DoctorForm(FlaskForm):
     notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
-
+    def validate_name(self, first_name, last_name):
+        last_name = User.doctors.query.filter_by(last_name=self.last_name.data).first()
+        if last_name is not None:
+            full_name = User.doctors.query.filter_by(last_name=self.last_name.data, first_name=self.first_name.data).first() 
+            if full_name is not None:
+                raise ValidationError('You already have a doctor with this name.')
+ 
 class PharmacyForm(FlaskForm):
     name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
     phone_number = TelField('Telephone number') #not sure I have this input working with model

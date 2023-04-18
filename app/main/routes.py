@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import MedicationForm, EmptyForm
+from app.main.forms import MedicationForm, AddDoctorForm, EmptyForm
 from app.main import bp
 
 @bp.route('/')
@@ -88,7 +88,7 @@ def add_medication(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = MedicationForm()
     if form.validate_on_submit():
-        medication = Medication(user_id = current_user.id,
+        medication = Medication(user = current_user,
             medication_name=form.medication_name.data,
             brand_name=form.brand_name.data,
             dose=form.dose.data,
@@ -113,6 +113,28 @@ def add_medication(username):
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
     pharmacy_id = db.Column(db.Integer, db.ForeignKey('pharmacy.id'))
   
+@bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])
+@login_required
+def add_doctor(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    form = AddDoctorForm()
+    if form.validate_on_submit():
+        doctor = Doctor(user=current_user,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            phone_number=form.phone_number.data,
+            address_line_1=form.address_line_1.data,
+            address_line_2=form.address_line_2.data,
+            city=form.city.data,
+            state=form.state.data,
+            zipcode=form.zipcode.data,
+            notes=form.notes.dat
+        )
+        db.session.add(doctor)
+        db.session.commit()
+        flash(f'You have successfully added Dr. {form.last_name.data} to your doctor list.')
+        return redirect(url_for('main.user', username=username))
+    return render_template('add_doctor.html', title='Add Doctor', user=user, form=form)
 
 
     
