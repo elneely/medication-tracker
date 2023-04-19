@@ -27,7 +27,14 @@ class User(UserMixin, db.Model):
     def doctor_list(self):
         my_doctors = Doctor.query.filter_by(user_id=self.id)
         return my_doctors.order_by(Doctor.last_name.desc())
-      
+          
+    def medication_list(self):
+        my_meds = Medication.query.filter_by(user_id=self.id)
+        return my_meds.order_by(Medication.medication_name.desc())
+    
+    def pharmacy_list(self):
+        my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
+        return my_pharmacies.order_by(Pharmacy.name.desc())
 
 
 @login.user_loader

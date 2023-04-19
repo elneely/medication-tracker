@@ -2,9 +2,9 @@
 
 {% block header %} 
     {% if current_user.display_name %}
-        <h1 class="header">Doctor List - {{ current_user.display_name }}</h1>
+        <h1 class="header">Pharmacy List - {{ current_user.display_name }}</h1>
     {% else %} 
-        <h1 class="header">Doctor List</h1>
+        <h1 class="header">Pharmacy List</h1>
     {% endif %} 
 {% endblock %} 
 
@@ -20,13 +20,12 @@
 
 {% block content %} 
     <div class="main-container">
-        <div class="doctor-container">
-            {% for doctor in doctors %}
-                <div class="doctor-summary">
-                    <p> {{ doctor.first_name }}  
-                        {{ doctor.last_name }}, 
-                        {{ doctor.phone_number }}, 
-                        {{ doctor.notes }}</p>
+        <div class="pharmacy-container">
+            {% for pharmacy in pharmacies %}
+                <div class="pharmacy-summary">
+                    <p> {{ pharmacy.name }}, 
+                        {{ pharmacy.phone_number }}, 
+                        {{ pharmacy.notes }}</p>
                 </div>
             {% endfor %}
         </div>

@@ -73,7 +73,7 @@ class AddDoctorForm(FlaskForm):
             if full_name is not None:
                 raise ValidationError('You already have a doctor with this name.')
  
-class PharmacyForm(FlaskForm):
+class AddPharmacyForm(FlaskForm):
     name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
     phone_number = TelField('Telephone number') #not sure I have this input working with model
     address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
