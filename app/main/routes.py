@@ -88,7 +88,7 @@ def add_medication(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = MedicationForm()
     if form.validate_on_submit():
-        medication = Medication(user = current_user,
+        medication = Medication(
             medication_name=form.medication_name.data,
             brand_name=form.brand_name.data,
             dose=form.dose.data,
@@ -103,6 +103,7 @@ def add_medication(username):
             length=form.length.data,
             reason=form.reason.data,
             notes=form.notes.data,
+            user_id=current_user.id,
         )
         db.session.add(medication)
         db.session.commit()
@@ -119,7 +120,7 @@ def add_doctor(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = AddDoctorForm()
     if form.validate_on_submit():
-        doctor = Doctor(user=current_user,
+        doctor = Doctor(
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             phone_number=form.phone_number.data,
@@ -128,7 +129,8 @@ def add_doctor(username):
             city=form.city.data,
             state=form.state.data,
             zipcode=form.zipcode.data,
-            notes=form.notes.dat
+            notes=form.notes.data,
+            user_id = current_user.id,
         )
         db.session.add(doctor)
         db.session.commit()
@@ -136,5 +138,36 @@ def add_doctor(username):
         return redirect(url_for('main.user', username=username))
     return render_template('add_doctor.html', title='Add Doctor', user=user, form=form)
 
+@bp.route('/user/<username>/doctor_list', methods=['GET'])
+@login_required
+def doctor_list(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    form = EmptyForm()
+    """
+    doctors = [
+        {"user_id" : current_user.id,
+         "first_name" : "Jonathan",
+         "last_name" : "Gendel",
+         "phone_number" : "1234567890",
+         "city" : "Munchtopia",
+         "state": "",
+         "zipcode" : "22066",
+         "notes" : "Pillows!"
+         },
+        {"user_id" : current_user.id,
+         "first_name" : "Rosie",
+         "last_name" : "McDonaldson",
+         "phone_number" : "1234567890",
+         "address_line_1" : "Somewhere",
+         "address_line_2" : "",
+         "city" : "Munchtopia",
+         "state": "",
+         "zipcode" : "22066",
+         "notes" : "Nose!"
+         },
+    ]
+"""
+    doctors = current_user.doctor_list().all()
+    return render_template('doctor_list.html', title="Doctor List", user=user, doctors=doctors, form=form)
 
     

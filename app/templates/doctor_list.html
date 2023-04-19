@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+
+{% block header %} 
+    {% if current_user.display_name %}
+        <h1 class="header">Doctor List - {{ current_user.display_name }}</h1>
+    {% else %} 
+        <h1 class="header">Doctor List</h1>
+    {% endif %} 
+{% endblock %} 
+
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+                <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
+{% block content %} 
+    <div class="main-container">
+        <div class="doctor-container">
+            {% for doctor in doctors %}
+                <div class="doctor-summary">
+                    <p> {{ doctor.user_id }},
+                        {{ doctor.first_name }}  
+                        {{ doctor.last_name }}, 
+                        {{ doctor.phone_number }}, 
+                        {{ doctor.notes }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %} 
