@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
-    IntegerField, StringField, SubmitField, TelField, TextAreaField
+    IntegerField, SelectField, StringField, SubmitField, TelField, TextAreaField
 from wtforms.validators import DataRequired, Length, ValidationError, Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
+from app.models import User
 
 class ProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -39,11 +40,8 @@ class MedicationForm(FlaskForm):
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('How many days in advance do you want to be reminded?', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])
-    doctor_id = HiddenField('Prescribing doctor: ')
-    pharmacy_id = HiddenField('Pharmacy: ')
-    doctor_first_name = StringField('First name', validators=[Length(max=64)])
-    doctor_last_name = StringField('Last name', validators=[Length(max=64)])
-    pharmacy_name = StringField('Pharmacy name', validators=[Length(max=64)])
+    doctor_id = IntegerField()
+    pharmacy_id = HiddenField('Pharmacy: ') 
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])

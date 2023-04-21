@@ -7,4 +7,16 @@
     <p><a href="{{ url_for('main.doctor_list', username=current_user.username) }}">View Doctor List</a></p>
     <p><a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">Add Pharmacy</a></p>
     <p><a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">View Pharmacy List</a></p>
-    {% endblock %} 
+
+    <div class="main-container">
+        <div class="doctor-container">
+            {% for doctor in doctors %}
+                <div class="doctor-summary">
+                    <p> {{ doctor[0] }},  
+                        {{ doctor[1] }} </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %} 

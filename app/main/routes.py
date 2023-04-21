@@ -23,14 +23,20 @@ def user(username):
 def user_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = EmptyForm()
-    return render_template('user_profile.html', title="User Profile", user=user, form=form)
+    doctors = current_user.doctor_choices()
+    return render_template('user_profile.html', title="User Profile", user=user, doctors=doctors, form=form)
 
 
 @bp.route('/user/<username>/add_medication', methods=['GET', 'POST'])
 @login_required
 def add_medication(username):
     user = User.query.filter_by(username=username).first_or_404()
+    doctors = current_user.doctor_choices()
     form = MedicationForm()
+    # succeeds at populating the form with doctors but I don't seem to have the data coming back in the
+    # right format.  Not sure if it's because I wrote the html by hand for this and flask form won't
+    # play nicely or if there's something else going on.
+    
     if form.validate_on_submit():
         medication = Medication(
             medication_name=form.medication_name.data,
@@ -48,12 +54,13 @@ def add_medication(username):
             reason=form.reason.data,
             notes=form.notes.data,
             user_id=current_user.id,
+            doctor_id=int(form.doctor_id.data)
         )
         db.session.add(medication)
         db.session.commit()
         flash(f'You have successfully added {form.medication_name.data} to your medication list.')
         return redirect(url_for('main.user', username=username))
-    return render_template('add_medication.html', title='Add Medication', user=user, form=form)
+    return render_template('add_medication.html', title='Add Medication', doctors=doctors, user=user, form=form)
 
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
     pharmacy_id = db.Column(db.Integer, db.ForeignKey('pharmacy.id'))

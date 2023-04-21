@@ -50,6 +50,20 @@
             {% endfor %} 
         </p>
         <p>
+            <label for="doctor_id">Choose a doctor:</label><br>
+            <select name="doctor_id" id="doctor_id">
+                {% for doctor in doctors %} 
+                    <div class="doctor option">
+                        <option value= doctor[0] >{{ doctor[1] }}</option>
+                    </div>
+                {% endfor %} 
+            </select> 
+            {% for error in form.frequency.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+        
+        <p>
             {# deal with the date #} 
             {{ form.prescription_date.label }} 
             {{ form.prescription_date() }}<br>

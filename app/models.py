@@ -26,8 +26,20 @@ class User(UserMixin, db.Model):
 
     def doctor_list(self):
         my_doctors = Doctor.query.filter_by(user_id=self.id)
-        return my_doctors.order_by(Doctor.last_name.desc())
-          
+        return my_doctors.order_by(Doctor.last_name.asc())
+    
+    def doctor_choices(self):
+        my_doctors = self.doctor_list().all()
+        doctor_choices = []
+        for doctor in my_doctors:
+            if doctor.first_name:
+                doctor_name = doctor.first_name + " " + doctor.last_name
+            else:
+                doctor_name = doctor.last_name
+            doctor_entry = (doctor.id, doctor_name)
+            doctor_choices.append(doctor_entry)
+        return doctor_choices
+
     def medication_list(self):
         my_meds = Medication.query.filter_by(user_id=self.id)
         return my_meds.order_by(Medication.medication_name.desc())
