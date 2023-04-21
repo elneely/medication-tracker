@@ -31,6 +31,9 @@ nav a:hover {
     background-color: cornflowerblue;
 }
 
+textarea {
+
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -68,3 +71,34 @@ nav a:hover {
     color: red; 
     font-size:medium;
 }
+
+
+.info-circle {
+    vertical-align: super;
+    font-size: 12px;
+}
+
+.info-circle .info-text {
+    visibility: hidden;
+    width: 300px;
+    background-color: white;
+    color: black;
+    text-align: left;
+ /*   border-radius: 6px; */
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    padding: 5px;
+    font-size: 12px;
+
+  
+    /* Position the tooltip */
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 30px;
+    z-index: 1;
+  }
+  
+  .info-circle:hover .info-text {
+    visibility: visible;
+  }

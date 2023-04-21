@@ -65,6 +65,7 @@ class Medication(db.Model):
     def __repr__(self):
         return self.medication_name
 
+
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -81,6 +82,7 @@ class Doctor(db.Model):
 
     def __repr__(self):
         return 'Dr. {}'.format(self.last_name)
+
 
 class Pharmacy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
