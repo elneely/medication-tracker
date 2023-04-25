@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
     IntegerField, SelectField, StringField, SubmitField, TelField, TextAreaField
 from wtforms.validators import DataRequired, Length, ValidationError, Optional, NumberRange, Regexp
@@ -40,17 +41,13 @@ class MedicationForm(FlaskForm):
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('How many days in advance do you want to be reminded?', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])
-    doctor_id = IntegerField()
+    doctor_list =  SelectField('Choose a doctor: ', )
     pharmacy_id = HiddenField('Pharmacy: ') 
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     submit = SubmitField('Submit')
-
- #   def __init__(self, username):
- #       self.id = 
-
     
 class AddDoctorForm(FlaskForm):
     first_name = StringField('First name (optional)', validators=[Length(max=64)])

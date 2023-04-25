@@ -30,12 +30,8 @@ def user_profile(username):
 @bp.route('/user/<username>/add_medication', methods=['GET', 'POST'])
 @login_required
 def add_medication(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    doctors = current_user.doctor_choices()
     form = MedicationForm()
-    # succeeds at populating the form with doctors but I don't seem to have the data coming back in the
-    # right format.  Not sure if it's because I wrote the html by hand for this and flask form won't
-    # play nicely or if there's something else going on.
+    form.doctor_list.choices = current_user.doctor_choices()
     
     if form.validate_on_submit():
         medication = Medication(
@@ -54,17 +50,34 @@ def add_medication(username):
             reason=form.reason.data,
             notes=form.notes.data,
             user_id=current_user.id,
-            doctor_id=int(form.doctor_id.data)
+            doctor_id=form.doctor_list.data
         )
         db.session.add(medication)
         db.session.commit()
         flash(f'You have successfully added {form.medication_name.data} to your medication list.')
         return redirect(url_for('main.user', username=username))
-    return render_template('add_medication.html', title='Add Medication', doctors=doctors, user=user, form=form)
 
-    doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
-    pharmacy_id = db.Column(db.Integer, db.ForeignKey('pharmacy.id'))
-  
+    return render_template('add_medication.html', title='Add Medication', user=user, form=form)
+
+
+@bp.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm(current_user.username)
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash(_('Your changes have been saved.'))
+        return redirect(url_for('main.edit_profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title=_('Edit Profile'),
+                           form=form)
+
+
+
 @bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])
 @login_required
 def add_doctor(username):
