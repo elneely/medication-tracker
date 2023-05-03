@@ -102,3 +102,7 @@ textarea {
   .info-circle:hover .info-text {
     visibility: visible;
   }
+
+  .info-circle:focus .info-text {
+    visibility: visible;
+  }

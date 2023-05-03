@@ -18,119 +18,126 @@
     <form action="" method="post">
         {{ form.hidden_tag() }}
 
-        <p>
-            {{ form.medication_name.label }}
-            {{ form.medication_name(size=64, maxlength=128) }}<br>
-            {% for error in form.medication_name.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.brand_name.label}}<span class="info-circle">&#x1F6C8; 
-                <span class="info-text">Since medications are often filled with 
-                    generics that have long names, you may enter a brand name here 
-                    in case that is easier to remember.</span></span>  
-            {{ form.brand_name(size=64, maxlength=64 ) }}<br>
-            {% for error in form.brand_name.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.dose.label }}
-            {{ form.dose(size=64, maxlength=64) }}<br>
-            {% for error in form.dose.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.frequency.label }}
-            {{ form.frequency(size=64, maxlength=64 )}}<br>
-            {% for error in form.frequency.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.doctor_list.label }}
-            {{ form.doctor_list }}
-            {% for error in form.doctor_list.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        
-        <p>
-            {# deal with the date #} 
-            {{ form.prescription_date.label }} 
-            {{ form.prescription_date() }}<br>
-            {% for error in form.prescription_date.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {# deal with the date #} 
-            {{ form.last_filled.label }} 
-            {{ form.last_filled()}}<br>
-            {% for error in form.last_filled.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {# deal with the boolean #} 
-            {{ form.short_term.label }}
-            {{ form.short_term()}}<br>
-            {% for error in form.short_term.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.length.label }} {{ form.length(size=3, maxlength=3) }} days<br>
-            {% for error in form.length.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {# deal with the boolean #} 
-            {{ form.reminder.label }}
-            {{ form.reminder() }}<br>
-            {% for error in form.reminder.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {# this should only show if the former is true #} 
-            {{ form.reminder_length.label}}
-            {{ form.reminder_length(size=3, maxlength=3) }} days<br>
-            {% for error in form.reminder_length.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.refills_remaining.label}}
-            {{ form.refills_remaining(size=3, maxlength=5) }}<br>
-            {% for error in form.refills_remaining.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.refills_expiration.label }}
-            {{ form.refills_expiration() }}<br>
-            {% for error in form.refills_expiration.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.reason.label }}
-            {{ form.reason(size=64, maxlength=128) }}<br>
-            {% for error in form.reason.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.notes.label }}<br>
-            {{ form.notes(rows=5, cols=64, maxlength=1024)}}
-            {% for error in form.notes.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
+        <fieldset>
+            <legend>Basic information</legend>
+            <p>
+                {{ form.medication_name.label }}
+                {{ form.medication_name(size=64, maxlength=128) }}<br>
+                {% for error in form.medication_name.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.brand_name.label}}<span tabindex="0" class="info-circle">&#x1F6C8; 
+                    <span class="info-text">Since medications are frequently dispensed 
+                        as generics that have long names, you may enter a brand name here 
+                        if that is easier to remember.</span></span>  
+                {{ form.brand_name(size=64, maxlength=64 ) }}<br>
+                {% for error in form.brand_name.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.dose.label }}
+                {{ form.dose(size=64, maxlength=64) }}<br>
+                {% for error in form.dose.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.frequency.label }}
+                {{ form.frequency(size=64, maxlength=64 )}}<br>
+                {% for error in form.frequency.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.length.label }} {{ form.length(size=3, maxlength=3) }} days<br>
+                {% for error in form.length.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {# deal with the boolean #} 
+                {{ form.short_term.label }}
+                {{ form.short_term()}}<br>
+                {% for error in form.short_term.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.reason.label }}
+                {{ form.reason(size=64, maxlength=128) }}<br>
+                {% for error in form.reason.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            
+            <p>
+                {{ form.doctor_list.label }}
+                {{ form.doctor_list }}
+                {% for error in form.doctor_list.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+
+        </fieldset>
+        <fieldset>
+            <legend>Details</legend>
+            <p>
+                {# deal with the date #} 
+                {{ form.prescription_date.label }} 
+                {{ form.prescription_date() }}<br>
+                {% for error in form.prescription_date.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {# deal with the date #} 
+                {{ form.last_filled.label }} 
+                {{ form.last_filled()}}<br>
+                {% for error in form.last_filled.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.refills_expiration.label }}
+                {{ form.refills_expiration() }}<br>
+                {% for error in form.refills_expiration.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.refills_remaining.label}}
+                {{ form.refills_remaining(size=3, maxlength=5) }}<br>
+                {% for error in form.refills_remaining.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {# deal with the boolean #} 
+                {{ form.reminder.label }}
+                {{ form.reminder() }}<br>
+                {% for error in form.reminder.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p id="reminders-true">
+                {# this should only show if the former is true #} 
+                {{ form.reminder_length.label}}
+                {{ form.reminder_length(size=3, maxlength=3) }} days in advance<br>
+                {% for error in form.reminder_length.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+                {{ form.notes.label }}<br>
+                {{ form.notes(rows=5, cols=64, maxlength=1024)}}
+                {% for error in form.notes.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+        </fieldset>
         <p>
             {{ form.submit() }}
         </p>
