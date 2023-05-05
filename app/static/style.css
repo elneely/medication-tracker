@@ -106,3 +106,19 @@ textarea {
   .info-circle:focus .info-text {
     visibility: visible;
   }
+
+  #reminders-true {
+    display: none;
+  }
+
+  #doctor-choice {
+    display: none;
+  }
+
+  #only-current-doctor {
+    display: none;
+  }
+
+  #only-new-doctor {
+    display: none;
+  }

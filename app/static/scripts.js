@@ -9,7 +9,11 @@ doctorBtn.addEventListener("click", () => {
     } else {
         targetDiv.style.display = "block";
         targetMessage.style.display = "block";
-        document.querySelector('#current-doctor').click();
+        if (document.getElementById("new-doctor").checked) {
+            document.querySelector('#new-doctor').click();
+        } else {
+            document.querySelector('#current-doctor').click();
+        }
     }
 }); 
 
@@ -33,3 +37,16 @@ targetDiv.addEventListener("click", () => {
 });
 
 
+var reminderAskBox = document.getElementById("reminders-ask");
+const reminderTrueDiv = document.getElementById("reminders-true");
+reminderAskBox.addEventListener("click", () => {
+    if (reminderAskBox.checked == true){
+        reminderTrueDiv.style.display = "block";
+    }
+    else {
+        reminderTrueDiv.style.display = "none";
+    }
+    });
+
+ 
+    

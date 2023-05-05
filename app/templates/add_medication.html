@@ -73,14 +73,56 @@
                 {% endfor %} 
             </p>
             
+      
             <p>
-                {{ form.doctor_list.label }}
-                {{ form.doctor_list }}
-                {% for error in form.doctor_list.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
+                <button id="doctor-btn" type="button">Add Doctor?</button>
             </p>
+            <div id="doctor-choice">
+                <p>
+                    <div>
+                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" checked>
+                        <label for="current-doctor">Current doctor</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="add-doctor" value="new-doctor" id="new-doctor">
+                        <label for="new-doctor">New doctor</label>
+                    </div>
+                </p>
+            </div>
+            <p id="doctoroutput"></p>
+            <div id="doctor-offers">
+                <div id="only-current-doctor">
+                    <p>{# might want to handle the case where this list is blank better #}
+                        {{ form.doctor_list.label }}
+                        {{ form.doctor_list }}
+                        {% for error in form.doctor_list.errors %} 
+                        <span class="error">{{ error }}</span>
+                        {% endfor %} 
+                    </p>
+                    </div>
+                </p>
+                <div id="only-new-doctor">
+                    <p>
+                        {{ form.new_doctor_first.label }}
+                        {{ form.new_doctor_first(size=64, maxlength=64) }}<br>
+                        {% for error in form.new_doctor_first.errors %} 
+                        <span class="error">{{ error }}</span>
+                        {% endfor %} 
+                    </p>
+                    <p>
+                        {{ form.new_doctor_last.label }}
+                        {{ form.new_doctor_last(size=64, maxlength=64) }}<br>
+                        {% for error in form.new_doctor_last.errors %} 
+                        <span class="error">{{ error }}</span>
+                        {% endfor %} 
+                    </p>
+             
 
+
+                </div>
+            </div>
+
+            
         </fieldset>
         <fieldset>
             <legend>Details</legend>
@@ -117,19 +159,22 @@
             <p>
                 {# deal with the boolean #} 
                 {{ form.reminder.label }}
-                {{ form.reminder() }}<br>
+                {{ form.reminder(id="reminders-ask") }}<br>
                 {% for error in form.reminder.errors %} 
                 <span class="error">{{ error }}</span>
                 {% endfor %} 
             </p>
-            <p id="reminders-true">
-                {# this should only show if the former is true #} 
-                {{ form.reminder_length.label}}
-                {{ form.reminder_length(size=3, maxlength=3) }} days in advance<br>
-                {% for error in form.reminder_length.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
+            <div id="reminders-true">
+                <p>
+                    {# this should only show if the former is true #} 
+                    {{ form.reminder_length.label}}
+                    {{ form.reminder_length(size=3, maxlength=3) }} days in advance<br>
+                    {% for error in form.reminder_length.errors %} 
+                    <span class="error">{{ error }}</span>
+                    {% endfor %} 
+                </p>
+            </div>
+            
             <p>
                 {{ form.notes.label }}<br>
                 {{ form.notes(rows=5, cols=64, maxlength=1024)}}
@@ -139,9 +184,13 @@
             </p>
         </fieldset>
         <p>
-            {{ form.submit() }}
+            {{ form.submit(id="submit-form") }}
         </p>
         
     </form>
 
 {% endblock %} 
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+{% endblock %}

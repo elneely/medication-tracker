@@ -33,7 +33,26 @@ def add_medication(username):
     form = MedicationForm()
     form.doctor_list.choices = current_user.doctor_choices()
     
+# if there's a new doctor, need to make the new doctor and submit it but then use
+# that new id number for the doctor id
+# if not, can just take it from form
+
+
     if form.validate_on_submit():
+# Add new doctor to Doctor table
+        if form.new_doctor_last.data:
+            new_doctor = Doctor(
+                last_name=form.new_doctor_last.data,
+                first_name=form.new_doctor_first.data,
+                user_id=current_user.id
+            )
+            db.session.add(new_doctor)
+            db.session.flush()
+            flash(f'You have successfully added Dr. {form.new_doctor_last.data} to your doctor list.')
+# retrieve id of that new doctor
+            med_doctor_id = new_doctor.id
+        else:
+            med_doctor_id=form.doctor_list.data
         medication = Medication(
             medication_name=form.medication_name.data,
             brand_name=form.brand_name.data,
@@ -50,13 +69,12 @@ def add_medication(username):
             reason=form.reason.data,
             notes=form.notes.data,
             user_id=current_user.id,
-            doctor_id=form.doctor_list.data
+            doctor_id=med_doctor_id
         )
         db.session.add(medication)
         db.session.commit()
         flash(f'You have successfully added {form.medication_name.data} to your medication list.')
         return redirect(url_for('main.user', username=username))
-
     return render_template('add_medication.html', title='Add Medication', user=user, form=form)
 
 

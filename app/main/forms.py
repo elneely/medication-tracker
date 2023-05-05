@@ -4,7 +4,7 @@ from wtforms import BooleanField, DateField, EmailField, HiddenField, \
     IntegerField, SelectField, StringField, SubmitField, TelField, TextAreaField
 from wtforms.validators import DataRequired, Length, ValidationError, Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
-from app.models import User
+from app.models import User, Doctor
 
 class ProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -47,11 +47,19 @@ class MedicationForm(FlaskForm):
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
+    new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
+    new_doctor_last = StringField('Last Name (Required): ', validators=[Length(max=64)])
     submit = SubmitField('Submit')
     
+    def validate_new_doctor_last(self, new_doctor_last):
+        if new_doctor_last.data:  
+            name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.new_doctor_first.data, last_name=new_doctor_last.data).first()
+            if name is not None:
+                raise ValidationError("You already have a doctor with this name")
+
 class AddDoctorForm(FlaskForm):
     first_name = StringField('First name (optional)', validators=[Length(max=64)])
-    last_name = StringField('Last name', validators=[Length(max=64), DataRequired()])
+    last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
     phone_number = TelField('Telephone number') #not sure I have this input working with model
     address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
@@ -61,13 +69,11 @@ class AddDoctorForm(FlaskForm):
     notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
-    def validate_name(self, first_name, last_name):
-        last_name = User.doctors.query.filter_by(last_name=self.last_name.data).first()
-        if last_name is not None:
-            full_name = User.doctors.query.filter_by(last_name=self.last_name.data, first_name=self.first_name.data).first() 
-            if full_name is not None:
-                raise ValidationError('You already have a doctor with this name.')
- 
+    def validate_last_name(self, last_name):
+        name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.first_name.data, last_name=last_name.data).first()
+        if name is not None:
+            raise ValidationError("You already have a doctor with this name")
+     
 class AddPharmacyForm(FlaskForm):
     name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
     phone_number = TelField('Telephone number') #not sure I have this input working with model
