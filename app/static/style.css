@@ -122,3 +122,7 @@ textarea {
   #only-new-doctor {
     display: none;
   }
+
+  #no-doctor-btn {
+    display: none;
+  }

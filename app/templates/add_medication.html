@@ -76,25 +76,37 @@
       
             <p>
                 <button id="doctor-btn" type="button">Add Doctor?</button>
+                <button id="no-doctor-btn" type="button">Don't Add Doctor</button>
             </p>
+           
             <div id="doctor-choice">
+                 <!-- 
+                <p>
+                    {% for subfield in form.doctor_choice %} 
+                    <tr> 
+                        <td>{{ subfield.label }}</td>
+                        <td> {{ subfield }} </td>
+                    </tr>
+                    {% endfor %}
+                </p>
+                  -->
                 <p>
                     <div>
-                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" checked>
+                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" autocomplete="off">
                         <label for="current-doctor">Current doctor</label>
                     </div>
                     <div>
-                        <input type="radio" name="add-doctor" value="new-doctor" id="new-doctor">
+                        <input type="radio" name="add-doctor" value="new-doctor" id="new-doctor" autocomplete="off">
                         <label for="new-doctor">New doctor</label>
                     </div>
                 </p>
+          
             </div>
-            <p id="doctoroutput"></p>
             <div id="doctor-offers">
                 <div id="only-current-doctor">
                     <p>{# might want to handle the case where this list is blank better #}
                         {{ form.doctor_list.label }}
-                        {{ form.doctor_list }}
+                        {{ form.doctor_list(id="current-doctor-choice") }}
                         {% for error in form.doctor_list.errors %} 
                         <span class="error">{{ error }}</span>
                         {% endfor %} 
@@ -104,14 +116,14 @@
                 <div id="only-new-doctor">
                     <p>
                         {{ form.new_doctor_first.label }}
-                        {{ form.new_doctor_first(size=64, maxlength=64) }}<br>
+                        {{ form.new_doctor_first(id="new-doctor-first",size=64, maxlength=64) }}<br>
                         {% for error in form.new_doctor_first.errors %} 
                         <span class="error">{{ error }}</span>
                         {% endfor %} 
                     </p>
                     <p>
                         {{ form.new_doctor_last.label }}
-                        {{ form.new_doctor_last(size=64, maxlength=64) }}<br>
+                        {{ form.new_doctor_last(id="new-doctor-last", size=64, maxlength=64) }}<br>
                         {% for error in form.new_doctor_last.errors %} 
                         <span class="error">{{ error }}</span>
                         {% endfor %} 

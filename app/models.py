@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
     
     def doctor_choices(self):
         my_doctors = self.doctor_list().all()
-        doctor_choices = []
+        doctor_choices = [(None, '')]
         for doctor in my_doctors:
             if doctor.first_name:
                 doctor_name = doctor.first_name + " " + doctor.last_name

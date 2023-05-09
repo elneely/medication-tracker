@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
-    IntegerField, SelectField, StringField, SubmitField, TelField, TextAreaField
-from wtforms.validators import DataRequired, Length, ValidationError, Optional, NumberRange, Regexp
+    IntegerField, RadioField, SelectField, StringField, SubmitField, \
+    TelField, TextAreaField
+from wtforms.validators import DataRequired, Length, ValidationError, \
+    Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
-from app.models import User, Doctor
+from app.models import User, Doctor, Pharmacy
 
 class ProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -47,12 +49,13 @@ class MedicationForm(FlaskForm):
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
+    doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
     new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
     new_doctor_last = StringField('Last Name (Required): ', validators=[Length(max=64)])
     submit = SubmitField('Submit')
     
     def validate_new_doctor_last(self, new_doctor_last):
-        if new_doctor_last.data:  
+        if new_doctor_last.data is not None:  
             name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.new_doctor_first.data, last_name=new_doctor_last.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
@@ -85,6 +88,10 @@ class AddPharmacyForm(FlaskForm):
     notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
-
+    def validate_name(self, name):
+        check_name = Pharmacy.query.filter_by(name=name).first()
+        if check_name is not None:
+            raise ValidationError("You already have a pharmacy with this name.")
+        
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
