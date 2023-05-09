@@ -1,7 +1,4 @@
-/* This governs what happens when the Add Doctor button is pressed - it 
-hides this button, makes the No doctor button visible, checks to see if 
-a radio button is checked and, if so, handles it appropriately.  It defaults
-to current doctor */
+/* These three scripts handle the doctor portion of the form */
 
 /*Html parts */
 
@@ -12,8 +9,7 @@ const newDoctorDiv = document.getElementById("only-new-doctor")
 var doctorBtn = document.getElementById("doctor-btn");
 var noDoctorBtn = document.getElementById("no-doctor-btn");
 var doctorButtons = document.querySelectorAll('input[name="add-doctor"]');
-var typeOfDoctor
-var form = document.getElementById("med-form")
+var typeOfDoctor; 
 
 /* form fields */
 var currentDoctorChoice = document.getElementById("current-doctor-choice");
@@ -28,12 +24,6 @@ doctorBtn.addEventListener("click", () => {
     newDoctorFirst.disabled = false;
     newDoctorLast.disabled = false;
     currentDoctorChoice.disabled = false;
-    if (document.getElementById("new-doctor").checked) {
-        document.querySelector('#new-doctor').click();
-    } else {
-        document.querySelector('#current-doctor').click();
-    }
-
 }) 
 
 noDoctorBtn.addEventListener("click", () => {
@@ -45,8 +35,6 @@ noDoctorBtn.addEventListener("click", () => {
     doctorOffers.style.display = "none";
     doctorChoice.style.display = "none";
 });
-
-
 
 doctorChoice.addEventListener("click", () => {
     for (const doctorButton of doctorButtons) {
@@ -66,7 +54,61 @@ doctorChoice.addEventListener("click", () => {
 
     } 
 });
+/* These three scripts handle the pharmacy part of the form */
 
+/*Html parts */
+
+const pharmacyChoice = document.getElementById("pharmacy-choice");
+const pharmacyOffers = document.getElementById("pharmacy-offers");
+const currentPharmacyDiv = document.getElementById("only-current-pharmacy")
+const newPharmacyDiv = document.getElementById("only-new-pharmacy")
+var pharmacyBtn = document.getElementById("pharmacy-btn");
+var noPharmacyBtn = document.getElementById("no-pharmacy-btn");
+var pharmacyButtons = document.querySelectorAll('input[name="add-pharmacy"]');
+var typeOfPharmacy; 
+
+/* form fields */
+var currentPharmacyChoice = document.getElementById("current-pharmacy-choice");
+var newPharmacyName = document.getElementById("new-pharmacy-name");
+
+
+pharmacyBtn.addEventListener("click", () => {
+    pharmacyBtn.style.display = "none";
+    noPharmacyBtn.style.display = "block";
+    pharmacyChoice.style.display = "block";
+    pharmacyOffers.style.display = "block";
+    newPharmacyName.disabled = false;
+    currentPharmacyChoice.disabled = false;
+}); 
+
+noPharmacyBtn.addEventListener("click", () => {
+    noPharmacyBtn.style.display = "none";
+    pharmacyBtn.style.display = "block";
+    pharmacyOffers.style.display = "none";
+    pharmacyChoice.style.display = "none";
+    currentPharmacyChoice.disabled = true;
+    newPharmacyName.disabled = true;
+});
+
+pharmacyChoice.addEventListener("click", () => {
+    for (const pharmacyButton of pharmacyButtons) {
+        if (pharmacyButton.checked) {
+            typeOfPharmacy = pharmacyButton.value;
+        }
+    }
+    if (typeOfPharmacy == "current-pharmacy") {
+        currentPharmacyDiv.style.display = "block"; 
+        newPharmacyDiv.style.display = "none";
+        newPharmacyName.value = "";
+    } else if (typeOfPharmacy == "new-pharmacy") { 
+        newPharmacyDiv.style.display = "block";
+        currentPharmacyDiv.style.display = "none";
+        currentPharmacyChoice.value = "";
+
+    } 
+}); 
+
+/* This script handles the reminder box */
 var reminderAskBox = document.getElementById("reminders-ask");
 const reminderTrueDiv = document.getElementById("reminders-true");
 reminderAskBox.addEventListener("click", () => {

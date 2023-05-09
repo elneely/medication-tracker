@@ -42,16 +42,18 @@ class MedicationForm(FlaskForm):
     short_term = BooleanField('Short term medication?')
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
-    reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])
-    doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
-    pharmacy_id = HiddenField('Pharmacy: ') 
+    reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])   
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
+    doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
     new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
     new_doctor_last = StringField('Last Name (Required): ', validators=[Length(max=64)])
+    pharmacy_choice = RadioField('', choices=[('current-pharmacy', 'Current Pharmacy'), ('new-pharmacy', 'New Pharmacy')], default='current-pharmacy')
+    pharmacy_list = SelectField('Choose a pharmacy: ', validators=[Optional()]) 
+    new_pharmacy_name = StringField('Pharmacy Name: ', validators=[Length(max=64)])
     submit = SubmitField('Submit')
     
     def validate_new_doctor_last(self, new_doctor_last):
@@ -59,6 +61,12 @@ class MedicationForm(FlaskForm):
             name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.new_doctor_first.data, last_name=new_doctor_last.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
+
+    def validate_new_pharmacy_name(self, new_pharmacy_name):
+        if new_pharmacy_name.data is not None:
+            name = Pharmacy.query.filter_by(user_id=current_user.id, name=self.new_pharmacy_name.data).first()
+            if name is not None:
+                raise ValidationError("You already have a pharmacy with this name")
 
 class AddDoctorForm(FlaskForm):
     first_name = StringField('First name (optional)', validators=[Length(max=64)])

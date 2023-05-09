@@ -48,7 +48,14 @@ class User(UserMixin, db.Model):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
         return my_pharmacies.order_by(Pharmacy.name.desc())
 
-
+    def pharmacy_choices(self):
+        my_pharmacies = self.pharmacy_list().all()
+        pharmacy_choices = [(None, '')]
+        for pharmacy in my_pharmacies:
+            pharmacy_entry = (pharmacy.id, pharmacy.name)
+            pharmacy_choices.append(pharmacy_entry)
+        return pharmacy_choices
+    
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

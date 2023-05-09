@@ -126,3 +126,19 @@ textarea {
   #no-doctor-btn {
     display: none;
   }
+
+  #pharmacy-choice {
+    display: none;
+  }
+
+  #only-current-pharmacy {
+    display: none;
+  }
+
+  #only-new-pharmacy {
+    display: none;
+  }
+
+  #no-pharmacy-btn {
+    display: none;
+  }

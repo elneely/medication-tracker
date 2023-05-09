@@ -43,7 +43,7 @@
                 {% for med in meds %} 
                     {% if not med.short_term %} 
                         <div class="medication-summary">
-                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}, {{med.doctor_id}}</p>
+                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}, {{ med.doctor_id }}, {{ med.pharmacy_id }}</p>
                         </div>
                     {% endif %}
                 {% endfor %} 

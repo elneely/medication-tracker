@@ -32,6 +32,7 @@ def user_profile(username):
 def add_medication(username):
     form = MedicationForm()
     form.doctor_list.choices = current_user.doctor_choices()
+    form.pharmacy_list.choices = current_user.pharmacy_choices()
     
 # if there's a new doctor, need to make the new doctor and submit it but then use
 # that new id number for the doctor id
@@ -41,7 +42,7 @@ def add_medication(username):
     if form.validate_on_submit():
 # Add new doctor to Doctor table
         last_data = form.new_doctor_last.data
-        if last_data and last_data.isspace() == False:
+        if last_data and (last_data.isspace() == False):
             new_doctor = Doctor(
             last_name=form.new_doctor_last.data,
             first_name=form.new_doctor_first.data,
@@ -56,6 +57,20 @@ def add_medication(username):
             med_doctor_id=form.doctor_list.data
         else:
             med_doctor_id = None
+        pharm_data = form.new_pharmacy_name.data
+        if pharm_data and pharm_data.isspace() == False:
+            new_pharmacy = Pharmacy(
+                name=form.new_pharmacy_name.data,
+                user_id=current_user.id
+            )
+            db.session.add(new_pharmacy)
+            db.session.flush()
+            flash(f'You have successfully added {form.new_pharmacy_name.data} to your pharmacy list.')
+            pharm_id = new_pharmacy.id
+        elif form.pharmacy_list.data:
+            pharm_id = form.pharmacy_list.data
+        else:
+            pharm_id = None    
         medication = Medication(
             medication_name=form.medication_name.data,
             brand_name=form.brand_name.data,
@@ -72,7 +87,8 @@ def add_medication(username):
             reason=form.reason.data,
             notes=form.notes.data,
             user_id=current_user.id,
-            doctor_id=med_doctor_id
+            doctor_id=med_doctor_id,
+            pharmacy_id=pharm_id
         )
         db.session.add(medication)
         db.session.commit()
