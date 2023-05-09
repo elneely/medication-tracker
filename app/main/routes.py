@@ -40,19 +40,22 @@ def add_medication(username):
 
     if form.validate_on_submit():
 # Add new doctor to Doctor table
-        if form.new_doctor_last.data:
+        last_data = form.new_doctor_last.data
+        if last_data and last_data.isspace() == False:
             new_doctor = Doctor(
-                last_name=form.new_doctor_last.data,
-                first_name=form.new_doctor_first.data,
-                user_id=current_user.id
+            last_name=form.new_doctor_last.data,
+            first_name=form.new_doctor_first.data,
+            user_id=current_user.id
             )
             db.session.add(new_doctor)
             db.session.flush()
             flash(f'You have successfully added Dr. {form.new_doctor_last.data} to your doctor list.')
 # retrieve id of that new doctor
             med_doctor_id = new_doctor.id
-        else:
+        elif form.doctor_list.data:
             med_doctor_id=form.doctor_list.data
+        else:
+            med_doctor_id = None
         medication = Medication(
             medication_name=form.medication_name.data,
             brand_name=form.brand_name.data,

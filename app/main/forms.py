@@ -43,7 +43,7 @@ class MedicationForm(FlaskForm):
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])
-    doctor_list =  SelectField('Choose a doctor: ', )
+    doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
     pharmacy_id = HiddenField('Pharmacy: ') 
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])

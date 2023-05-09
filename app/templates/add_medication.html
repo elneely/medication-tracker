@@ -15,7 +15,7 @@
 {% endblock %} 
 
 {% block content %} 
-    <form action="" method="post">
+    <form id="med-form" action="" method="post">
         {{ form.hidden_tag() }}
 
         <fieldset>
@@ -75,24 +75,19 @@
             
       
             <p>
-                <button id="doctor-btn" type="button">Add Doctor?</button>
+                {% for error in form.new_doctor_last.errors %} 
+                <span class="error">{{ error }}</span>
+                {% endfor %} 
+            </p>
+            <p>
+            <button id="doctor-btn" type="button">Add Doctor?</button>
                 <button id="no-doctor-btn" type="button">Don't Add Doctor</button>
             </p>
            
             <div id="doctor-choice">
-                 <!-- 
-                <p>
-                    {% for subfield in form.doctor_choice %} 
-                    <tr> 
-                        <td>{{ subfield.label }}</td>
-                        <td> {{ subfield }} </td>
-                    </tr>
-                    {% endfor %}
-                </p>
-                  -->
                 <p>
                     <div>
-                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" autocomplete="off">
+                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" autocomplete="off" checked>
                         <label for="current-doctor">Current doctor</label>
                     </div>
                     <div>
@@ -101,6 +96,7 @@
                     </div>
                 </p>
           
+                
             </div>
             <div id="doctor-offers">
                 <div id="only-current-doctor">
@@ -124,9 +120,6 @@
                     <p>
                         {{ form.new_doctor_last.label }}
                         {{ form.new_doctor_last(id="new-doctor-last", size=64, maxlength=64) }}<br>
-                        {% for error in form.new_doctor_last.errors %} 
-                        <span class="error">{{ error }}</span>
-                        {% endfor %} 
                     </p>
              
 
