@@ -23,10 +23,13 @@
         <div class="pharmacy-container">
             {% for pharmacy in pharmacies %}
                 <div class="pharmacy-summary">
-                    <p> {{ pharmacy.name }}, 
-                        {{ pharmacy.phone_number }}, 
-                        {{ pharmacy.notes }}</p>
-                </div>
+                    <p>
+                        <div class="pharmacy-name"><a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}">{{ pharmacy.name }}</a></div>
+                        <div class="pharmacy-phone">{% if pharmacy.phone_number %}Phone: {{ pharmacy.phone_number }}{% endif %}</div>
+                        <div class="pharmacy-notes">{% if pharmacy.notes %}Notes: {{ pharmacy.notes }}{% endif %}</div>
+                    </p>
+
+
             {% endfor %}
         </div>
     </div>

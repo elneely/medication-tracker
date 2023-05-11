@@ -23,10 +23,10 @@
         <div class="doctor-container">
             {% for doctor in doctors %}
                 <div class="doctor-summary">
-                    <p> {{ doctor.first_name }}  
-                        {{ doctor.last_name }}, 
-                        {{ doctor.phone_number }}, 
-                        {{ doctor.notes }}</p>
+                    <p> <div class="doctor-name"><a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=doctor.id) }}">Dr. {{ doctor.full_name() }}</a></div>
+                        <div class="doctor-phone">{% if doctor.phone_number %}Phone: {{ doctor.phone_number }}{% endif %}</div>
+                        <div class="doctor-notes">{% if doctor.notes %}Notes: {{ doctor.notes}}{% endif %}</div>
+                    </p>
                 </div>
             {% endfor %}
         </div>

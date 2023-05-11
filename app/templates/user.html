@@ -28,10 +28,17 @@
         <div class="short-term-container">
             <h2 class="short-term-title">Short-term Medications</h2>
             <div class="short-term-medications">
-                {% for med in meds %}
-                    {% if med.short_term %}
+                {% for medication in medications %}
+                    {% if medication.short_term %}
                         <div class="medication-summary">
-                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}, {{med.length }}, {{med.doctor_id }}</p>
+                               <p>
+                                    <div class="medication-name"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></div>
+                                    <div class="medication-dose">{% if medication.dose %} {{ medication.dose }}{% endif %}</div>
+                                    <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
+                                    <div class="prescribing-doctor">{% if medication.doctor_id %}{{ medication.prescribing_doctor_name() }}{% endif %} </div>
+                                    <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
+                                    <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
+                                </p>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -40,10 +47,16 @@
         <div class="long-term-container">
             <h2 class="long-term-title">Long-term Medications</h2>
             <div class="long-term-medications">
-                {% for med in meds %} 
-                    {% if not med.short_term %} 
+                {% for medication in medications %} 
+                    {% if not medication.short_term %} 
                         <div class="medication-summary">
-                            <p>{{ med.medication_name }}, {{ med.dose }}, {{ med.frequency }}, {{ med.doctor_id }}, {{ med.pharmacy_id }}</p>
+                            <p>
+                                <div class="medication-name"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></div>
+                                <div class="medication-dose">{% if medication.dose %} {{ medication.dose }}{% endif %}</div>
+                                <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
+                                <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
+                                <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
+                            </p>
                         </div>
                     {% endif %}
                 {% endfor %} 

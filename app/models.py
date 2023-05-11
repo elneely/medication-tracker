@@ -84,7 +84,14 @@ class Medication(db.Model):
     def __repr__(self):
         return self.medication_name
 
+    def prescribing_doctor_name(self):
+        doctor_record = Doctor.query.filter_by(id=self.doctor_id).first_or_404()
+        return doctor_record.full_name()
 
+    def filling_pharmacy(self):
+        pharmacy_record = Pharmacy.query.filter_by(id=self.pharmacy_id).first_or_404()
+        return pharmacy_record.name    
+    
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -102,6 +109,12 @@ class Doctor(db.Model):
     def __repr__(self):
         return 'Dr. {}'.format(self.last_name)
 
+    def full_name(self):
+        if self.first_name:
+            doctor_name = self.first_name + " " + self.last_name
+        else:
+            doctor_name = self.last_name
+        return doctor_name
 
 class Pharmacy(db.Model):
     id = db.Column(db.Integer, primary_key=True)

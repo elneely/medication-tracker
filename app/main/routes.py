@@ -15,8 +15,8 @@ def index():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = EmptyForm()
-    meds = current_user.medication_list().all()
-    return render_template('user.html', title="Summary", user=user, meds=meds, form=form)
+    medications = current_user.medication_list().all()
+    return render_template('user.html', title="Summary", user=user, medications=medications, form=form)
 
 @bp.route('/user/<username>/user_profile')
 @login_required
@@ -97,6 +97,14 @@ def add_medication(username):
     return render_template('add_medication.html', title='Add Medication', user=user, form=form)
 
 
+@bp.route('/user/<username>/medication/<medication_id>', methods=['GET', 'POST'])
+@login_required
+def medication(username, medication_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    medication = Medication.query.filter_by(id=medication_id).first_or_404()
+    form = MedicationForm()
+    return render_template('medication.html', title="Medication Information", user=user, medication=medication, form=form)
+
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -147,6 +155,14 @@ def doctor_list(username):
     doctors = current_user.doctor_list().all()
     return render_template('doctor_list.html', title="Doctor List", user=user, doctors=doctors, form=form)
 
+@bp.route('/user/<username>/doctor/<doctor_id>', methods=['GET', 'POST'])
+@login_required
+def doctor(username, doctor_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    doctor = Doctor.query.filter_by(id=doctor_id).first_or_404()
+    form = AddDoctorForm()
+    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+
 @bp.route('/user/<username>/add_pharmacy', methods=['GET', 'POST'])
 @login_required
 def add_pharmacy(username):
@@ -177,3 +193,12 @@ def pharmacy_list(username):
     form = EmptyForm()
     pharmacies = current_user.pharmacy_list().all()
     return render_template('pharmacy_list.html', title="Pharmacy List", user=user, pharmacies=pharmacies, form=form)
+
+
+@bp.route('/user/<username>/pharmacy/<pharmacy_id>', methods=['GET', 'POST'])
+@login_required
+def pharmacy(username, pharmacy_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
+    form = AddPharmacyForm()
+    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
