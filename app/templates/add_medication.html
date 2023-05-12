@@ -18,211 +18,103 @@
     <form id="med-form" action="" method="post">
         {{ form.hidden_tag() }}
 
-        <fieldset>
-            <legend>Basic information</legend>
-            <p>
-                {{ form.medication_name.label }}
-                {{ form.medication_name(size=64, maxlength=128) }}<br>
-                {% for error in form.medication_name.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.brand_name.label}}<span tabindex="0" class="info-circle">&#x1F6C8; 
-                    <span class="info-text">Since medications are frequently dispensed 
-                        as generics that have long names, you may enter a brand name here 
-                        if that is easier to remember.</span></span>  
-                {{ form.brand_name(size=64, maxlength=64 ) }}<br>
-                {% for error in form.brand_name.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.dose.label }}
-                {{ form.dose(size=64, maxlength=64) }}<br>
-                {% for error in form.dose.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.frequency.label }}
-                {{ form.frequency(size=64, maxlength=64 )}}<br>
-                {% for error in form.frequency.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.length.label }} {{ form.length(size=3, maxlength=3) }} days<br>
-                {% for error in form.length.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {# deal with the boolean #} 
-                {{ form.short_term.label }}
-                {{ form.short_term()}}<br>
-                {% for error in form.short_term.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.reason.label }}
-                {{ form.reason(size=64, maxlength=128) }}<br>
-                {% for error in form.reason.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            
-      
-            <p>
-                <button id="doctor-btn" type="button">Add Doctor?</button>
-                <button id="no-doctor-btn" type="button">Don't Add Doctor</button>
-            </p>
-                {% for error in form.new_doctor_last.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-           
-            <div id="doctor-choice">
-                <p>
-                    <div>
-                        <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" autocomplete="off">
-                        <label for="current-doctor">Current doctor</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="add-doctor" value="new-doctor" id="new-doctor" autocomplete="off">
-                        <label for="new-doctor">New doctor</label>
-                    </div>
-                </p>
-          
+        {% include '_basic_med_info.html' %}
+            <div id="button-section">
+                <div id="doctor-section">
+                    <p>
+                        <button id="doctor-btn" type="button">Add Doctor?</button>
+                        <button id="no-doctor-btn" type="button">Don't Add Doctor</button>
+                    </p>
+                        {% for error in form.new_doctor_last.errors %} 
+                        <span class="error">{{ error }}</span>
+                        {% endfor %} 
                 
-            </div>
-            <div id="doctor-offers">
-                <div id="only-current-doctor">
-                    <p>{# might want to handle the case where this list is blank better #}
-                        {{ form.doctor_list.label }}
-                        {{ form.doctor_list(id="current-doctor-choice") }}
-                        {% for error in form.doctor_list.errors %} 
-                        <span class="error">{{ error }}</span>
-                        {% endfor %} 
-                    </p>
-                    </div>
+                    <div id="doctor-choice">
+                        <p>
+                            <div>
+                                <input type="radio" name="add-doctor" value="current-doctor" id="current-doctor" autocomplete="off">
+                                <label for="current-doctor">Current doctor</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="add-doctor" value="new-doctor" id="new-doctor" autocomplete="off">
+                                <label for="new-doctor">New doctor</label>
+                            </div>
+                        </p>
                 
-                <div id="only-new-doctor">
-                    <p>
-                        {{ form.new_doctor_first.label }}
-                        {{ form.new_doctor_first(id="new-doctor-first",size=64, maxlength=64) }}<br>
-                        {% for error in form.new_doctor_first.errors %} 
-                        <span class="error">{{ error }}</span>
-                        {% endfor %} 
-                    </p>
-                    <p>
-                        {{ form.new_doctor_last.label }}
-                        {{ form.new_doctor_last(id="new-doctor-last", size=64, maxlength=64) }}<br>
-                    </p>
-             
-
-
-                </div>
-            </div>
-            <p>
-                <button id="pharmacy-btn" type="button">Add Pharmacy?</button>
-                <button id="no-pharmacy-btn" type="button">Don't Add Pharmacy</button>
-            </p>
-            {% for error in form.new_pharmacy_name.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %}
-            
-            <div id="pharmacy-choice">
-                <p>
-                    <div>
-                        <input type="radio" name="add-pharmacy" value="current-pharmacy" id="current-pharmacy" autocomplete="off">
-                        <label for="current-pharmacy">Current pharmacy</label>
+                        
                     </div>
-                    <div>
-                        <input type="radio" name="add-pharmacy" value="new-pharmacy" id="new-pharmacy" autocomplete="off">
-                        <label for="new-pharmacy">New pharmacy</label>
-                    </div>
-                </p>    
-            </div>
-            <div id="pharmacy-offers">
-                <div id="only-current-pharmacy">
-                    <p>{# might want to handle the case where this list is blank better #}
-                        {{ form.pharmacy_list.label }}
-                        {{ form.pharmacy_list(id="current-pharmacy-choice") }}
-                        {% for error in form.pharmacy_list.errors %} 
-                        <span class="error">{{ error }}</span>
-                        {% endfor %} 
-                    </p>
-                </div>
-             
-                <div id="only-new-pharmacy">
-                    <p>
-                        {{ form.new_pharmacy_name.label }}
-                        {{ form.new_pharmacy_name(id="new-pharmacy-name",size=64, maxlength=64) }}<br>
-                    </p>
+                    <div id="doctor-offers">
+                        <div id="only-current-doctor">
+                            <p>{# might want to handle the case where this list is blank better #}
+                                {{ form.doctor_list.label }}
+                                {{ form.doctor_list(id="current-doctor-choice") }}
+                                {% for error in form.doctor_list.errors %} 
+                                <span class="error">{{ error }}</span>
+                                {% endfor %} 
+                            </p>
+                            </div>
+                        
+                        <div id="only-new-doctor">
+                            <p>
+                                {{ form.new_doctor_first.label }}
+                                {{ form.new_doctor_first(id="new-doctor-first",size=32, maxlength=64) }}<br>
+                                {% for error in form.new_doctor_first.errors %} 
+                                <span class="error">{{ error }}</span>
+                                {% endfor %} 
+                            </p>
+                            <p>
+                                {{ form.new_doctor_last.label }}
+                                {{ form.new_doctor_last(id="new-doctor-last", size=32, maxlength=64) }}<br>
+                            </p>
+                    
 
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Details</legend>
-            <p>
-                {# deal with the date #} 
-                {{ form.prescription_date.label }} 
-                {{ form.prescription_date() }}<br>
-                {% for error in form.prescription_date.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {# deal with the date #} 
-                {{ form.last_filled.label }} 
-                {{ form.last_filled()}}<br>
-                {% for error in form.last_filled.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.refills_expiration.label }}
-                {{ form.refills_expiration() }}<br>
-                {% for error in form.refills_expiration.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {{ form.refills_remaining.label}}
-                {{ form.refills_remaining(size=3, maxlength=5) }}<br>
-                {% for error in form.refills_remaining.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <p>
-                {# deal with the boolean #} 
-                {{ form.reminder.label }}
-                {{ form.reminder(id="reminders-ask") }}<br>
-                {% for error in form.reminder.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-            <div id="reminders-true">
-                <p>
-                    {# this should only show if the former is true #} 
-                    {{ form.reminder_length.label}}
-                    {{ form.reminder_length(size=3, maxlength=3) }} days in advance<br>
-                    {% for error in form.reminder_length.errors %} 
+                <div id="pharmacy-section">
+                       <p>
+                            <button id="pharmacy-btn" type="button">Add Pharmacy?</button>
+                            <button id="no-pharmacy-btn" type="button">Don't Add Pharmacy</button>
+                        </p> 
+                    {% for error in form.new_pharmacy_name.errors %} 
                     <span class="error">{{ error }}</span>
-                    {% endfor %} 
-                </p>
+                    {% endfor %}
+                    
+                    <div id="pharmacy-choice">
+                        <p>
+                            <div>
+                                <input type="radio" name="add-pharmacy" value="current-pharmacy" id="current-pharmacy" autocomplete="off">
+                                <label for="current-pharmacy">Current pharmacy</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="add-pharmacy" value="new-pharmacy" id="new-pharmacy" autocomplete="off">
+                                <label for="new-pharmacy">New pharmacy</label>
+                            </div>
+                        </p>    
+                    </div>
+                    <div id="pharmacy-offers">
+                        <div id="only-current-pharmacy">
+                            <p>{# might want to handle the case where this list is blank better #}
+                                {{ form.pharmacy_list.label }}
+                                {{ form.pharmacy_list(id="current-pharmacy-choice") }}
+                                {% for error in form.pharmacy_list.errors %} 
+                                <span class="error">{{ error }}</span>
+                                {% endfor %} 
+                            </p>
+                        </div>
+                    
+                        <div id="only-new-pharmacy">
+                            <p>
+                                {{ form.new_pharmacy_name.label }}
+                                {{ form.new_pharmacy_name(id="new-pharmacy-name",size=32, maxlength=64) }}<br>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <p>
-                {{ form.notes.label }}<br>
-                {{ form.notes(rows=5, cols=64, maxlength=1024)}}
-                {% for error in form.notes.errors %} 
-                <span class="error">{{ error }}</span>
-                {% endfor %} 
-            </p>
-        </fieldset>
+            {% include '_detailed_med_info.html' %}
         <p>
             {{ form.submit(id="submit-form") }}
         </p>
@@ -232,5 +124,5 @@
 {% endblock %} 
 
 {% block javascript %}
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='med_form_scripts.js') }}"></script>
 {% endblock %}

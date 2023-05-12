@@ -4,9 +4,43 @@
     <h1 class="header">Detailed Information - Dr. {{ doctor.full_name() }}</h1>
 {% endblock %} 
 
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+            <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
 {% block content %} 
     
-<p>This will have information on this specific doctor.</p>
+<p><div id="doctor-info-summary">
+    <p>Dr. {{ doctor.full_name() }}</p>
+    <p>Phone number: {{ doctor.phone_number }}</p>
+    <p>Address: 
+        {% if doctor.address_line_1 %}{{ doctor.address_line_1 }},{% endif %} 
+        {% if doctor.address_line_2 %}{{ doctor.address_line_2 }},{% endif %} 
+        {% if doctor.city and doctor.state %} 
+            {{ doctor.city }}, {{ doctor.state}}
+        {% elif doctor.city and not doctor.state %} 
+            {{ doctor.city }}
+        {% elif doctor.state and not doctor.city %} 
+            {{ doctor.state }}
+        {% endif %}{% if doctor.zipcode %}{{ doctor.zipcode }}{% endif %}</p>
+        
+    <p>{% if doctor.notes %}Notes: {{ doctor.notes }}{% endif %}</p>
+</div></p>
+<button id="edit-doctor-btn" type="button">Edit Information</button>
+
+<p><div id="edit-doctor-form">
+    {% include '_doctor_form.html' %}
+</div>
+</p>
+{% endblock %}
 
 
+{% block javascript %}
+    <script src="{{ url_for('static', filename='doctor_form_scripts.js') }}"></script>
 {% endblock %}

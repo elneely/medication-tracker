@@ -142,3 +142,16 @@ textarea {
   #no-pharmacy-btn {
     display: none;
   }
+
+  #button-section {
+    display: flex;
+    column-gap: 1em;
+  }
+
+  #edit-doctor-form {
+    display: none;
+  }
+
+  #edit-pharmacy-form {
+    display: none;
+  }

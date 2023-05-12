@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import MedicationForm, AddDoctorForm, AddPharmacyForm, EmptyForm
+from app.main.forms import MedicationForm, AddDoctorForm, AddPharmacyForm, EditDoctorForm, EditPharmacyForm, EmptyForm
 from app.main import bp
 
 @bp.route('/')
@@ -160,7 +160,30 @@ def doctor_list(username):
 def doctor(username, doctor_id):
     user = User.query.filter_by(username=username).first_or_404()
     doctor = Doctor.query.filter_by(id=doctor_id).first_or_404()
-    form = AddDoctorForm()
+    doctor_name = doctor.full_name()
+    form = EditDoctorForm(doctor_name)
+    if form.validate_on_submit():
+        doctor.first_name=form.first_name.data
+        doctor.last_name=form.last_name.data
+        doctor.phone_number=form.phone_number.data
+        doctor.address_line_1=form.address_line_1.data
+        doctor.address_line_2=form.address_line_2.data
+        doctor.city=form.city.data
+        doctor.state=form.state.data
+        doctor.zipcode=form.zipcode.data
+        doctor.notes=form.notes.data
+        db.session.commit()
+        flash(f'You have successfully edited information for Dr. {form.last_name.data}.')
+    elif request.method == 'GET':
+        form.first_name.data = doctor.first_name
+        form.last_name.data = doctor.last_name
+        form.phone_number.data = doctor.phone_number
+        form.address_line_1.data = doctor.address_line_1
+        form.address_line_2.data = doctor.address_line_2
+        form.city.data = doctor.city
+        form.state.data = doctor.state
+        form.zipcode.data = doctor.zipcode
+        form.notes.data = doctor.notes
     return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
 @bp.route('/user/<username>/add_pharmacy', methods=['GET', 'POST'])
@@ -200,5 +223,26 @@ def pharmacy_list(username):
 def pharmacy(username, pharmacy_id):
     user = User.query.filter_by(username=username).first_or_404()
     pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
-    form = AddPharmacyForm()
+    form = EditPharmacyForm(pharmacy.name)
+    if form.validate_on_submit():
+        pharmacy.name=form.name.data
+        pharmacy.phone_number=form.phone_number.data
+        pharmacy.address_line_1=form.address_line_1.data
+        pharmacy.address_line_2=form.address_line_2.data
+        pharmacy.city=form.city.data
+        pharmacy.state=form.state.data
+        pharmacy.zipcode=form.zipcode.data
+        pharmacy.notes=form.notes.data
+        db.session.commit()
+        flash(f'You have successfully edited information for {form.name.data}.')
+    elif request.method == 'GET':
+        form.name.data = pharmacy.name
+        form.phone_number.data = pharmacy.phone_number
+        form.address_line_1.data = pharmacy.address_line_1
+        form.address_line_2.data = pharmacy.address_line_2
+        form.city.data = pharmacy.city
+        form.state.data = pharmacy.state
+        form.zipcode.data = pharmacy.zipcode
+        form.notes.data = pharmacy.notes
     return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+

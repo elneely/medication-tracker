@@ -1,0 +1,55 @@
+<fieldset>
+    <legend>Basic information</legend>
+    <p>
+        {{ form.medication_name.label }}
+        {{ form.medication_name(size=64, maxlength=128) }}<br>
+        {% for error in form.medication_name.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.brand_name.label}}<span tabindex="0" class="info-circle">&#x1F6C8; 
+            <span class="info-text">Since medications are frequently dispensed 
+                as generics that have long names, you may enter a brand name here 
+                if that is easier to remember.</span></span>  
+        {{ form.brand_name(size=64, maxlength=64 ) }}<br>
+        {% for error in form.brand_name.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.dose.label }}
+        {{ form.dose(size=64, maxlength=64) }}<br>
+        {% for error in form.dose.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.frequency.label }}
+        {{ form.frequency(size=64, maxlength=64 )}}<br>
+        {% for error in form.frequency.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.length.label }} {{ form.length(size=3, maxlength=3) }} days<br>
+        {% for error in form.length.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {# deal with the boolean #} 
+        {{ form.short_term.label }}
+        {{ form.short_term()}}<br>
+        {% for error in form.short_term.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.reason.label }}
+        {{ form.reason(size=64, maxlength=128) }}<br>
+        {% for error in form.reason.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    </fieldset>
