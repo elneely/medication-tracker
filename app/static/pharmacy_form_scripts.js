@@ -1,4 +1,4 @@
-/* This is to show/hide the edit doctor info form */
+/* This is to show/hide the edit pharmacy info form */
 
 const pharmacyInfoDiv = document.getElementById("edit-pharmacy-form"); 
 var editPharmacyBtn = document.getElementById("edit-pharmacy-btn");

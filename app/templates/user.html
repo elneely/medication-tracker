@@ -35,7 +35,6 @@
                                     <div class="medication-name"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></div>
                                     <div class="medication-dose">{% if medication.dose %} {{ medication.dose }}{% endif %}</div>
                                     <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
-                                    <div class="prescribing-doctor">{% if medication.doctor_id %}{{ medication.prescribing_doctor_name() }}{% endif %} </div>
                                     <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
                                     <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
                                 </p>
@@ -56,7 +55,7 @@
                                 <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
                                 <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
                                 <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
-                            </p>
+                          </p>
                         </div>
                     {% endif %}
                 {% endfor %} 

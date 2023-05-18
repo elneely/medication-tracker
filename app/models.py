@@ -39,7 +39,7 @@ class User(UserMixin, db.Model):
             doctor_entry = (doctor.id, doctor_name)
             doctor_choices.append(doctor_entry)
         return doctor_choices
-
+            
     def medication_list(self):
         my_meds = Medication.query.filter_by(user_id=self.id)
         return my_meds.order_by(Medication.medication_name.desc())
@@ -91,7 +91,13 @@ class Medication(db.Model):
     def filling_pharmacy(self):
         pharmacy_record = Pharmacy.query.filter_by(id=self.pharmacy_id).first_or_404()
         return pharmacy_record.name    
-    
+    """I don't think I will need this, but let's wait to get everything working first
+    def selected_doctor(self):
+        if self.doctor_id:
+            return (self.doctor_id, self.prescribing_doctor_name())
+        else:
+            return (None, "")"""
+
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

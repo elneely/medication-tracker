@@ -6,7 +6,7 @@ from wtforms import BooleanField, DateField, EmailField, HiddenField, \
 from wtforms.validators import DataRequired, Length, ValidationError, \
     Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
-from app.models import User, Doctor, Pharmacy
+from app.models import User, Doctor, Pharmacy, Medication
 
 class ProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -32,19 +32,19 @@ class ProfileForm(FlaskForm):
             if user is not None:
                 raise ValidationError('Please use a different email.')
     
-class MedicationForm(FlaskForm):
+class AddMedicationForm(FlaskForm):
     medication_name = StringField('Medication Name (Required): ', validators=[DataRequired(), Length(max=128)])
     brand_name = StringField('Brand name:', validators=[Length(max=64)])
     dose = StringField('Dosage: ', validators=[Length(max=64)])
     frequency = StringField('Frequency: ', validators=[Length(max=64)])
-    prescription_date = DateField('Prescription Date: ', format='%m/%d/%Y', validators=[Optional()])
-    last_filled = DateField('Last Filled: ', format='%m/%d/%Y', validators=[Optional()])
+    prescription_date = DateField('Prescription Date: ', validators=[Optional()])
+    last_filled = DateField('Last Filled: ', validators=[Optional()])
     short_term = BooleanField('Short term medication?')
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])   
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
-    refills_expiration = DateField('Prescription expiration Date: ', format='%m/%d/%Y', validators=[Optional()])
+    refills_expiration = DateField('Prescription expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
@@ -68,6 +68,29 @@ class MedicationForm(FlaskForm):
             if name is not None:
                 raise ValidationError("You already have a pharmacy with this name")
 
+class EditMedicationForm(FlaskForm):
+    medication_name = StringField('Medication Name (Required): ', validators=[DataRequired(), Length(max=128)])
+    brand_name = StringField('Brand name:', validators=[Length(max=64)])
+    dose = StringField('Dosage: ', validators=[Length(max=64)])
+    frequency = StringField('Frequency: ', validators=[Length(max=64)])
+    prescription_date = DateField('Prescription Date: ', validators=[Optional()])
+    last_filled = DateField('Last Filled: ', validators=[Optional()])
+    short_term = BooleanField('Short term medication?')
+    length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
+    reminder = BooleanField('Refill reminders on?')
+    reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])   
+    refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
+    refills_expiration = DateField('Prescription expiration Date: ', validators=[Optional()])
+    reason = StringField('Reason for taking: ', validators=[Length(max=128)])
+    notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
+    doctor_list =  SelectField('Doctor: ', validators=[Optional()])
+    pharmacy_list = SelectField('Pharmacy: ', validators=[Optional()]) 
+    submit = SubmitField('Submit')
+
+    def __init__(self, original_name, *args, **kwargs):
+        super(EditMedicationForm, self).__init__(*args, **kwargs)
+        self.original_name = original_name
+        
 class AddDoctorForm(FlaskForm):
     first_name = StringField('First name (optional)', validators=[Length(max=64)])
     last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
@@ -124,11 +147,13 @@ class AddPharmacyForm(FlaskForm):
     zipcode = StringField('Zipcode', validators=[Length(max=5)])
     notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
-
+# not sure that last part works
     def validate_name(self, name):
         check_name = Pharmacy.query.filter_by(user_id=current_user.id, name=name.data).first()
         if check_name is not None:
             raise ValidationError("You already have a pharmacy with this name.")
+        if name.data.isspace() == True:
+            raise ValidationError("You cannot leave a blank name.")
 
 
 class EditPharmacyForm(FlaskForm):
@@ -145,8 +170,10 @@ class EditPharmacyForm(FlaskForm):
     def __init__(self, original_name, *args, **kwargs):
         super(EditPharmacyForm, self).__init__(*args, **kwargs)
         self.original_name = original_name
-
+# not sure that last part works
     def validate_name(self, name):
+        if name.data.isspace() == True:
+            raise ValidationError("You cannot leave a blank name.")
         if name.data != self.original_name:
             check_name = Pharmacy.query.filter_by(user_id=current_user.id, name=name.data).first()
             if check_name is not None:

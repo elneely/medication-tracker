@@ -155,3 +155,7 @@ textarea {
   #edit-pharmacy-form {
     display: none;
   }
+
+  #edit-medication-form {
+    display: none;
+  }

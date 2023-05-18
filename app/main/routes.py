@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import MedicationForm, AddDoctorForm, AddPharmacyForm, EditDoctorForm, EditPharmacyForm, EmptyForm
+from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm
 from app.main import bp
 
 @bp.route('/')
@@ -30,7 +30,7 @@ def user_profile(username):
 @bp.route('/user/<username>/add_medication', methods=['GET', 'POST'])
 @login_required
 def add_medication(username):
-    form = MedicationForm()
+    form = AddMedicationForm()
     form.doctor_list.choices = current_user.doctor_choices()
     form.pharmacy_list.choices = current_user.pharmacy_choices()
     
@@ -102,7 +102,44 @@ def add_medication(username):
 def medication(username, medication_id):
     user = User.query.filter_by(username=username).first_or_404()
     medication = Medication.query.filter_by(id=medication_id).first_or_404()
-    form = MedicationForm()
+    form = EditMedicationForm(medication.medication_name, doctor_list=medication.doctor_id, pharmacy_list=medication.pharmacy_id)
+    form.doctor_list.choices = current_user.doctor_choices()
+    form.pharmacy_list.choices = current_user.pharmacy_choices()
+    if form.validate_on_submit():
+        # need to put in the if clause for if it's None for doctor/pharm
+        medication.medication_name=form.medication_name.data
+        medication.brand_name=form.brand_name.data
+        medication.dose=form.dose.data
+        medication.frequency=form.frequency.data
+        medication.prescription_date=form.prescription_date.data
+        medication.last_filled=form.last_filled.data
+        medication.short_term=form.short_term.data
+        medication.reminder=form.reminder.data
+        medication.reminder_length=form.reminder_length.data
+        medication.refills_remaining=form.refills_remaining.data
+        medication.refills_expiration=form.refills_expiration.data
+        medication.length=form.length.data
+        medication.reason=form.reason.data
+        medication.notes=form.notes.data
+        medication.doctor_id=form.doctor_list.data,
+        medication.pharmacy_id=form.pharmacy_list.data
+        db.session.commit()
+        flash(f'You have successfully edited information for {form.medication_name.data}.')
+    elif request.method == 'GET':
+        form.medication_name.data = medication.medication_name
+        form.brand_name.data = medication.brand_name
+        form.dose.data = medication.dose
+        form.frequency.data = medication.frequency
+        form.prescription_date.data = medication.prescription_date
+        form.last_filled.data=medication.last_filled
+        form.short_term.data=medication.short_term
+        form.reminder.data=medication.reminder
+        form.reminder_length.data=medication.reminder_length
+        form.refills_remaining.data=medication.refills_remaining
+        form.refills_expiration.data=medication.refills_expiration
+        form.length.data=medication.length
+        form.reason.data=medication.reason
+        form.notes.data=medication.notes
     return render_template('medication.html', title="Medication Information", user=user, medication=medication, form=form)
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
