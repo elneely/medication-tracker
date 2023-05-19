@@ -1,0 +1,47 @@
+{% extends "base.html" %} 
+
+{% block header %} 
+    <h1 class="header">Manage Medications</h1>
+{% endblock %} 
+
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+                <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
+{% block content %} 
+    <div class="main-container">
+        <div class="medication-container">
+            <table id="medication-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dose</th>
+                        <th>Prescription Length</th>
+                        <th>Remaining Refills</th>
+                        <th>Prescribing Doctor</th>
+                        <th>Pharmacy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medication in medications %}
+                        <tr>
+                            <td><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></td>
+                            <td>{% if medication.dose %}{{ medication.dose }}{% endif %}</td>
+                            <td>{% if medication.length %}{{ medication.length }}{% endif %}</td>
+                            <td>{% if medication.refills_remaining %}{{ medication.refills_remaining }}{% endif %}</td>
+                            <td>{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</td>
+                            <td>{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %} 

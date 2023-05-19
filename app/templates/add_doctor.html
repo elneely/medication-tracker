@@ -15,6 +15,13 @@
 {% endblock %} 
 
 {% block content %} 
-    {% include '_doctor_form.html' %}
+    <form action="" method="post">
+    {{ form.hidden_tag() }}
 
+    {% include '_doctor_form.html' %}
+    <p>
+        {{ form.submit() }}
+    </p>
+    
+    </form>
 {% endblock %} 

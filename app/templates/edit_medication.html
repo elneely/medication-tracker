@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block header %} 
+    <h1 class="header">Detailed Medication Information - {{ medication.medication_name }}</h1>
+{% endblock %} 
+
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+            <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
+{% block content %} 
+    
+<p><div id="edit-medication-form">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {% include '_basic_med_info.html' %}
+        {% include '_detailed_med_info.html' %} 
+        <fieldset>
+            <legend>Doctor Information</legend>
+            {% include '_doctor_form.html' %} 
+        </fieldset>
+        <fieldset>
+            <legend>Pharmacy Information</legend>
+            {% include '_pharmacy_form.html' %}
+        </fieldset>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+</div>
+</p>
+
+{% endblock %}

@@ -46,7 +46,7 @@ class AddMedicationForm(FlaskForm):
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
-    notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
+    medication_notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
     doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
     new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
@@ -58,13 +58,13 @@ class AddMedicationForm(FlaskForm):
     
     def validate_new_doctor_last(self, new_doctor_last):
         if new_doctor_last.data is not None:  
-            name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.new_doctor_first.data, last_name=new_doctor_last.data).first()
+            name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.new_doctor_first.data, doctor_last_name=new_doctor_last.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
 
     def validate_new_pharmacy_name(self, new_pharmacy_name):
         if new_pharmacy_name.data is not None:
-            name = Pharmacy.query.filter_by(user_id=current_user.id, name=self.new_pharmacy_name.data).first()
+            name = Pharmacy.query.filter_by(user_id=current_user.id, pharmacy_name=self.new_pharmacy_name.data).first()
             if name is not None:
                 raise ValidationError("You already have a pharmacy with this name")
 
@@ -82,7 +82,7 @@ class EditMedicationForm(FlaskForm):
     refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
     refills_expiration = DateField('Prescription expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
-    notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
+    medication_notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     doctor_list =  SelectField('Doctor: ', validators=[Optional()])
     pharmacy_list = SelectField('Pharmacy: ', validators=[Optional()]) 
     submit = SubmitField('Submit')
@@ -92,90 +92,90 @@ class EditMedicationForm(FlaskForm):
         self.original_name = original_name
         
 class AddDoctorForm(FlaskForm):
-    first_name = StringField('First name (optional)', validators=[Length(max=64)])
-    last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    phone_number = TelField('Telephone number') #not sure I have this input working with model
-    address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
-    address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
-    city = StringField('City', validators=[Length(max=64)])
-    state = StringField('State', validators=[Length(max=2)])
-    zipcode = StringField('Zipcode', validators=[Length(max=5)])
-    notes = TextAreaField('Notes', validators=[Length(max=128)])
+    doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
+    doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
+    doctor_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
+    doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
+    doctor_city = StringField('City', validators=[Length(max=64)])
+    doctor_state = StringField('State', validators=[Length(max=2)])
+    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
-    def validate_last_name(self, last_name):
-        name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.first_name.data, last_name=last_name.data).first()
+    def validate_doctor_last_name(self, doctor_last_name):
+        name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
         if name is not None:
             raise ValidationError("You already have a doctor with this name")
 
 class EditDoctorForm(FlaskForm):
-    first_name = StringField('First name (optional)', validators=[Length(max=64)])
-    last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    phone_number = TelField('Telephone number') #not sure I have this input working with model
-    address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
-    address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
-    city = StringField('City', validators=[Length(max=64)])
-    state = StringField('State', validators=[Length(max=2)])
-    zipcode = StringField('Zipcode', validators=[Length(max=5)])
-    notes = TextAreaField('Notes', validators=[Length(max=128)])
+    doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
+    doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
+    doctor_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
+    doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
+    doctor_city = StringField('City', validators=[Length(max=64)])
+    doctor_state = StringField('State', validators=[Length(max=2)])
+    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
     def __init__(self, original_full_name, *args, **kwargs):
         super(EditDoctorForm, self).__init__(*args, **kwargs)
         self.original_full_name = original_full_name
 
-    def validate_last_name(self, last_name):
-        if self.first_name.data:
-            doctor_name = self.first_name.data + " " + last_name.data
+    def validate_doctor_last_name(self, doctor_last_name):
+        if self.doctor_first_name.data:
+            doctor_name = self.doctor_first_name.data + " " + doctor_last_name.data
         else:
-            doctor_name = last_name.data
+            doctor_name = doctor_last_name.data
 
         if doctor_name != self.original_full_name:
-            name = Doctor.query.filter_by(user_id=current_user.id, first_name=self.first_name.data, last_name=last_name.data).first()
+            name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
         
 
 
 class AddPharmacyForm(FlaskForm):
-    name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
-    phone_number = TelField('Telephone number') #not sure I have this input working with model
-    address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
-    address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
-    city = StringField('City', validators=[Length(max=64)])
-    state = StringField('State', validators=[Length(max=2)])
-    zipcode = StringField('Zipcode', validators=[Length(max=5)])
-    notes = TextAreaField('Notes', validators=[Length(max=128)])
+    pharmacy_name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
+    pharmacy_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
+    pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
+    pharmacy_city = StringField('City', validators=[Length(max=64)])
+    pharmacy_state = StringField('State', validators=[Length(max=2)])
+    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 # not sure that last part works
-    def validate_name(self, name):
-        check_name = Pharmacy.query.filter_by(user_id=current_user.id, name=name.data).first()
+    def validate_pharmacy_name(self, pharmacy_name):
+        check_name = Pharmacy.query.filter_by(user_id=current_user.id, pharmacy_name=pharmacy_name.data).first()
         if check_name is not None:
             raise ValidationError("You already have a pharmacy with this name.")
-        if name.data.isspace() == True:
+        if pharmacy_name.data.isspace() == True:
             raise ValidationError("You cannot leave a blank name.")
 
 
 class EditPharmacyForm(FlaskForm):
-    name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
-    phone_number = TelField('Telephone number') #not sure I have this input working with model
-    address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
-    address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
-    city = StringField('City', validators=[Length(max=64)])
-    state = StringField('State', validators=[Length(max=2)])
-    zipcode = StringField('Zipcode', validators=[Length(max=5)])
-    notes = TextAreaField('Notes', validators=[Length(max=128)])
+    pharmacy_name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
+    pharmacy_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
+    pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
+    pharmacy_city = StringField('City', validators=[Length(max=64)])
+    pharmacy_state = StringField('State', validators=[Length(max=2)])
+    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
     def __init__(self, original_name, *args, **kwargs):
         super(EditPharmacyForm, self).__init__(*args, **kwargs)
         self.original_name = original_name
 # not sure that last part works
-    def validate_name(self, name):
-        if name.data.isspace() == True:
+    def validate_pharmacy_name(self, pharmacy_name):
+        if pharmacy_name.data.isspace() == True:
             raise ValidationError("You cannot leave a blank name.")
-        if name.data != self.original_name:
-            check_name = Pharmacy.query.filter_by(user_id=current_user.id, name=name.data).first()
+        if pharmacy_name.data != self.original_name:
+            check_name = Pharmacy.query.filter_by(user_id=current_user.id, pharmacy_name=pharmacy_name.data).first()
             if check_name is not None:
                 raise ValidationError("You already have a pharmacy with this name.")
 

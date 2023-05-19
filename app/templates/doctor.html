@@ -18,29 +18,20 @@
     
 <p><div id="doctor-info-summary">
     <p>Dr. {{ doctor.full_name() }}</p>
-    <p>Phone number: {{ doctor.phone_number }}</p>
+    <p>Phone number: {{ doctor.doctor_phone_number }}</p>
     <p>Address: 
-        {% if doctor.address_line_1 %}{{ doctor.address_line_1 }},{% endif %} 
-        {% if doctor.address_line_2 %}{{ doctor.address_line_2 }},{% endif %} 
-        {% if doctor.city and doctor.state %} 
-            {{ doctor.city }}, {{ doctor.state}}
-        {% elif doctor.city and not doctor.state %} 
-            {{ doctor.city }}
-        {% elif doctor.state and not doctor.city %} 
-            {{ doctor.state }}
-        {% endif %}{% if doctor.zipcode %}{{ doctor.zipcode }}{% endif %}</p>
+        {% if doctor.doctor_address_line_1 %}{{ doctor.doctor_address_line_1 }},{% endif %} 
+        {% if doctor.doctor_address_line_2 %}{{ doctor.doctor_address_line_2 }},{% endif %} 
+        {% if doctor.doctor_city and doctor.doctor_state %} 
+            {{ doctor.doctor_city }}, {{ doctor.doctor_state}}
+        {% elif doctor.doctor_city and not doctor.doctor_state %} 
+            {{ doctor.doctor_city }}
+        {% elif doctor.doctor_state and not doctor.doctor_city %} 
+            {{ doctor.doctor_state }}
+        {% endif %}{% if doctor.doctor_zipcode %}{{ doctor.doctor_zipcode }}{% endif %}</p>
         
-    <p>{% if doctor.notes %}Notes: {{ doctor.notes }}{% endif %}</p>
+    <p>{% if doctor.doctor_notes %}Notes: {{ doctor.doctor_notes }}{% endif %}</p>
 </div></p>
-<button id="edit-doctor-btn" type="button">Edit Information</button>
+<a href="{{ url_for('main.edit_doctor', username=current_user.username, doctor_id=doctor.id) }}"><button id="edit-doctor-btn" type="button">Edit Information</button></a>
 
-<p><div id="edit-doctor-form">
-    {% include '_doctor_form.html' %}
-</div>
-</p>
-{% endblock %}
-
-
-{% block javascript %}
-    <script src="{{ url_for('static', filename='doctor_form_scripts.js') }}"></script>
 {% endblock %}

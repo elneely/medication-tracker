@@ -26,16 +26,16 @@ class User(UserMixin, db.Model):
 
     def doctor_list(self):
         my_doctors = Doctor.query.filter_by(user_id=self.id)
-        return my_doctors.order_by(Doctor.last_name.asc())
+        return my_doctors.order_by(Doctor.doctor_last_name.asc())
     
     def doctor_choices(self):
         my_doctors = self.doctor_list().all()
         doctor_choices = [(None, '')]
         for doctor in my_doctors:
-            if doctor.first_name:
-                doctor_name = doctor.first_name + " " + doctor.last_name
+            if doctor.doctor_first_name:
+                doctor_name = doctor.doctor_first_name + " " + doctor.doctor_last_name
             else:
-                doctor_name = doctor.last_name
+                doctor_name = doctor.doctor_last_name
             doctor_entry = (doctor.id, doctor_name)
             doctor_choices.append(doctor_entry)
         return doctor_choices
@@ -46,13 +46,13 @@ class User(UserMixin, db.Model):
     
     def pharmacy_list(self):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
-        return my_pharmacies.order_by(Pharmacy.name.desc())
+        return my_pharmacies.order_by(Pharmacy.pharmacy_name.desc())
 
     def pharmacy_choices(self):
         my_pharmacies = self.pharmacy_list().all()
         pharmacy_choices = [(None, '')]
         for pharmacy in my_pharmacies:
-            pharmacy_entry = (pharmacy.id, pharmacy.name)
+            pharmacy_entry = (pharmacy.id, pharmacy.pharmacy_name)
             pharmacy_choices.append(pharmacy_entry)
         return pharmacy_choices
     
@@ -78,7 +78,7 @@ class Medication(db.Model):
     refills_expiration = db.Column(db.Date, index=True)
     length = db.Column(db.Integer, index=True)
     reason = db.Column(db.String(128))
-    notes = db.Column(db.String(1024))
+    medication_notes = db.Column(db.String(1024))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))   
 
     def __repr__(self):
@@ -90,7 +90,7 @@ class Medication(db.Model):
 
     def filling_pharmacy(self):
         pharmacy_record = Pharmacy.query.filter_by(id=self.pharmacy_id).first_or_404()
-        return pharmacy_record.name    
+        return pharmacy_record.pharmacy_name    
     """I don't think I will need this, but let's wait to get everything working first
     def selected_doctor(self):
         if self.doctor_id:
@@ -101,39 +101,39 @@ class Medication(db.Model):
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    first_name = db.Column(db.String(64))
-    last_name = db.Column(db.String(64))
+    doctor_first_name = db.Column(db.String(64))
+    doctor_last_name = db.Column(db.String(64))
     # for now only dealing with US addresses/phone numbers
-    phone_number = db.Column(db.String(10))
-    address_line_1 = db.Column(db.String(64))
-    address_line_2 = db.Column(db.String(64))
-    city = db.Column(db.String(64))
-    state = db.Column(db.String(2))
-    zipcode = db.Column(db.String(5))
-    notes = db.Column(db.String(128))
+    doctor_phone_number = db.Column(db.String(10))
+    doctor_address_line_1 = db.Column(db.String(64))
+    doctor_address_line_2 = db.Column(db.String(64))
+    doctor_city = db.Column(db.String(64))
+    doctor_state = db.Column(db.String(2))
+    doctor_zipcode = db.Column(db.String(5))
+    doctor_notes = db.Column(db.String(128))
 
     def __repr__(self):
-        return 'Dr. {}'.format(self.last_name)
+        return 'Dr. {}'.format(self.doctor_last_name)
 
     def full_name(self):
-        if self.first_name:
-            doctor_name = self.first_name + " " + self.last_name
+        if self.doctor_first_name:
+            doctor_name = self.doctor_first_name + " " + self.doctor_last_name
         else:
-            doctor_name = self.last_name
+            doctor_name = self.doctor_last_name
         return doctor_name
 
 class Pharmacy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    name = db.Column(db.String(64))
+    pharmacy_name = db.Column(db.String(64))
     # for now only dealing with US addresses/phone numbers
-    phone_number = db.Column(db.String(10))
-    address_line_1 = db.Column(db.String(64))
-    address_line_2 = db.Column(db.String(64))
-    city = db.Column(db.String(64))
-    state = db.Column(db.String(2))
-    zipcode = db.Column(db.String(5))
-    notes = db.Column(db.String(128))
+    pharmacy_phone_number = db.Column(db.String(10))
+    pharmacy_address_line_1 = db.Column(db.String(64))
+    pharmacy_address_line_2 = db.Column(db.String(64))
+    pharmacy_city = db.Column(db.String(64))
+    pharmacy_state = db.Column(db.String(2))
+    pharmacy_zipcode = db.Column(db.String(5))
+    pharmacy_notes = db.Column(db.String(128))
 
     def __repr__(self):
-        return self.name
+        return self.pharmacy_name

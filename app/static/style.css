@@ -99,63 +99,119 @@ textarea {
     z-index: 1;
   }
   
-  .info-circle:hover .info-text {
+.info-circle:hover .info-text {
     visibility: visible;
-  }
+}
 
-  .info-circle:focus .info-text {
+.info-circle:focus .info-text {
     visibility: visible;
-  }
+}
 
-  #reminders-true {
+#reminders-true {
     display: none;
-  }
+}
 
-  #doctor-choice {
+#doctor-choice {
     display: none;
-  }
+}
 
-  #only-current-doctor {
+#only-current-doctor {
     display: none;
-  }
+}
 
-  #only-new-doctor {
+#only-new-doctor {
     display: none;
-  }
+}
 
-  #no-doctor-btn {
+#no-doctor-btn {
     display: none;
-  }
+}
 
-  #pharmacy-choice {
+#pharmacy-choice {
     display: none;
-  }
+}
 
-  #only-current-pharmacy {
+#only-current-pharmacy {
     display: none;
-  }
+}
 
-  #only-new-pharmacy {
+#only-new-pharmacy {
     display: none;
-  }
+}
 
-  #no-pharmacy-btn {
+#no-pharmacy-btn {
     display: none;
-  }
+}
 
-  #button-section {
+#button-section {
     display: flex;
     column-gap: 1em;
-  }
+}
 
-  #edit-doctor-form {
-    display: none;
-  }
 
-  #edit-pharmacy-form {
-    display: none;
-  }
+/* Table styles */
 
-  #edit-medication-form {
-    display: none;
-  }
+td {
+    text-align: left;
+}
+
+thead {
+  background-color: rgb(245, 207, 158);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(248, 227, 199);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgb(252, 241, 227);
+}
+
+/* Medication table */
+
+#medication-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Doctor table */
+
+#doctor-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#doctor-table thead th:nth-child(1) {
+  width: 30%;
+}
+
+#doctor-table thead th:nth-child(2) {
+  width: 20%;
+}
+
+#doctor-table thead th:nth-child(3) {
+  width: 50%
+}
+
+
+/* Pharmacy table */
+
+#pharmacy-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;    
+}
+
+#pharmacy-table thead th:nth-child(1) {
+  width: 30%;
+}
+
+#pharmacy-table thead th:nth-child(2) {
+  width: 20%;
+}
+
+#pharmacy-table thead th:nth-child(3) {
+  width: 50%
+}

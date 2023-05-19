@@ -1,63 +1,59 @@
-<form action="" method="post">
-    {{ form.hidden_tag() }}
+<fieldset>
+    <legend>Pharmacy</legend>
     <p>
-        {{ form.name.label }}<br>
-        {{ form.name(size=64) }}<br>
-        {% for error in form.name.errors %} 
+        {{ form.pharmacy_name.label }}<br>
+        {{ form.pharmacy_name(size=64) }}<br>
+        {% for error in form.pharmacy_name.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.phone_number.label }}<br>
-        {{ form.phone_number(size=64) }}<br>
-        {% for error in form.phone_number.errors %} 
+        {{ form.pharmacy_phone_number.label }}<br>
+        {{ form.pharmacy_phone_number(size=64) }}<br>
+        {% for error in form.pharmacy_phone_number.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.address_line_1.label }}<br>
-        {{ form.address_line_1(size=64)}}<br>
-        {% for error in form.address_line_1.errors %} 
+        {{ form.pharmacy_address_line_1.label }}<br>
+        {{ form.pharmacy_address_line_1(size=64)}}<br>
+        {% for error in form.pharmacy_address_line_1.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.address_line_2.label }}<br>
-        {{ form.address_line_2(size=64) }}<br>
-        {% for error in form.address_line_2.errors %} 
+        {{ form.pharmacy_address_line_2.label }}<br>
+        {{ form.pharmacy_address_line_2(size=64) }}<br>
+        {% for error in form.pharmacy_address_line_2.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.city.label }}
-        {{ form.city(size=64)}}<br>
-        {% for error in form.city.errors %} 
+        {{ form.pharmacy_city.label }}
+        {{ form.pharmacy_city(size=64)}}<br>
+        {% for error in form.pharmacy_city.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.state.label }}
-        {{ form.state()}}<br>
-        {% for error in form.state.errors %} 
+        {{ form.pharmacy_state.label }}
+        {{ form.pharmacy_state()}}<br>
+        {% for error in form.pharmacy_state.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.zipcode.label }}
-        {{ form.zipcode(size=32) }} <br>
-        {% for error in form.zipcode.errors %} 
+        {{ form.pharmacy_zipcode.label }}
+        {{ form.pharmacy_zipcode(size=32) }} <br>
+        {% for error in form.pharmacy_zipcode.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.notes.label }}<br>
-        {{ form.notes(size=1024)}}
-        {% for error in form.notes.errors %} 
+        {{ form.pharmacy_notes.label }}<br>
+        {{ form.pharmacy_notes(size=1024)}}
+        {% for error in form.pharmacy_notes.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
-    <p>
-        {{ form.submit() }}
-    </p>
-    
-</form>
+</fieldset> 

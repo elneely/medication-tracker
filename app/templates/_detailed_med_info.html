@@ -50,9 +50,9 @@
     </div>
     
     <p>
-        {{ form.notes.label }}<br>
-        {{ form.notes(rows=5, cols=64, maxlength=1024)}}
-        {% for error in form.notes.errors %} 
+        {{ form.medication_notes.label }}<br>
+        {{ form.medication_notes(rows=5, cols=64, maxlength=1024)}}
+        {% for error in form.medication_notes.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>

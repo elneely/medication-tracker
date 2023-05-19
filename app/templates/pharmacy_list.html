@@ -1,11 +1,7 @@
 {% extends "base.html" %} 
 
 {% block header %} 
-    {% if current_user.display_name %}
-        <h1 class="header">Pharmacy List - {{ current_user.display_name }}</h1>
-    {% else %} 
-        <h1 class="header">Pharmacy List</h1>
-    {% endif %} 
+        <h1 class="header">Pharmacy Contact List</h1>
 {% endblock %} 
 
 {% block notifications %} 
@@ -21,16 +17,25 @@
 {% block content %} 
     <div class="main-container">
         <div class="pharmacy-container">
-            {% for pharmacy in pharmacies %}
-                <div class="pharmacy-summary">
-                    <p>
-                        <div class="pharmacy-name"><a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}">{{ pharmacy.name }}</a></div>
-                        <div class="pharmacy-phone">{% if pharmacy.phone_number %}Phone: {{ pharmacy.phone_number }}{% endif %}</div>
-                        <div class="pharmacy-notes">{% if pharmacy.notes %}Notes: {{ pharmacy.notes }}{% endif %}</div>
-                    </p>
-
-
-            {% endfor %}
+            <table id="pharmacy-table">
+                <thead>
+                    <tr>
+                        <th>Pharmacy Name</th>
+                        <th>Phone Number</th>
+                        <th>Notes</th>
+                    </tr>    
+                </thead>
+                <tbody>
+                    {% for pharmacy in pharmacies %}
+                        <tr>
+                            <td><a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}">{{ pharmacy.pharmacy_name }}</a></td>
+                            <td>{% if pharmacy.pharmacy_phone_number %}{{ pharmacy.pharmacy_phone_number }}{% endif %}</td>
+                            <td>{% if pharmacy.pharmacy_notes %}{{ pharmacy.pharmacy_notes }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>           
+            
+            </table>
         </div>
     </div>
 

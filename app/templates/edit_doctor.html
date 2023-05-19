@@ -1,7 +1,7 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block header %} 
-    <h1 class="header">Add Pharmacy</h1>
+    <h1 class="header">Edit Information - Dr. {{ doctor.full_name() }}</h1>
 {% endblock %} 
 
 {% block notifications %} 
@@ -17,12 +17,15 @@
 {% block content %} 
     <form action="" method="post">
     {{ form.hidden_tag() }}
-    
-    {% include '_pharmacy_form.html' %}
-    
+
+    {% include '_doctor_form.html' %}
+
     <p>
         {{ form.submit() }}
+        <a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=doctor.id) }}"><button id="edit-doctor-btn" type="button">Cancel</button></a>
+   
     </p>
-
+    
     </form>
-{% endblock %} 
+{% endblock %}
+

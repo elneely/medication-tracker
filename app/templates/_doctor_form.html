@@ -1,71 +1,67 @@
-<form action="" method="post">
-    {{ form.hidden_tag() }}
+<fieldset>
+    <legend>Doctor</legend>
 
     <p>
-        {{ form.first_name.label }}<br>
-        {{ form.first_name(size=128) }}<br>
-        {% for error in form.first_name.errors %} 
+        {{ form.doctor_first_name.label }}<br>
+        {{ form.doctor_first_name(size=128) }}<br>
+        {% for error in form.doctor_first_name.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.last_name.label }}<br>
-        {{ form.last_name(size=64) }}<br>
-        {% for error in form.last_name.errors %} 
+        {{ form.doctor_last_name.label }}<br>
+        {{ form.doctor_last_name(size=64) }}<br>
+        {% for error in form.doctor_last_name.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.phone_number.label }}<br>
-        {{ form.phone_number(size=64) }}<br>
-        {% for error in form.phone_number.errors %} 
+        {{ form.doctor_phone_number.label }}<br>
+        {{ form.doctor_phone_number(size=64) }}<br>
+        {% for error in form.doctor_phone_number.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.address_line_1.label }}<br>
-        {{ form.address_line_1(size=64)}}<br>
-        {% for error in form.address_line_1.errors %} 
+        {{ form.doctor_address_line_1.label }}<br>
+        {{ form.doctor_address_line_1(size=64)}}<br>
+        {% for error in form.doctor_address_line_1.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.address_line_2.label }}<br>
-        {{ form.address_line_2(size=64) }}<br>
-        {% for error in form.address_line_2.errors %} 
+        {{ form.doctor_address_line_2.label }}<br>
+        {{ form.doctor_address_line_2(size=64) }}<br>
+        {% for error in form.doctor_address_line_2.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.city.label }}
-        {{ form.city(size=64)}}<br>
-        {% for error in form.city.errors %} 
+        {{ form.doctor_city.label }}
+        {{ form.doctor_city(size=64)}}<br>
+        {% for error in form.doctor_city.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.state.label }}
-        {{ form.state()}}<br>
-        {% for error in form.state.errors %} 
+        {{ form.doctor_state.label }}
+        {{ form.doctor_state()}}<br>
+        {% for error in form.doctor_state.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.zipcode.label }}
-        {{ form.zipcode(size=32) }} <br>
-        {% for error in form.zipcode.errors %} 
+        {{ form.doctor_zipcode.label }}
+        {{ form.doctor_zipcode(size=32) }} <br>
+        {% for error in form.doctor_zipcode.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
     <p>
-        {{ form.notes.label }}<br>
-        {{ form.notes(size=1024)}}
-        {% for error in form.notes.errors %} 
+        {{ form.doctor_notes.label }}<br>
+        {{ form.doctor_notes(size=1024)}}
+        {% for error in form.doctor_notes.errors %} 
         <span class="error">{{ error }}</span>
         {% endfor %} 
     </p>
-    <p>
-        {{ form.submit() }}
-    </p>
-    
-</form>
+</fieldset>

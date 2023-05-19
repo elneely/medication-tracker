@@ -37,38 +37,9 @@
         {% elif medication.refills_remaining %}Refills remaining: {{ medication.refills_remaining }}
         {% elif medication.refills_expiration %}Refills expire: {{ medication.refills_expiration.month }}-{{ medication.refills_expiration.day }}-{{ medication.refills_expiration.year }}{% endif %}</p>
     <p>Refill reminders {% if medication.reminder %}on - remind {{medication.reminder_length }} days in advance {% else %}off{% endif %}</p>
-    <p>{% if medication.notes %}Notes: {{ medication.notes }}{% endif %}</p>
+    <p>{% if medication.medication_notes %}Notes: {{ medication.medication_notes }}{% endif %}</p>
 </div></p>
-<button id="edit-medication-btn" type="button">Edit Information</button>
-
-<p><div id="edit-medication-form">
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        {% include '_basic_med_info.html' %}
-        {% include '_detailed_med_info.html' %} 
-
-        <p>{{ form.doctor_list.label }}
-            {{ form.doctor_list(id="current-doctor-choice") }}
-            {% for error in form.doctor_list.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>{# might want to handle the case where this list is blank better #}
-            {{ form.pharmacy_list.label }}
-            {{ form.pharmacy_list(id="current-pharmacy-choice") }}
-            {% for error in form.pharmacy_list.errors %} 
-            <span class="error">{{ error }}</span>
-            {% endfor %} 
-        </p>
-        <p>
-            {{ form.submit() }}
-        </p>
-    </form>
-</div>
-</p>
+<a href="{{ url_for('main.edit_medication', username=current_user.username, medication_id=medication.id) }}"><button id="edit-medication-btn" type="button">Edit Information</button></a>
 
 {% endblock %}
-
-{% block javascript %}
-    <script src="{{ url_for('static', filename='med_form_scripts.js') }}"></script>
-{% endblock %}
+ 

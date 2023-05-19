@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %} 
-    <h1 class="header">Detailed Pharmacy Information - {{ pharmacy.name }}</h1>
+    <h1 class="header">Detailed Pharmacy Information - {{ pharmacy.pharmacy_name }}</h1>
 {% endblock %} 
 
 {% block notifications %} 
@@ -17,30 +17,22 @@
 {% block content %} 
        
 <p><div id="pharmacy-info-summary">
-    <p>{{ pharmacy.name }}</p>
-    <p>Phone number: {{ pharmacy.phone_number }}</p>
+    <p>{{ pharmacy.pharmacy_name }}</p>
+    <p>Phone number: {{ pharmacy.pharmacy_phone_number }}</p>
     <p>Address: 
-        {% if pharmacy.address_line_1 %}{{ pharmacy.address_line_1 }},{% endif %} 
-        {% if pharmacy.address_line_2 %}{{ pharmacy.address_line_2 }},{% endif %} 
-        {% if pharmacy.city and pharmacy.state %} 
-            {{ pharmacy.city }}, {{ pharmacy.state}}
-        {% elif pharmacy.city and not pharmacy.state %} 
-            {{ pharmacy.city }}
-        {% elif pharmacy.state and not pharmacy.city %} 
-            {{ pharmacy.state }}
-        {% endif %}{% if pharmacy.zipcode %}{{ pharmacy.zipcode }}{% endif %}</p>
+        {% if pharmacy.pharmacy_address_line_1 %}{{ pharmacy.pharmacy_address_line_1 }},{% endif %} 
+        {% if pharmacy.pharmacy_address_line_2 %}{{ pharmacy.pharmacy_address_line_2 }},{% endif %} 
+        {% if pharmacy.pharmacy_city and pharmacy.pharmacy_state %} 
+            {{ pharmacy.pharmacy_city }}, {{ pharmacy.pharmacy_state}}
+        {% elif pharmacy.pharmacy_city and not pharmacy.pharmacy_state %} 
+            {{ pharmacy.pharmacy_city }}
+        {% elif pharmacy.pharmacy_state and not pharmacy.pharmacy_city %} 
+            {{ pharmacy.pharmacy_state }}
+        {% endif %}{% if pharmacy.pharmacy_zipcode %}{{ pharmacy.pharmacy_zipcode }}{% endif %}</p>
         
-    <p>{% if pharmacy.notes %}Notes: {{ pharmacy.notes }}{% endif %}</p>
+    <p>{% if pharmacy.pharmacy_notes %}Notes: {{ pharmacy.pharmacy_notes }}{% endif %}</p>
 </div></p>
-<button id="edit-pharmacy-btn" type="button">Edit Information</button>
 
-<p><div id="edit-pharmacy-form">
-    {% include '_pharmacy_form.html' %}
-</div>
-</p>
-{% endblock %}
+<a href="{{ url_for('main.edit_pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}"><button id="edit-pharmacy-btn" type="button">Edit Information</button></a>
 
-
-{% block javascript %}
-    <script src="{{ url_for('static', filename='pharmacy_form_scripts.js') }}"></script>
-{% endblock %}
+{% endblock %} 

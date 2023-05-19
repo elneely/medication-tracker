@@ -21,14 +21,24 @@
 {% block content %} 
     <div class="main-container">
         <div class="doctor-container">
-            {% for doctor in doctors %}
-                <div class="doctor-summary">
-                    <p> <div class="doctor-name"><a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=doctor.id) }}">Dr. {{ doctor.full_name() }}</a></div>
-                        <div class="doctor-phone">{% if doctor.phone_number %}Phone: {{ doctor.phone_number }}{% endif %}</div>
-                        <div class="doctor-notes">{% if doctor.notes %}Notes: {{ doctor.notes}}{% endif %}</div>
-                    </p>
-                </div>
-            {% endfor %}
+            <table id="doctor-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                        <tr>
+                            <td><a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=doctor.id) }}">Dr. {{ doctor.full_name() }}</a></td>
+                            <td>{% if doctor.doctor_phone_number %}{{ doctor.doctor_phone_number }}{% endif %}</td>
+                            <td>{% if doctor.doctor_notes %}{{ doctor.doctor_notes}}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table> 
         </div>
     </div>
 
