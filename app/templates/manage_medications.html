@@ -45,7 +45,7 @@
             </tbody>
             </table>
         </div>
-        <div>
+        <div id="action-choice-div">
             <p>{{ form.action_choice.label }}
                 {{ form.action_choice(id="action-choice") }}
                 {% for error in form.action_choice.errors %} 
@@ -81,7 +81,7 @@
                 {% endfor %} 
             </p>
         </div>
-        <p>
+        <p id="manage-meds-submit-button">
             {{ form.submit() }}
         </p>
         </form>

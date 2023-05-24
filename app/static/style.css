@@ -225,3 +225,21 @@ tbody tr:nth-child(odd) {
 #pharmacy-table thead th:nth-child(3) {
   width: 50%
 }
+
+/* Manage Medications page */
+
+#pharmacy-list {
+    display: none;
+}
+
+#doctors-list {
+    display: none;
+}
+
+#delete-confirmation {
+    display: none;
+}
+
+#manage-meds-submit-button {
+    display: none;
+}

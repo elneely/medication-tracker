@@ -99,6 +99,13 @@ class ManageMedicationsForm(FlaskForm):
     selected_medications = SelectMultipleField('Select Medications', coerce=int)
     submit = SubmitField('Submit')
 
+    def validate_action_choice(self, action_choice):
+        if action_choice.data == "default":
+            raise ValidationError("You have not chosen an action.")
+        elif action_choice.data == "delete-medication":
+            raise ValidationError("Delete function has not been implemented")
+
+
 class AddDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])

@@ -40,9 +40,8 @@ def manage_medications(username):
 # for each if clause
 # for each selected medication, pull the medication with that id number
 # perform appropriate modification
-
         if form.action_choice.data == 'default':
-            pass
+            flash(f'No action has been selected.')
         elif form.action_choice.data == 'change-doctor':
             for medication in selected_medications:
                 med_id = int(medication)
@@ -52,13 +51,14 @@ def manage_medications(username):
             for medication in selected_medications:
                 med_id = int(medication)
                 med = Medication.query.filter_by(id=med_id).first_or_404()
-                med.pharmacy_id = form.pharmacy_list.data
+                med.pharmacy_id = form.pharmacy_list.data 
         elif form.action_choice.data == 'delete-medication':
+            flash(f'Delete function has not been implemented')
             if form.delete_confirmation.data == 'delete-yes':
                 pass # delete it
         db.session.commit()
         flash(f'Medications updated.')
-        return redirect(url_for('main.manage_medications', username=username))
+        return redirect(url_for('main.manage_medications', username=username))  
 
     return render_template('manage_medications.html', title="Manage Medications", user=user, medications=medications, form=form)
 
