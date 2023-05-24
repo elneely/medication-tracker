@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm
+from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm, ManageMedicationsForm
 from app.main import bp
 
 @bp.route('/')
@@ -26,12 +26,40 @@ def user_profile(username):
     doctors = current_user.doctor_choices()
     return render_template('user_profile.html', title="User Profile", user=user, doctors=doctors, form=form)
 
-@bp.route('/user/<username>/manage_medications')
+@bp.route('/user/<username>/manage_medications', methods=['GET', 'POST'])
 @login_required
 def manage_medications(username):
     user = User.query.filter_by(username=username).first_or_404()
-    form = EmptyForm()
+    form = ManageMedicationsForm()
+    form.doctor_list.choices = current_user.doctor_choices()
+    form.pharmacy_list.choices = current_user.pharmacy_choices()
+    form.selected_medications.choices = current_user.medication_choices()
     medications = current_user.medication_list().all()
+    if form.validate_on_submit():
+        selected_medications = form.selected_medications.data
+# for each if clause
+# for each selected medication, pull the medication with that id number
+# perform appropriate modification
+
+        if form.action_choice.data == 'default':
+            pass
+        elif form.action_choice.data == 'change-doctor':
+            for medication in selected_medications:
+                med_id = int(medication)
+                med = Medication.query.filter_by(id=med_id).first_or_404()
+                med.doctor_id = form.doctor_list.data
+        elif form.action_choice.data == 'change-pharmacy':
+            for medication in selected_medications:
+                med_id = int(medication)
+                med = Medication.query.filter_by(id=med_id).first_or_404()
+                med.pharmacy_id = form.pharmacy_list.data
+        elif form.action_choice.data == 'delete-medication':
+            if form.delete_confirmation.data == 'delete-yes':
+                pass # delete it
+        db.session.commit()
+        flash(f'Medications updated.')
+        return redirect(url_for('main.manage_medications', username=username))
+
     return render_template('manage_medications.html', title="Manage Medications", user=user, medications=medications, form=form)
 
 

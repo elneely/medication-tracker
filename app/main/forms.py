@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
-    IntegerField, RadioField, SelectField, StringField, SubmitField, \
-    TelField, TextAreaField
+    IntegerField, RadioField, SelectField, SelectMultipleField, StringField, \
+    SubmitField, TelField, TextAreaField
 from wtforms.validators import DataRequired, Length, ValidationError, \
     Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
@@ -91,6 +91,14 @@ class EditMedicationForm(FlaskForm):
         super(EditMedicationForm, self).__init__(*args, **kwargs)
         self.original_name = original_name
         
+class ManageMedicationsForm(FlaskForm):
+    action_choice = SelectField('Action:', choices=[('default', 'Please select'), ('change-doctor', 'Change Doctor'), ('change-pharmacy', 'Change Pharmacy'), ('delete-medication', 'Delete Medication')])
+    doctor_list =  SelectField('Doctor: ', validators=[Optional()])
+    pharmacy_list = SelectField('Pharmacy: ', validators=[Optional()]) 
+    delete_confirmation = RadioField('Are you certain you wish to delete these medications?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
+    selected_medications = SelectMultipleField('Select Medications', coerce=int)
+    submit = SubmitField('Submit')
+
 class AddDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])

@@ -44,6 +44,13 @@ class User(UserMixin, db.Model):
         my_meds = Medication.query.filter_by(user_id=self.id)
         return my_meds.order_by(Medication.medication_name.desc())
     
+    def medication_choices(self):
+        my_medications = self.medication_list().all()
+        medication_choices = []
+        for medication in my_medications:
+            medication_choices.append(medication.id)
+        return medication_choices
+
     def pharmacy_list(self):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
         return my_pharmacies.order_by(Pharmacy.pharmacy_name.desc())

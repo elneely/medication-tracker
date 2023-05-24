@@ -155,6 +155,9 @@ td {
     text-align: left;
 }
 
+th {
+    text-align: left;
+}
 thead {
   background-color: rgb(245, 207, 158);
 }
@@ -175,6 +178,13 @@ tbody tr:nth-child(odd) {
   border-collapse: collapse;
 }
 
+#medication-table thead th:nth-child(1) {
+    width: 3%;
+  }
+
+#delete-confirmation {
+    list-style-type: none;
+}
 /* Doctor table */
 
 #doctor-table {

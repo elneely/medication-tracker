@@ -112,7 +112,7 @@ pharmacyChoice.addEventListener("click", () => {
 var reminderAskBox = document.getElementById("reminders-ask");
 const reminderTrueDiv = document.getElementById("reminders-true");
 reminderAskBox.addEventListener("click", () => {
-    if (reminderAskBox.checked == true){
+    if (reminderAskBox.checked == true) {
         reminderTrueDiv.style.display = "block";
     }
     else {
