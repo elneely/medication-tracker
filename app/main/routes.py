@@ -51,7 +51,8 @@ def manage_medications(username):
             for medication in selected_medications:
                 med_id = int(medication)
                 med = Medication.query.filter_by(id=med_id).first_or_404()
-                med.pharmacy_id = form.pharmacy_list.data 
+                med.pharmacy_id = form.pharmacy_list.data
+ 
         elif form.action_choice.data == 'delete-medication':
             flash(f'Delete function has not been implemented')
             if form.delete_confirmation.data == 'delete-yes':

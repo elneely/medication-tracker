@@ -92,7 +92,7 @@ class EditMedicationForm(FlaskForm):
         self.original_name = original_name
         
 class ManageMedicationsForm(FlaskForm):
-    action_choice = SelectField('Action:', choices=[('default', 'Please select'), ('change-doctor', 'Change Doctor'), ('change-pharmacy', 'Change Pharmacy'), ('delete-medication', 'Delete Medication')])
+    action_choice = SelectField('Action:', choices=[('default', 'Please select'), ('change-doctor', 'Change Doctor'), ('change-pharmacy', 'Change Pharmacy'), ('delete-medication', 'Delete Medication')], default="default")
     doctor_list =  SelectField('Doctor: ', validators=[Optional()])
     pharmacy_list = SelectField('Pharmacy: ', validators=[Optional()]) 
     delete_confirmation = RadioField('Are you certain you wish to delete these medications?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')

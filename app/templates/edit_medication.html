@@ -21,14 +21,20 @@
         {{ form.hidden_tag() }}
         {% include '_basic_med_info.html' %}
         {% include '_detailed_med_info.html' %} 
-        <fieldset>
-            <legend>Doctor Information</legend>
-            {% include '_doctor_form.html' %} 
-        </fieldset>
-        <fieldset>
-            <legend>Pharmacy Information</legend>
-            {% include '_pharmacy_form.html' %}
-        </fieldset>
+        <p>{{ form.doctor_list.label }}
+            {{ form.doctor_list(id="current-doctor-choice") }}
+            {% for error in form.doctor_list.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+        <p>{# might want to handle the case where this list is blank better #}
+            {{ form.pharmacy_list.label }}
+            {{ form.pharmacy_list(id="current-pharmacy-choice") }}
+            {% for error in form.pharmacy_list.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+
         <p>
             {{ form.submit() }}
         </p>
