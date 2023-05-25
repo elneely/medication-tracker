@@ -40,6 +40,8 @@
                 </tbody>
             </table> 
         </div>
+        <a href="{{ url_for('main.add_doctor', username=current_user.username) }}"><button id="add-doctor-btn" type="button">Add New Doctor</button></a>
+
     </div>
 
 {% endblock %} 

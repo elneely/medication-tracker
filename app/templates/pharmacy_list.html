@@ -37,6 +37,8 @@
             
             </table>
         </div>
+        <a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}"><button id="add-pharmacy-btn" type="button">Add New Pharmacy</button></a>
+
     </div>
 
 {% endblock %} 
