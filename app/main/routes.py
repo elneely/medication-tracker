@@ -145,9 +145,14 @@ def medication(username, medication_id):
 def edit_medication(username, medication_id):
     user = User.query.filter_by(username=username).first_or_404()
     medication = Medication.query.filter_by(id=medication_id).first_or_404()
-    doctor = Doctor.query.filter_by(id=medication.doctor_id).first_or_404()
-    pharmacy = Pharmacy.query.filter_by(id=medication.pharmacy_id).first_or_404()
-    form = EditMedicationForm(medication.medication_name, doctor_list=medication.doctor_id, pharmacy_list=medication.pharmacy_id)
+    if (medication.doctor_id != None) and (medication.pharmacy_id != None):
+        form = EditMedicationForm(medication.medication_name, doctor_list=medication.doctor_id, pharmacy_list=medication.pharmacy_id)
+    elif medication.doctor_id != None:
+        form = EditMedicationForm(medication.medication_name, doctor_list=medication.doctor_id)
+    elif medication.pharmacy_id != None:
+        form = EditMedicationForm(medication.medication_name, pharmacy_list=medication.pharmacy_id)
+    else:
+        form = EditMedicationForm(medication.medication_name)
     form.doctor_list.choices = current_user.doctor_choices()
     form.pharmacy_list.choices = current_user.pharmacy_choices()
     if form.validate_on_submit():
