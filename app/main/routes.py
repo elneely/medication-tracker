@@ -206,8 +206,7 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title=_('Edit Profile'),
-                           form=form)
+    return render_template('edit_profile.html', title='Edit Profile', form=form)
 
 
 
@@ -215,7 +214,8 @@ def edit_profile():
 @login_required
 def add_doctor(username):
     user = User.query.filter_by(username=username).first_or_404()
-    form = AddDoctorForm()
+    referrer = request.referrer
+    form = AddDoctorForm(referring_URL=referrer)
     if form.validate_on_submit():
         doctor = Doctor(
             doctor_first_name=form.doctor_first_name.data,
@@ -232,7 +232,7 @@ def add_doctor(username):
         db.session.add(doctor)
         db.session.commit()
         flash(f'You have successfully added Dr. {form.doctor_last_name.data} to your doctor list.')
-        return redirect(url_for('main.user', username=username))
+        return redirect(form.referring_URL.data)
     return render_template('add_doctor.html', title='Add Doctor', user=user, form=form)
 
 @bp.route('/user/<username>/doctor_list', methods=['GET'])
@@ -288,7 +288,8 @@ def edit_doctor(username, doctor_id):
 @login_required
 def add_pharmacy(username):
     user = User.query.filter_by(username=username).first_or_404()
-    form = AddPharmacyForm()
+    referrer = request.referrer
+    form = AddPharmacyForm(referring_URL=referrer)
     if form.validate_on_submit():
         pharmacy = Pharmacy(
             pharmacy_name=form.pharmacy_name.data,
@@ -304,7 +305,7 @@ def add_pharmacy(username):
         db.session.add(pharmacy)
         db.session.commit()
         flash(f'You have successfully added {form.pharmacy_name.data} to your pharmacy list.')
-        return redirect(url_for('main.user', username=username))
+        return redirect(form.referring_URL.data)
     return render_template('add_pharmacy.html', title='Add Pharmacy', user=user, form=form)
 
 @bp.route('/user/<username>/pharmacy_list', methods=['GET'])

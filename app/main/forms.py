@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
     IntegerField, RadioField, SelectField, SelectMultipleField, StringField, \
-    SubmitField, TelField, TextAreaField
+    SubmitField, TelField, TextAreaField, URLField
 from wtforms.validators import DataRequired, Length, ValidationError, \
     Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
@@ -116,12 +116,16 @@ class AddDoctorForm(FlaskForm):
     doctor_state = StringField('State', validators=[Length(max=2)])
     doctor_zipcode = StringField('Zipcode', validators=[Length(max=5)])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
+    referring_URL = HiddenField()
     submit = SubmitField('Submit')
 
     def validate_doctor_last_name(self, doctor_last_name):
         name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
         if name is not None:
             raise ValidationError("You already have a doctor with this name")
+
+   # def validate_referring_URL(self, referring_URL):
+
 
 class EditDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
@@ -161,6 +165,7 @@ class AddPharmacyForm(FlaskForm):
     pharmacy_state = StringField('State', validators=[Length(max=2)])
     pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5)])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
+    referring_URL = HiddenField()
     submit = SubmitField('Submit')
 # not sure that last part works
     def validate_pharmacy_name(self, pharmacy_name):
