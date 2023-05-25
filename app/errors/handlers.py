@@ -3,9 +3,28 @@ from app import db
 from app.errors import bp
 
 
+@bp.app_errorhandler(401)
+def unauthorized_error(error):
+    return render_template('errors/401.html'), 401
+
+@bp.app_errorhandler(403)
+def forbidden_error(error):
+    return render_template('errors/403.html'), 403
+
 @bp.app_errorhandler(404)
 def not_found_error(error):
     return render_template('errors/404.html'), 404
+
+@bp.app_errorhandler(408)
+def request_timeout_error(error):
+    return render_template('errors/408.html'), 408
+
+""" 
+
+
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout"""
 
 
 @bp.app_errorhandler(500)

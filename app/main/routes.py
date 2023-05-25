@@ -8,6 +8,8 @@ from app.main import bp
 @bp.route('/')
 @bp.route('/index')
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.user', username=current_user.username))
     return render_template('index.html', title='Home')
 
 @bp.route('/user/<username>')

@@ -2,11 +2,11 @@
 
 
 {% block header %} 
-    <h1 class="header">Error 404</h1> 
+    <h1 class="header">Error 401</h1> 
 {% endblock %} 
 
 {% block content %}
-    <h2>File Not Found</h2>
-    <p>Oops!  It looks like we can't find what you are looking for.</p>
+    <h2>Unauthorized</h2>
+    <p>You must be logged in to access this resource.</p>
     <p><a href="{{ url_for('main.index') }}">Return to home page</a></p>
 {% endblock %}
