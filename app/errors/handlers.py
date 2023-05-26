@@ -19,15 +19,19 @@ def not_found_error(error):
 def request_timeout_error(error):
     return render_template('errors/408.html'), 408
 
-""" 
-
-
-502 Bad Gateway
-503 Service Unavailable
-504 Gateway Timeout"""
-
-
 @bp.app_errorhandler(500)
 def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
+
+@bp.app_errorhandler(502)
+def bad_gateway_error(error):
+    return render_template('errors/502.html'), 502
+
+@bp.app_errorhandler(503)
+def service_unavailable_error(error):
+    return render_template('errors/503.html'), 503
+
+@bp.app_errorhandler(504)
+def gateway_timeout_error(error):
+    return render_template('errors/504.html'), 504
