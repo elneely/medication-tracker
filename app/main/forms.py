@@ -102,8 +102,6 @@ class ManageMedicationsForm(FlaskForm):
     def validate_action_choice(self, action_choice):
         if action_choice.data == "default":
             raise ValidationError("You have not chosen an action.")
-        elif action_choice.data == "delete-medication":
-            raise ValidationError("Delete function has not been implemented")
 
 
 class AddDoctorForm(FlaskForm):

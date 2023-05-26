@@ -9,9 +9,9 @@ class User(UserMixin, db.Model):
     display_name = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    doctors = db.relationship("Doctor", backref="patient")
-    pharmacies = db.relationship("Pharmacy", backref="patient")
-    meds = db.relationship("Medication", backref="patient")
+    doctors = db.relationship("Doctor", backref="patient", cascade="delete")
+    pharmacies = db.relationship("Pharmacy", backref="patient", cascade="delete")
+    meds = db.relationship("Medication", backref="patient", cascade="delete")
     # Not 100% sure I did the back_populates thing right here
  #   medications = db.relationship('Medication', back_populates='patient') 
 
@@ -42,7 +42,7 @@ class User(UserMixin, db.Model):
             
     def medication_list(self):
         my_meds = Medication.query.filter_by(user_id=self.id)
-        return my_meds.order_by(Medication.medication_name.desc())
+        return my_meds.order_by(Medication.medication_name.asc())
     
     def medication_choices(self):
         my_medications = self.medication_list().all()
@@ -53,7 +53,7 @@ class User(UserMixin, db.Model):
 
     def pharmacy_list(self):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
-        return my_pharmacies.order_by(Pharmacy.pharmacy_name.desc())
+        return my_pharmacies.order_by(Pharmacy.pharmacy_name.asc())
 
     def pharmacy_choices(self):
         my_pharmacies = self.pharmacy_list().all()

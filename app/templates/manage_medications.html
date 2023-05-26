@@ -73,16 +73,16 @@
             </p>
         </div>
         
-        <div id="delete-confirmation">
+        <div id="delete-confirmation-div">
             <p>{{ form.delete_confirmation.label }}
-                {{form.delete_confirmation(style="list-style:none") }}
+                {{form.delete_confirmation(style="list-style:none", id="delete-confirmation") }}
                 {% for error in form.delete_confirmation.errors %} 
                 <span class="error">{{ error }}</span>
                 {% endfor %} 
             </p>
         </div>
-        <p id="manage-meds-submit-button">
-            {{ form.submit() }}
+        <p>
+            {{ form.submit(id="manage-meds-submit-button") }}
         </p>
         </form>
 {% endblock %} 

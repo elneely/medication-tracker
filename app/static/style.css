@@ -236,7 +236,7 @@ tbody tr:nth-child(odd) {
     display: none;
 }
 
-#delete-confirmation {
+#delete-confirmation-div {
     display: none;
 }
 

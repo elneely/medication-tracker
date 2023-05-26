@@ -24,7 +24,7 @@ checkAllBox.addEventListener("click", () => {
 const doctorSection = document.getElementById("doctors-list");
 const pharmacySection = document.getElementById("pharmacy-list");
 const submitButton = document.getElementById("manage-meds-submit-button");
-const deleteConfirmation = document.getElementById("delete-confirmation");
+const deleteConfirmationDiv = document.getElementById("delete-confirmation-div");
 const actionChoice = document.getElementById("action-choice"); 
 
 actionChoice.addEventListener("change", (e) => {
@@ -33,32 +33,35 @@ actionChoice.addEventListener("change", (e) => {
         doctorSection.style.display = "block";
         submitButton.style.display = "block";
         pharmacySection.style.display = "none";
-        deleteConfirmation.style.display = "none";
+        deleteConfirmationDiv.style.display = "none";
     } else if (value == "change-pharmacy") {
         pharmacySection.style.display = "block";
         submitButton.style.display = "block";
         doctorSection.style.display = "none";
-        deleteConfirmation.style.display = "none";
+        deleteConfirmationDiv.style.display = "none";
     } else if (value == "delete-medication") {
-        deleteConfirmation.style.display = "block";
+        deleteConfirmationDiv.style.display = "block";
         submitButton.style.display = "block";
+        submitButton.disabled = true;
         doctorSection.style.display = "none";
         pharmacySection.style.display = "none";
     } else {
         doctorSection.style.display = "none";
         pharmacySection.style.display = "none";
-        deleteConfirmation.style.display = "none";
+        deleteConfirmationDiv.style.display = "none";
         submitButton.style.display = "none";
     }
 });
 
-/* No action selected portion */
+/* Delete medication confirmation */
 
-/* Edit Doctor portion */
+var deleteConfirmation = document.getElementById("delete-confirmation");
 
- 
-
-
-/* Edit Pharmacy portion */
-
-/* Delete medication portion */
+deleteConfirmation.addEventListener("change", (e) => {
+    const value = e.target.value;
+    if (value == "delete-yes") {
+        submitButton.disabled = false;
+    } else if (value == "delete-no") {
+        submitButton.disabled = true;
+    }
+})

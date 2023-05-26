@@ -1,0 +1,55 @@
+2023-05-26 13:13:32,933 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:14:14,473 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:16:07,930 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:22:12,417 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:22:15,724 ERROR: Exception on /user/Mortimer/manage_medications [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 39, in manage_medications
+    medications = current_user.medication_list().all().asc()
+AttributeError: 'list' object has no attribute 'asc'
+2023-05-26 13:23:28,689 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:23:33,138 ERROR: Exception on /user/Mortimer/manage_medications [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 73, in manage_medications
+    return render_template('manage_medications.html', title="Manage Medications", user=user, medications=medications, form=form)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/erica/portfolio/medication_tracker/app/templates/manage_medications.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 35, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/manage_medications.html", line 34, in block 'content'
+    {% for medication in medications %}
+TypeError: 'NoneType' object is not iterable
+2023-05-26 13:24:38,325 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:25:14,048 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:29:48,486 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:33:12,830 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:33:42,126 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 13:41:09,572 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
