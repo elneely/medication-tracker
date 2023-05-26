@@ -32,6 +32,23 @@
         
     <p>{% if doctor.doctor_notes %}Notes: {{ doctor.doctor_notes }}{% endif %}</p>
 </div></p>
-<a href="{{ url_for('main.edit_doctor', username=current_user.username, doctor_id=doctor.id) }}"><button id="edit-doctor-btn" type="button">Edit Information</button></a>
 
+<a href="{{ url_for('main.edit_doctor', username=current_user.username, doctor_id=doctor.id) }}"><button id="edit-doctor-btn" type="button">Edit Information</button></a><button id="delete-doctor-btn">Delete Doctor</button>
+<form action="" id="delete-doctor-form" method="post">
+    {{ form.hidden_tag() }}
+    <div id="delete-confirmation-div">
+        <p>{{ form.delete_confirmation.label }}
+            {{form.delete_confirmation(style="list-style:none", id="delete-confirmation") }}
+            {% for error in form.delete_confirmation.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+    </div>
+    {{ form.submit(id="delete-doctor-submit") }}
+</form>
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='doctor_page_scripts.js') }}"></script>
 {% endblock %}

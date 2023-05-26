@@ -1,8 +1,7 @@
-2023-05-26 13:13:32,933 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:14:14,473 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:16:07,930 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:22:12,417 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:22:15,724 ERROR: Exception on /user/Mortimer/manage_medications [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+2023-05-26 15:42:56,935 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:43:44,265 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:44:21,639 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:44:29,866 ERROR: Exception on /user/Mortimer/doctor/8 [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,11 +13,11 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 39, in manage_medications
-    medications = current_user.medication_list().all().asc()
-AttributeError: 'list' object has no attribute 'asc'
-2023-05-26 13:23:28,689 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:23:33,138 ERROR: Exception on /user/Mortimer/manage_medications [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 264, in doctor
+    return render_template(main.doctor_list, title="Doctor List", user=user, doctors=doctors, form=EmptyForm())
+NameError: name 'main' is not defined
+2023-05-26 15:46:02,651 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:46:14,101 ERROR: Exception on /user/Mortimer/doctor/2 [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -30,26 +29,64 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 73, in manage_medications
-    return render_template('manage_medications.html', title="Manage Medications", user=user, medications=medications, form=form)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
-    rv = template.render(context)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 264, in doctor
+    return redirect(url_for(main.doctor_list, title="Doctor List", user=user, doctors=doctors, form=EmptyForm()))
+NameError: name 'main' is not defined
+2023-05-26 15:47:29,135 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:48:10,056 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 15:52:41,582 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:02:45,031 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:04:27,283 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:06:25,653 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:15:05,393 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:21:04,271 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:21:09,280 ERROR: Exception on /user/Mortimer/pharmacy/4 [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 355, in pharmacy
+    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
   File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/manage_medications.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 35, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/manage_medications.html", line 34, in block 'content'
-    {% for medication in medications %}
-TypeError: 'NoneType' object is not iterable
-2023-05-26 13:24:38,325 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:25:14,048 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:29:48,486 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:33:12,830 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:33:42,126 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 13:41:09,572 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+  File "/home/erica/portfolio/medication_tracker/app/templates/pharmacy.html", line 56, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'.
+2023-05-26 16:21:26,609 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:25:24,915 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:26:20,450 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-05-26 16:26:36,996 ERROR: Exception on /user/Mortimer/doctor/3 [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 260, in doctor
+    name = doctor.doctor_name
+AttributeError: 'Doctor' object has no attribute 'doctor_name'
+2023-05-26 16:27:45,072 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]

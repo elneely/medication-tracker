@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm, ManageMedicationsForm
+from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, DeleteDoctorForm, DeletePharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm, ManageMedicationsForm
 from app.main import bp
 
 @bp.route('/')
@@ -257,8 +257,19 @@ def doctor_list(username):
 def doctor(username, doctor_id):
     user = User.query.filter_by(username=username).first_or_404()
     doctor = Doctor.query.filter_by(id=doctor_id).first_or_404()
-    doctor_name = doctor.full_name()
-    form = EmptyForm()
+    name = doctor.doctor_last_name
+    referrer = request.referrer
+    form = DeleteDoctorForm(referring_URL=referrer)
+    if form.validate_on_submit():
+        if form.delete_confirmation.data == "delete-yes":
+            medications = current_user.medication_list().all()
+            for medication in medications:
+                if medication.doctor_id == doctor.id:
+                    medication.doctor_id = None 
+            db.session.delete(doctor)
+            db.session.commit()
+            flash(f'Dr. {name} has been deleted')
+            return redirect(form.referring_URL.data)
     return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
 @bp.route('/user/<username>/doctor/<doctor_id>/edit', methods=['GET', 'POST'])
@@ -330,7 +341,19 @@ def pharmacy_list(username):
 def pharmacy(username, pharmacy_id):
     user = User.query.filter_by(username=username).first_or_404()
     pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
-    form = EmptyForm()
+    name = pharmacy.pharmacy_name
+    referrer = request.referrer
+    form = DeletePharmacyForm(referring_URL=referrer)
+    if form.validate_on_submit():
+        if form.delete_confirmation.data == "delete-yes":
+            medications = current_user.medication_list().all()
+            for medication in medications:
+                if medication.pharmacy_id == pharmacy.id:
+                    medication.pharmacy_id = None 
+            db.session.delete(pharmacy)
+            db.session.commit()
+            flash(f'{name} has been deleted')
+            return redirect(form.referring_URL.data)
     return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
 
 @bp.route('/user/<username>/pharmacy/<pharmacy_id>/edit', methods=['GET', 'POST'])

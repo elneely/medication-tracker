@@ -243,3 +243,31 @@ tbody tr:nth-child(odd) {
 #manage-meds-submit-button {
     display: none;
 }
+
+/* Doctor page */
+
+#edit-doctor-btn {
+ 
+}
+
+#delete-doctor-btn {
+    margin-left: 5%;
+
+}
+
+#delete-doctor-submit {
+    display: none;
+}
+
+/* Pharmacy page */
+
+#edit-pharmacy-btn {
+
+}
+
+#delete-pharmacy-btn {
+    margin-left: 5%;
+}
+#delete-pharmacy-submit {
+    display: none;
+}

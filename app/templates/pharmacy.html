@@ -33,6 +33,23 @@
     <p>{% if pharmacy.pharmacy_notes %}Notes: {{ pharmacy.pharmacy_notes }}{% endif %}</p>
 </div></p>
 
-<a href="{{ url_for('main.edit_pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}"><button id="edit-pharmacy-btn" type="button">Edit Information</button></a>
+<a href="{{ url_for('main.edit_pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}"><button id="edit-pharmacy-btn" type="button">Edit Information</button></a><button id="delete-pharmacy-btn">Delete Pharmacy</button>
+<form action="" id="delete-pharmacy-form" method="post">
+    {{ form.hidden_tag() }}
+    <div id="delete-confirmation-div">
+        <p>{{ form.delete_confirmation.label }}
+            {{form.delete_confirmation(style="list-style:none", id="delete-confirmation") }}
+            {% for error in form.delete_confirmation.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+    </div>
+    {{ form.submit(id="delete-pharmacy-submit") }}
+</form>
+{% endblock %}
 
-{% endblock %} 
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='pharmacy_page_scripts.js') }}"></script>
+{% endblock %}
+ 

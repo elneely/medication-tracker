@@ -199,3 +199,13 @@ class EditPharmacyForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
+
+class DeleteDoctorForm(FlaskForm):
+    referring_URL = HiddenField()
+    delete_confirmation = RadioField('Are you certain you wish to delete this doctor?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
+    submit = SubmitField('Permanently delete this doctor')
+
+class DeletePharmacyForm(FlaskForm):
+    referring_URL = HiddenField()
+    delete_confirmation = RadioField('Are you certain you wish to delete this pharmacy?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
+    submit = SubmitField('Permanently delete this pharmacy')
