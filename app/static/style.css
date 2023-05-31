@@ -57,6 +57,11 @@ nav a {
     text-decoration: none;  
 }
 
+.main-nav-menu hr {
+    color: antiquewhite;
+    size: 2px;
+
+}
 .nav-menu-item {
     display: block;
     color:antiquewhite;
