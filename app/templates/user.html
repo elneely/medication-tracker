@@ -31,13 +31,20 @@
                 {% for medication in medications %}
                     {% if medication.short_term %}
                         <div class="medication-summary">
-                               <p>
-                                    <div class="medication-name"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></div>
-                                    <div class="medication-dose">{% if medication.dose %} {{ medication.dose }}{% endif %}</div>
-                                    <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
-                                    <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
-                                    <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
-                                </p>
+                            <p>
+                                <div class="basic-med-info"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
+                                    {%- if medication.dose -%}: {{ medication.dose }}
+                                        {%- if medication.frequency -%}, {{ medication.frequency }}{% endif %}
+                                        {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
+                                    {%- elif medication.frequency -%}: {{ medication.frequency }}
+                                        {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
+                                    {%- elif medication.length -%}: for {{ medication.length }} days
+                                    {% endif %}</div>
+                              
+                                    <div class="med-reason">{%- if medication.reason %}Reason: {{ medication.reason }}{% endif %}</div>
+                                    <div class="med-notes">{% if medication.medication_notes -%}Notes: {{ medication.medication_notes }}{% endif %}</div>
+                                  
+                            </p>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -50,11 +57,15 @@
                     {% if not medication.short_term %} 
                         <div class="medication-summary">
                             <p>
-                                <div class="medication-name"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a></div>
-                                <div class="medication-dose">{% if medication.dose %} {{ medication.dose }}{% endif %}</div>
-                                <div class="medication-length">{% if medication.length %}{{ medication.length }}{% endif %}</div>
-                                <div class="prescribing-doctor">{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</div>
-                                <div class="filling-pharmacy">{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</div>
+                                <div class="basic-med-info"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
+                                    {%- if medication.dose -%}: {{ medication.dose }}
+                                        {%- if medication.frequency -%}, {{ medication.frequency }}{% endif %}
+                                    {%- elif medication.frequency -%}: {{ medication.frequency }}
+                                    {% endif %}</div>
+                                <div class="more-med-info">
+                                <div class="med-reason">{%- if medication.reason %}Reason: {{ medication.reason }}{% endif %}</div>
+                                <div class="med-notes">{% if medication.medication_notes -%}Notes: {{ medication.medication_notes }}{% endif %}</div>
+                                </div>  
                           </p>
                         </div>
                     {% endif %}

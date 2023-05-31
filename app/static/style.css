@@ -107,6 +107,22 @@ nav a:hover {
     font-size:medium;
 }
 
+/* User homepage */
+
+.medication-summary {
+    display: flex;
+    padding-left: 25px;
+    padding-right: 25px;
+    column-gap: 25px;
+   
+}
+
+
+
+.reminders, .short-term-medications, .long-term-medications {
+    padding-left: 25px;
+    padding-right: 25px;
+} 
 /* Add Medication page */
 
 .info-circle {
