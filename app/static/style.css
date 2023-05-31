@@ -48,7 +48,6 @@ nav {
 
 nav ul {
     list-style-type: none;
-    padding-top: 4%;
     padding-right: 4%;
 }
 
@@ -59,7 +58,7 @@ nav a {
 
 .main-nav-menu hr {
     color: antiquewhite;
-    size: 2px;
+    size: 4px;
 
 }
 .nav-menu-item {
@@ -72,7 +71,7 @@ nav a {
 .menu-sub-heading {
     display: block;
     color:antiquewhite;
-    padding: 4%;
+    padding: 4% 4% 0% 10%;
     font-size: 24px;
 }
 
@@ -82,10 +81,11 @@ nav a {
 }
 
 .menu-med-items, .menu-doctor-items, .menu-pharmacy-items {
-    display: block;
+    padding-top: 0%;
+    padding-bottom: 0%;
 }
 
-nav a:hover, nav .menu-sub-heading:hover {
+nav a:hover {
     background-color: cornflowerblue;
    
 }

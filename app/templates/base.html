@@ -12,37 +12,40 @@
     </head>
     <body>
         <nav>
-            <ul class="main-nav-menu"> 
+            <div class="main-nav-menu"> 
                 {% if current_user.is_anonymous %} 
-                <li class="nav-menu-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+                <a href="{{ url_for('main.index') }}" class="nav-menu-item">Home</a>
                 <hr>
-                <li class="nav-menu-item"><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                <a href="{{ url_for('auth.login') }}" class="nav-menu-item">Log In</a>
                 {% else %} 
-                <li class="nav-menu-item"><a href="{{ url_for('main.user', username=current_user.username) }}">Home</a></li>
-                <li class="nav-menu-item"><a href="{{ url_for('main.user_profile', username=current_user.username) }}">Profile</a></li>
+                <a href="{{ url_for('main.user', username=current_user.username) }}" class="nav-menu-item">Home</a>
+                <hr>
+                <a href="{{ url_for('main.user_profile', username=current_user.username) }}" class="nav-menu-item">Profile</a>
+                <hr>
                 <div class="nav-submenus">
-                    <li class="menu-container"><span class="menu-sub-heading" id="menu-med-heading">Medications</span>
-                        <ul class="menu-med-items">
-                            <li class="sub-menu-item" id="menu-add-med"><a href="{{ url_for('main.add_medication', username=current_user.username) }}">Add Medication</a></li>
-                            <li class="sub-menu-item" id="menu-manage-med"><a href="{{ url_for('main.manage_medications', username=current_user.username) }}">Manage Medications</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-container"><span class="menu-sub-heading" id="menu-doctor-heading">Doctors</span>
+                    <span class="menu-sub-heading" id="menu-med-heading">Medications</span>
+                        <div class="menu-med-items">
+                            <a href="{{ url_for('main.add_medication', username=current_user.username) }}" class="sub-menu-item">Add Medication</a>
+                            <p><a href="{{ url_for('main.manage_medications', username=current_user.username) }}" class="sub-menu-item">Manage Medications</a></p>
+                        </div>
+                        <hr>
+                    <span class="menu-sub-heading" id="menu-doctor-heading">Doctors</span>
+                   
                         <ul class="menu-doctor-items">
-                            <li class="sub-menu-item" id="menu-add-doctor"><a href="{{ url_for('main.add_doctor', username=current_user.username) }}">Add Doctor</a></li>
-                            <li class="sub-menu-item" id="menu-doctor-list"><a href="{{ url_for('main.doctor_list', username=current_user.username) }}">View Doctors</a></li>
+                            <a href="{{ url_for('main.add_doctor', username=current_user.username) }}" class="sub-menu-item">Add Doctor</a>
+                            <p><a href="{{ url_for('main.doctor_list', username=current_user.username) }}" class="sub-menu-item">View Doctors</a></p>
                         </ul>
-                    </li>
-                    <li class="menu-container"><span class="menu-sub-heading" id="menu-pharmacy-heading">Pharmacies</span>
+                    
+                    <span class="menu-sub-heading" id="menu-pharmacy-heading">Pharmacies</span>
                         <ul class="menu-pharmacy-items">
-                            <li class="sub-menu-item" id="menu-add-pharmacy"><a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">Add Pharmacy</a></li>
-                            <li class="sub-menu-item" id="menu-pharmacy-list"><a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">View Pharmacies</a></li>
+                            <a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}" class="sub-menu-item">Add Pharmacy</a>
+                            <a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}" class="sub-menu-item">View Pharmacies</a>
                         </ul>
-                    </li>
+                    
                 </div>
-                <li class="nav-menu-item"><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                <a href="{{ url_for('auth.logout') }}" class="nav-menu-item">Log Out</a></li>
                 {% endif %} 
-            </ul>
+            </div>
         </nav>
         <div class = "container">
             <div class = "header">
@@ -59,5 +62,4 @@
         {% block javascript %}{% endblock %}
         
     </body>
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
 </html>
