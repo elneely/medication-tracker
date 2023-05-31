@@ -13,7 +13,6 @@
     <body>
         <nav>
             <div class="main-nav-menu"> 
-                <p></p>
                 {% if current_user.is_anonymous %} 
                 <a href="{{ url_for('main.index') }}" class="nav-menu-item">Home</a>
                 <hr>

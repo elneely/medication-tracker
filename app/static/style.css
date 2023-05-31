@@ -56,6 +56,9 @@ nav a {
     text-decoration: none;  
 }
 
+.main-nav-menu {
+    padding-top: 4%;
+}
 
 .main-nav-menu hr {
     color: antiquewhite;
