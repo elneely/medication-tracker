@@ -1,39 +1,10 @@
 
+/* Base styles */
+
 body {
     background-color: antiquewhite;
 }
-nav {
-    margin: 0;
-    padding: 0;
-    width: 15%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
 
-    background-color: darkblue;
-    color:antiquewhite;
-}
-
-nav ul {
-    list-style-type: none;
-    padding-top: 4%;
-}
-nav a {
-    display: block;
-    color:antiquewhite;
-    padding: 4%;
-    font-size: 24px;
-    text-decoration: none;  
-}
-
-nav a:hover {
-    background-color: cornflowerblue;
-}
-
-textarea {
-
-}
 .container {
     display: flex;
     flex-direction: column;
@@ -61,6 +32,59 @@ textarea {
     padding: 0;
 }
 
+/* Navigation Bar */
+
+nav {
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: darkblue;
+    color:antiquewhite;
+}
+
+nav ul {
+    list-style-type: none;
+    padding-top: 4%;
+    padding-right: 4%;
+}
+
+nav a {
+    color:antiquewhite;
+    text-decoration: none;  
+}
+
+.nav-menu-item {
+    display: block;
+    color:antiquewhite;
+    padding: 4%;
+    font-size: 24px;
+}
+
+.menu-sub-heading {
+    display: block;
+    color:antiquewhite;
+    padding: 4%;
+    font-size: 24px;
+}
+
+.sub-menu-item {
+    font-size: 18px;
+    padding-bottom: 4%;
+}
+
+.menu-med-items, .menu-doctor-items, .menu-pharmacy-items {
+    display: block;
+}
+
+nav a:hover, nav .menu-sub-heading:hover {
+    background-color: cornflowerblue;
+   
+}
+/* Notifications and Errors */
 .notifications {
     color: red;
     order: 2;
@@ -72,6 +96,7 @@ textarea {
     font-size:medium;
 }
 
+/* Add Medication page */
 
 .info-circle {
     vertical-align: super;
@@ -90,7 +115,6 @@ textarea {
     border-color: black;
     padding: 5px;
     font-size: 12px;
-
   
     /* Position the tooltip */
     position: absolute;
@@ -149,6 +173,24 @@ textarea {
 }
 
 
+/* Manage Medications page */
+
+#pharmacy-list {
+    display: none;
+}
+
+#doctors-list {
+    display: none;
+}
+
+#delete-confirmation-div {
+    display: none;
+}
+
+#manage-meds-submit-button {
+    display: none;
+}
+
 /* Table styles */
 
 td {
@@ -205,7 +247,6 @@ tbody tr:nth-child(odd) {
   width: 50%
 }
 
-
 /* Pharmacy table */
 
 #pharmacy-table {
@@ -224,24 +265,6 @@ tbody tr:nth-child(odd) {
 
 #pharmacy-table thead th:nth-child(3) {
   width: 50%
-}
-
-/* Manage Medications page */
-
-#pharmacy-list {
-    display: none;
-}
-
-#doctors-list {
-    display: none;
-}
-
-#delete-confirmation-div {
-    display: none;
-}
-
-#manage-meds-submit-button {
-    display: none;
 }
 
 /* Doctor page */

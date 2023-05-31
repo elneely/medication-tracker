@@ -16,12 +16,9 @@
 
 {% block content %} 
     <p>This is currently a placeholder.</p>
-    <p><a href="{{ url_for('main.add_medication', username=current_user.username) }}">Add Medication</a></p>
-    <p><a href="{{ url_for('main.add_doctor', username=current_user.username) }}">Add Doctor</a></p>
-    <p><a href="{{ url_for('main.doctor_list', username=current_user.username) }}">View Doctor List</a></p>
-    <p><a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">Add Pharmacy</a></p>
-    <p><a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">View Pharmacy List</a></p>
-    <p><a href="{{ url_for('main.manage_medications', username=current_user.username) }}">Manage Medications</a></p>
+    
+    
+ 
     <div class="main-container">
         <div class="doctor-container">
             {% for doctor in doctors %}
