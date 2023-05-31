@@ -56,6 +56,7 @@ nav a {
     text-decoration: none;  
 }
 
+
 .main-nav-menu hr {
     color: antiquewhite;
     size: 4px;
@@ -64,7 +65,7 @@ nav a {
 .nav-menu-item {
     display: block;
     color:antiquewhite;
-    padding: 4%;
+    padding: 4% 4% 4% 10%;
     font-size: 24px;
 }
 
@@ -73,11 +74,13 @@ nav a {
     color:antiquewhite;
     padding: 4% 4% 0% 10%;
     font-size: 24px;
+    
 }
 
 .sub-menu-item {
     font-size: 18px;
     padding-bottom: 4%;
+    padding-left: 4%;
 }
 
 .menu-med-items, .menu-doctor-items, .menu-pharmacy-items {
