@@ -107,22 +107,6 @@ nav a:hover {
     font-size:medium;
 }
 
-/* User homepage */
-
-.medication-summary {
-    display: flex;
-    padding-left: 25px;
-    padding-right: 25px;
-    column-gap: 25px;
-   
-}
-
-
-
-.reminders, .short-term-medications, .long-term-medications {
-    padding-left: 25px;
-    padding-right: 25px;
-} 
 /* Add Medication page */
 
 .info-circle {
@@ -222,6 +206,7 @@ nav a:hover {
 
 td {
     text-align: left;
+    padding: 5px;
 }
 
 th {
@@ -321,3 +306,32 @@ tbody tr:nth-child(odd) {
 #delete-pharmacy-submit {
     display: none;
 }
+
+
+/* User homepage */
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+   
+}
+.short-term-medications, .long-term-medications {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;   
+
+}
+
+
+.short-term-medications tbody tr {
+  background-color: antiquewhite;
+}
+
+.shorter-term-medications {
+    background-color: antiquewhite;
+}
+
+.reminders, .short-term-medications, .long-term-medications {
+    margin-left: 25px;
+    margin-right: 25px;
+} 
