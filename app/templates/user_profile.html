@@ -20,7 +20,7 @@
     <p>Username: {{ user.username }}</p>
     <p>Display name: {% if user.display_name %}{{ user.display_name }} {% endif %} </p>
     <p>Email address: {{ user.email }}</p>
-    <p>Password: ****</p>
+    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-pword-btn" type="button">Change Password</button></a></p>
 </div></p>
 
 <p><div id="refill-info-summary">
