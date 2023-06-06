@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, Length, ValidationError, \
 from wtforms.widgets import TextInput
 from app.models import User, Doctor, Pharmacy, Medication
 
-class ProfileForm(FlaskForm):
+class EditProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
     display_name = StringField('Display name')
     email = EmailField('Email address')
@@ -16,7 +16,7 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, original_email, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
+        super(EditProfileForm, self).__init__(*args, **kwargs)
         self.original_username = original_username
         self.original_email = original_email
 
@@ -200,6 +200,11 @@ class EditPharmacyForm(FlaskForm):
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
+class DeleteProfileForm(FlaskForm):
+    delete_confirmation = RadioField('Are you certain you wish to delete your account?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
+    extra_confirmation = RadioField('There is no undoing this action - are you completely certain?', choices=[('certain-no', 'No'), ('certain-yes', 'Yes')], default='certain-no')
+    submit = SubmitField('Permanently delete this account')
+    
 class DeleteDoctorForm(FlaskForm):
     referring_URL = HiddenField()
     delete_confirmation = RadioField('Are you certain you wish to delete this doctor?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')

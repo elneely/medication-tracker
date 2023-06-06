@@ -322,16 +322,24 @@ tbody tr:nth-child(odd) {
 
 }
 
-
-.short-term-medications tbody tr {
-  background-color: antiquewhite;
-}
-
-.shorter-term-medications {
-    background-color: antiquewhite;
-}
-
 .reminders, .short-term-medications, .long-term-medications {
     margin-left: 25px;
     margin-right: 25px;
 } 
+
+/* Profile page */
+
+#edit-profile-btn {
+
+}
+
+#extra-confirmation-div {
+    display: none;
+}
+
+#delete-profile-btn {
+    margin-left: 5%;
+}
+#delete-profile-submit {
+    display: none;
+}

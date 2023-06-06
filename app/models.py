@@ -12,8 +12,6 @@ class User(UserMixin, db.Model):
     doctors = db.relationship("Doctor", backref="patient", cascade="delete")
     pharmacies = db.relationship("Pharmacy", backref="patient", cascade="delete")
     meds = db.relationship("Medication", backref="patient", cascade="delete")
-    # Not 100% sure I did the back_populates thing right here
- #   medications = db.relationship('Medication', back_populates='patient') 
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

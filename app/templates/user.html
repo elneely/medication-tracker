@@ -30,25 +30,24 @@
             
             <table class="short-term-medications">
                 <tbody>
-                {% for medication in medications %}
-                    {% if medication.short_term %}
-                        <tr>
-                                <td><div class="basic-med-info"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
-                                    {%- if medication.dose -%}: {{ medication.dose }}
-                                        {%- if medication.frequency -%}, {{ medication.frequency }}{% endif %}
-                                        {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
-                                    {%- elif medication.frequency -%}: {{ medication.frequency }}
-                                        {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
-                                    {%- elif medication.length -%}: for {{ medication.length }} days
-                                    {% endif %}</div>
-                                </td>
-                                {%- if medication.reason -%}<td>Reason: {{ medication.reason }}</td>
-                                {%- elif medication.medication_notes -%}<td>Notes: {{ medication.medication_notes }}</td>{% endif %}
-                                {%- if medication.reason and medication.medication_notes -%}<td>Notes: {{ medication.medication_notes}}{% endif %}</td>
-                            </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
+                    {% for medication in medications %}
+                        {% if medication.short_term %}
+                            <tr>
+                                    <td><div class="basic-med-info"><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
+                                        {%- if medication.dose -%}: {{ medication.dose }}
+                                            {%- if medication.frequency -%}, {{ medication.frequency }}{% endif %}
+                                            {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
+                                        {%- elif medication.frequency -%}: {{ medication.frequency }}
+                                            {%- if medication.length -%}, for {{ medication.length }} days{% endif %}
+                                        {%- elif medication.length -%}: for {{ medication.length }} days
+                                        {% endif %}</div>
+                                    </td>
+                                    <td>{%- if medication.reason -%}Reason: {{ medication.reason }}{% endif %}</td>
+                                    <td>{%- if medication.medication_notes -%}Notes: {{ medication.medication_notes}}{% endif %}</td>
+                                </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
             </table>
           
         </div>

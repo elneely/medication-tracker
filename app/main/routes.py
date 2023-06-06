@@ -2,7 +2,10 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
-from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, DeleteDoctorForm, DeletePharmacyForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, EmptyForm, ManageMedicationsForm
+from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, \
+    DeleteDoctorForm, DeletePharmacyForm, DeleteProfileForm, EditDoctorForm, \
+    EditMedicationForm, EditPharmacyForm, EditProfileForm, EmptyForm, \
+    ManageMedicationsForm
 from app.main import bp
 
 @bp.route('/')
@@ -18,15 +21,54 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = EmptyForm()
     medications = current_user.medication_list().all()
-    return render_template('user.html', title="Summary", user=user, medications=medications, form=form)
+    return render_template('user.html', title="Summary", 
+                           user=user, medications=medications, form=form)
 
-@bp.route('/user/<username>/user_profile')
+@bp.route('/user/<username>/user_profile', methods=['GET', 'POST'])
 @login_required
 def user_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    form = EmptyForm()
-    doctors = current_user.doctor_choices()
-    return render_template('user_profile.html', title="User Profile", user=user, doctors=doctors, form=form)
+    form = DeleteProfileForm()
+    if form.validate_on_submit():
+        if form.delete_confirmation.data == 'delete-yes' and form.extra_confirmation.data == 'certain-yes':
+            """
+            I think this is all done with the cascade - check this
+            medications = current_user.medication_list.all()
+            doctors = current_user.doctor_list.all()
+            pharmacies = current_user.doctor_list.all()
+            for medication in medications:
+                db.session.delete(medication)
+            """
+            db.session.delete(user)
+            db.session.commit()
+           
+            flash('Your account has been deleted')
+            return redirect(url_for('main.index'))
+        elif form.delete_confirmation.data == 'delete-no' or form.extra_confirmation.data == 'certain-no':
+            flash('If you want to delete your account, you must confirm twice.')
+    return render_template('user_profile.html', title="User Profile", 
+                           user=user, form=form)
+
+@bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    form = EditProfileForm(username, user.email)
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.display_name = form.display_name.data
+        user.email = form.email.data
+        new_name = User.query.filter_by(username=form.email.data).first_or_404()
+        db.session.commit()
+        flash("You have successfully changed your information")
+        return redirect(url_for('main.edit_profile'))
+    elif request.method == 'GET':
+        form.username.data = user.username
+        form.display_name.data = user.display_name
+        form.email.data = user.email
+    
+    return render_template('edit_profile.html', title="Edit Profile", 
+                           user=user, form=form)
 
 @bp.route('/user/<username>/manage_medications', methods=['GET', 'POST'])
 @login_required
@@ -181,7 +223,6 @@ def edit_medication(username, medication_id):
         medication.medication_notes=form.medication_notes.data
         medication.doctor_id=form.doctor_list.data
         medication.pharmacy_id=form.pharmacy_list.data
-    # right now I'm not passing any of the data to/from the doctor or pharmacy parts of the form
         db.session.commit()
         flash(f'You have successfully edited information for {form.medication_name.data}.')
         return redirect(url_for('main.medication', username=username, medication=medication, medication_id=medication.id))
@@ -201,10 +242,11 @@ def edit_medication(username, medication_id):
         form.reason.data=medication.reason
         form.medication_notes.data=medication.medication_notes
     return render_template('edit_medication.html', title="Edit Medication", user=user, medication=medication, form=form)
-
-@bp.route('/edit_profile', methods=['GET', 'POST'])
+"""Not sure this is necessary
+@bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
+def edit_profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -215,8 +257,8 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
-
+    return render_template('edit_profile.html', title='Edit Profile', user=user,form=form)
+"""
 
 
 @bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block header %} 
+    <h1 class="header">Edit Information</h1>
+{% endblock %} 
+
+{% block notifications %} 
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %} 
+            <div class="notifications">{{ message }}</div>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %} 
+{% endblock %} 
+
+{% block content %} 
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=64)}}<br>
+        {% for error in form.username.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.display_name.label }}<br>
+        {{ form.display_name(size=64)}}<br>
+        {% for error in form.display_name.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email }}<br>
+        {% for error in form.email.errors %} 
+        <span class="error">{{ error }}</span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+
+    </form>
+{% endblock %}
