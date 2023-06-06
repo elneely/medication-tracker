@@ -330,9 +330,12 @@ tbody tr:nth-child(odd) {
 /* Profile page */
 
 #edit-profile-btn {
-
+    margin-left: 5%;
 }
 
+#change-password-btn {
+    margin-left: 3%;
+}
 #extra-confirmation-div {
     display: none;
 }

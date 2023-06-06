@@ -20,13 +20,13 @@
     <p>Username: {{ user.username }}</p>
     <p>Display name: {% if user.display_name %}{{ user.display_name }} {% endif %} </p>
     <p>Email address: {{ user.email }}</p>
-    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-pword-btn" type="button">Change Password</button></a></p>
+    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-password-btn" type="button">Change Password</button></a></p>
 </div></p>
-
+<hr>
 <p><div id="refill-info-summary">
     <p>Placeholder for refill reminder info.</p>
 </div></p>
- 
+ <hr>
 
 <a href="{{ url_for('main.edit_profile', username=current_user.username) }}"><button id="edit-profile-btn" type="button">Edit Information</button></a><button id="delete-profile-btn">Delete Profile</button>
 <form action="" id="delete-doctor-form" method="post">
