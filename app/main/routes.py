@@ -55,13 +55,13 @@ def edit_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = EditProfileForm(username, user.email)
     if form.validate_on_submit():
-        user.username = form.username.data
         user.display_name = form.display_name.data
         user.email = form.email.data
-        new_name = User.query.filter_by(username=form.email.data).first_or_404()
+        user.username = form.username.data
         db.session.commit()
+        new_name = user.username
         flash("You have successfully changed your information")
-        return redirect(url_for('main.edit_profile'))
+        return redirect(url_for('main.user_profile', username=new_name))
     elif request.method == 'GET':
         form.username.data = user.username
         form.display_name.data = user.display_name
