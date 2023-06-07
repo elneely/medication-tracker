@@ -56,11 +56,10 @@ def edit_profile(username):
     form = EditProfileForm(username, user.email)
     if form.validate_on_submit():
         user.display_name = form.display_name.data
-        user.email = form.email.data
-        user.username = form.username.data
+        user.email = form.email.data.lower()
+        user.username = form.username.data.lower()
         db.session.commit()
         new_name = user.username
-        flash("You have successfully changed your information")
         return redirect(url_for('main.user_profile', username=new_name))
     elif request.method == 'GET':
         form.username.data = user.username

@@ -121,3 +121,6 @@ Traceback (most recent call last):
 RuntimeError: The curent application was not configured with Flask-Mail
 2023-06-06 18:09:51,189 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
 2023-06-07 13:40:55,204 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 13:43:55,960 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 13:52:21,391 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 13:54:24,125 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]

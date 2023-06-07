@@ -21,14 +21,18 @@ class EditProfileForm(FlaskForm):
         self.original_email = original_email
 
     def validate_username(self, username):
-        if username.data != self.original_username:
-            user = User.query.filter_by(username=self.username.data).first()
+        if username.data.lower() != self.original_username:
+            user = User.query.filter_by(username=self.username.data.lower()).first()
             if user is not None:
-                raise ValidationError(('Please use a different username.'))
+                raise ValidationError('Please use a different username')
+            elif username.data.isspace() == True:
+                raise ValidationError('Usernames cannot be blank')
+            elif username.data.isalnum() == False:
+                raise ValidationError('Usernames can only contain letters and numbers')
     
     def validate_email(self, email):
-        if email.data != self.original_email:
-            user = User.query.filter_by(email=self.email.data).first()
+        if email.data.lower() != self.original_email:
+            user = User.query.filter_by(email=self.email.data.lower()).first()
             if user is not None:
                 raise ValidationError('Please use a different email.')
     

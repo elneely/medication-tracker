@@ -43,8 +43,6 @@ class RegistrationForm(FlaskForm):
         elif len(password.data.split()) > 1:
             raise ValidationError('Passwords cannot contain a space')
 
-
-
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
@@ -62,3 +60,11 @@ class ChangePasswordForm(FlaskForm):
     new_password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('new_password')])
     submit = SubmitField('Submit')
+
+    def validate_new_password(self, new_password):
+        if new_password.data.isspace() == True:
+            raise ValidationError('Passwords cannot be blank')
+        elif len(new_password.data) < 8:
+            raise ValidationError('Passwords must be at least 8 characters')
+        elif len(new_password.data.split()) > 1:
+            raise ValidationError('Passwords cannot contain a space')
