@@ -314,7 +314,7 @@ def edit_doctor(username, doctor_id):
         doctor.doctor_notes=form.doctor_notes.data
         db.session.commit()
         flash(f'You have successfully edited information for Dr. {form.doctor_last_name.data}.')
-        return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+        return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
     elif request.method == 'GET':
         form.doctor_first_name.data = doctor.doctor_first_name
         form.doctor_last_name.data = doctor.doctor_last_name
@@ -396,7 +396,7 @@ def edit_pharmacy(username, pharmacy_id):
         pharmacy.pharmacy_notes=form.pharmacy_notes.data
         db.session.commit()
         flash(f'You have successfully edited information for {form.pharmacy_name.data}.')
-        return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+        return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
     elif request.method == 'GET':
         form.pharmacy_name.data = pharmacy.pharmacy_name
         form.pharmacy_phone_number.data = pharmacy.pharmacy_phone_number
