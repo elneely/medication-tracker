@@ -231,7 +231,7 @@ class AddDoctorForm(FlaskForm):
 class EditDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    doctor_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="[0-9]{3}-[0-9]{3}-[0-9]{4}", message="Valid format is xxx-xxx-xxxx")])
+    doctor_phone_number = TelField('Telephone number') #not sure I have this input working with model
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])

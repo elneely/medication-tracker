@@ -101,3 +101,5 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
     raise TypeError(
 TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 17:00:27,608 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 17:01:58,352 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
