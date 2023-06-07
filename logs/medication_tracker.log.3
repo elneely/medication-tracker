@@ -1,9 +1,4 @@
-2023-05-31 16:03:07,284 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-31 16:25:20,654 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-31 16:25:24,124 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-31 16:33:20,496 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-31 16:40:53,282 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-31 16:40:55,885 ERROR: Exception on /user/Mortimer/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+2023-06-06 16:17:00,471 ERROR: Exception on /user/Munchbear/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,46 +10,7 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 30, in user_profile
-    form = EditProfileForm()
-  File "/home/erica/.local/lib/python3.10/site-packages/wtforms/form.py", line 208, in __call__
-    return type.__call__(cls, *args, **kwargs)
-TypeError: EditProfileForm.__init__() missing 2 required positional arguments: 'original_username' and 'original_email'
-2023-06-06 13:16:24,951 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 13:20:06,281 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 13:20:29,037 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 13:26:52,498 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 13:26:55,442 ERROR: Exception on /user/Mortimer/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 30, in user_profile
-    form = EditProfileForm(username)
-  File "/home/erica/.local/lib/python3.10/site-packages/wtforms/form.py", line 208, in __call__
-    return type.__call__(cls, *args, **kwargs)
-TypeError: EditProfileForm.__init__() missing 1 required positional argument: 'original_email'
-2023-06-06 13:27:32,342 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 13:27:36,720 ERROR: Exception on /user/Mortimer/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 38, in user_profile
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 49, in user_profile
     return render_template('user_profile.html', title="User Profile",
   File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
     return _render(app, template, context)
@@ -68,14 +24,17 @@ Traceback (most recent call last):
     {% extends "base.html" %}
   File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
     {% block content %}{% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 37, in block 'content'
-    {% for error in form.email %}
-TypeError: 'EmailField' object is not iterable
-2023-06-06 13:28:06,050 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:32:03,023 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:38:28,532 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:39:24,539 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:40:38,214 ERROR: Exception on /user/Munchbear/edit_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 23, in block 'content'
+    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-pword-btn" type="button">Change Password</button></a></p>
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2031, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2020, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/home/erica/.local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.change_password' with values ['username']. Did you mean 'auth.login' instead?
+2023-06-06 16:39:22,327 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:39:31,820 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
 Traceback (most recent call last):
   File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
     response = self.full_dispatch_request()
@@ -87,31 +46,70 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 63, in edit_profile
-    return render_template('edit_profile.html', title="Edit Profile",
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
-    rv = template.render(context)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/edit_profile.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 55, in top-level template code
-    {% block header %} {% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/edit_profile.html", line 4, in block 'header'
-    <h1 class="header">Edit Information - Dr. {{ doctor.full_name() }}</h1>
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'doctor' is undefined
-2023-06-06 14:41:48,995 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:42:58,750 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:45:14,523 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:46:22,848 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:48:13,157 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:49:54,013 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:52:02,806 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:53:05,862 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 14:57:57,244 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+TypeError: change_password() missing 1 required positional argument: 'username'
+2023-06-06 16:41:45,581 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+TypeError: change_password() missing 1 required positional argument: 'username'
+2023-06-06 16:42:33,433 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:42:37,087 ERROR: Exception on /auth/user/Munchbear/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/auth/routes.py", line 63, in change_password
+    return render_template('change_password.html', title="Change Password", user=user, form=form)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 62, in get_source
+    return self._get_source_fast(environment, template)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 98, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: change_password.html
+2023-06-06 16:45:51,305 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:45:57,377 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+TypeError: change_password() missing 1 required positional argument: 'username'
+2023-06-06 16:52:22,352 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:53:47,109 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:55:59,230 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:57:54,790 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:59:56,661 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 17:00:40,132 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 17:01:34,482 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 17:02:58,360 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 17:52:11,826 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:63]

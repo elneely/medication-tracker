@@ -1,115 +1,93 @@
-2023-06-06 16:17:00,471 ERROR: Exception on /user/Munchbear/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+2023-06-07 16:33:57,028 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 49, in user_profile
-    return render_template('user_profile.html', title="User Profile",
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 336, in edit_doctor
+    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
     return _render(app, template, context)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
     rv = template.render(context)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
     self.environment.handle_exception()
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 1, in top-level template code
+  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 1, in top-level template code
     {% extends "base.html" %}
   File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
     {% block content %}{% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 23, in block 'content'
-    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-pword-btn" type="button">Change Password</button></a></p>
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2031, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2020, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "/home/erica/.local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 917, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.change_password' with values ['username']. Did you mean 'auth.login' instead?
-2023-06-06 16:39:22,327 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:39:31,820 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 40, in block 'content'
+    <p>{{ form.delete_confirmation.label }}
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
+2023-06-07 16:34:11,837 ERROR: Exception on /user/mortimer/doctor/11/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-TypeError: change_password() missing 1 required positional argument: 'username'
-2023-06-06 16:41:45,581 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 336, in edit_doctor
+    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 40, in block 'content'
+    <p>{{ form.delete_confirmation.label }}
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
+2023-06-07 16:34:21,262 ERROR: Exception on /user/mortimer/pharmacy/1/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-TypeError: change_password() missing 1 required positional argument: 'username'
-2023-06-06 16:42:33,433 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:42:37,087 ERROR: Exception on /auth/user/Munchbear/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/auth/routes.py", line 63, in change_password
-    return render_template('change_password.html', title="Change Password", user=user, form=form)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 146, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/loaders.py", line 126, in load
-    source, filename, uptodate = self.get_source(environment, name)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 62, in get_source
-    return self._get_source_fast(environment, template)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: change_password.html
-2023-06-06 16:45:51,305 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:45:57,377 ERROR: Exception on /auth/change_password [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
-Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-TypeError: change_password() missing 1 required positional argument: 'username'
-2023-06-06 16:52:22,352 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:53:47,109 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:55:59,230 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:57:54,790 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 16:59:56,661 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 17:00:40,132 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 17:01:34,482 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 17:02:58,360 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-06-06 17:52:11,826 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:63]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 418, in edit_pharmacy
+    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/erica/portfolio/medication_tracker/app/templates/pharmacy.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/pharmacy.html", line 40, in block 'content'
+    <p>{{ form.delete_confirmation.label }}
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.main.forms.EditPharmacyForm object' has no attribute 'delete_confirmation'
