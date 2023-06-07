@@ -241,24 +241,6 @@ def edit_medication(username, medication_id):
         form.reason.data=medication.reason
         form.medication_notes.data=medication.medication_notes
     return render_template('edit_medication.html', title="Edit Medication", user=user, medication=medication, form=form)
-"""Not sure this is necessary
-@bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
-@login_required
-def edit_profile(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    form = EditProfileForm(current_user.username)
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
-        db.session.commit()
-        flash(_('Your changes have been saved.'))
-        return redirect(url_for('main.edit_profile'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', user=user,form=form)
-"""
-
 
 @bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])
 @login_required

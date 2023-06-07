@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import BooleanField, DateField, EmailField, HiddenField, \
@@ -47,8 +48,8 @@ class AddMedicationForm(FlaskForm):
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])   
-    refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[NumberRange(min=0, max=30),Optional()])
-    refills_expiration = DateField('Prescription expiration Date: ', validators=[Optional()])
+    refills_remaining = IntegerField('Number of refills remaining: ', widget=TextInput(), validators=[Optional()])
+    refills_expiration = DateField('Prescription Expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     medication_notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
     doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
@@ -60,6 +61,52 @@ class AddMedicationForm(FlaskForm):
     new_pharmacy_name = StringField('Pharmacy Name: ', validators=[Length(max=64)])
     submit = SubmitField('Submit')
     
+    def validate_medication_name(self, medication_name):
+        if medication_name.data.isspace() == True:
+            raise ValidationError('Medication names cannot be blank')
+        
+    def validate_prescription_date(self, prescription_date):
+        present = datetime.now()
+        if prescription_date.data > present.date():
+            raise ValidationError('Prescription date cannot be in the future')
+        
+    def validate_refills_expiration(self, refills_expiration):
+        present = datetime.now()
+        if refills_expiration.data < present.date():
+            raise ValidationError('This date has already passed')
+        if self.prescription_date.data and (self.prescription_date.data > refills_expiration.data):
+            raise ValidationError('Prescription cannot expire before it is prescribed')
+    
+    def validate_last_filled(self, last_filled):
+        present = datetime.now()
+        if last_filled.data > present.date():
+            raise ValidationError('Cannot enter future date')
+        if self.prescription_date.data and (self.prescription_date.data > last_filled.data):
+            raise ValidationError('You cannot fill a prescription before it is prescribed')
+        if self.refills_expiration.data and (self.refills_expiration.data < last_filled.data):
+            raise ValidationError('You cannot fill a prescription after it has expired')
+    
+    def validate_length(self, length):
+        if length.data <= 0:
+            raise ValidationError('Prescription must be for at least one day')
+    
+    def validate_refills_remaining(self, refills_remaining):
+        if refills_remaining.data < 0:
+            raise ValidationError('You cannot have a negative number of refills')
+    
+    def validate_reminder(self, reminder):
+        if reminder.data == True:
+            if self.reminder_length.data is None:
+                raise ValidationError('You must set a reminder length')
+            if self.length.data is None:
+                raise ValidationError('You must specify the length of the prescription')
+            if self.last_filled.data is None:
+                raise ValidationError('You must enter when this prescription was last filled')
+
+    def validate_reminder_length(self, reminder_length):
+        if self.length.data and (reminder_length.data > self.length.data):
+            raise ValidationError('Reminder length cannot be longer than the length of the prescription')
+
     def validate_new_doctor_last(self, new_doctor_last):
         if new_doctor_last.data is not None:  
             name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.new_doctor_first.data, doctor_last_name=new_doctor_last.data).first()
@@ -94,7 +141,54 @@ class EditMedicationForm(FlaskForm):
     def __init__(self, original_name, *args, **kwargs):
         super(EditMedicationForm, self).__init__(*args, **kwargs)
         self.original_name = original_name
+
+    def validate_medication_name(self, medication_name):
+        if medication_name.data.isspace() == True:
+            raise ValidationError('Medication names cannot be blank')
         
+    def validate_prescription_date(self, prescription_date):
+        present = datetime.now()
+        if prescription_date.data > present.date():
+            raise ValidationError('Prescription date cannot be in the future')
+        
+    def validate_refills_expiration(self, refills_expiration):
+        present = datetime.now()
+        if refills_expiration.data < present.date():
+            raise ValidationError('This date has already passed')
+        if self.prescription_date.data and (self.prescription_date.data > refills_expiration.data):
+            raise ValidationError('Prescription cannot expire before it is prescribed')
+    
+    def validate_last_filled(self, last_filled):
+        present = datetime.now()
+        if last_filled.data > present.date():
+            raise ValidationError('Cannot enter future date')
+        if self.prescription_date.data and (self.prescription_date.data > last_filled.data):
+            raise ValidationError('You cannot fill a prescription before it is prescribed')
+        if self.refills_expiration.data and (self.refills_expiration.data < last_filled.data):
+            raise ValidationError('You cannot fill a prescription after it has expired')
+    
+    def validate_length(self, length):
+        if length.data <= 0:
+            raise ValidationError('Prescription must be for at least one day')
+    
+    def validate_refills_remaining(self, refills_remaining):
+        if refills_remaining.data < 0:
+            raise ValidationError('You cannot have a negative number of refills')
+    
+    def validate_reminder(self, reminder):
+        if reminder.data == True:
+            if self.reminder_length.data is None:
+                raise ValidationError('You must set a reminder length')
+            if self.length.data is None:
+                raise ValidationError('You must specify the length of the prescription')
+            if self.last_filled.data is None:
+                raise ValidationError('You must enter when this prescription was last filled')
+
+    def validate_reminder_length(self, reminder_length):
+        if self.length.data and (reminder_length.data > self.length.data):
+            raise ValidationError('Reminder length cannot be longer than the length of the prescription')
+
+
 class ManageMedicationsForm(FlaskForm):
     action_choice = SelectField('Action:', choices=[('default', 'Please select'), ('change-doctor', 'Change Doctor'), ('change-pharmacy', 'Change Pharmacy'), ('delete-medication', 'Delete Medication')], default="default")
     doctor_list =  SelectField('Doctor: ', validators=[Optional()])
@@ -125,6 +219,12 @@ class AddDoctorForm(FlaskForm):
         name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
         if name is not None:
             raise ValidationError("You already have a doctor with this name")
+        if doctor_last_name.data.isspace() == True:
+            raise ValidationError('Doctor names cannot be blank')
+    
+    def validate_doctor_phone_number(self, doctor_phone_number):
+        pass
+        
 
    # def validate_referring_URL(self, referring_URL):
 
@@ -146,6 +246,8 @@ class EditDoctorForm(FlaskForm):
         self.original_full_name = original_full_name
 
     def validate_doctor_last_name(self, doctor_last_name):
+        if doctor_last_name.data.isspace() == True:
+            raise ValidationError('Doctor names cannot be blank')
         if self.doctor_first_name.data:
             doctor_name = self.doctor_first_name.data + " " + doctor_last_name.data
         else:

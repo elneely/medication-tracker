@@ -1,110 +1,112 @@
-2023-05-26 15:42:56,935 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:43:44,265 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:44:21,639 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:44:29,866 ERROR: Exception on /user/Mortimer/doctor/8 [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+2023-06-07 14:37:20,890 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 264, in doctor
-    return render_template(main.doctor_list, title="Doctor List", user=user, doctors=doctors, form=EmptyForm())
-NameError: name 'main' is not defined
-2023-05-26 15:46:02,651 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:46:14,101 ERROR: Exception on /user/Mortimer/doctor/2 [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
+    if form.validate_on_submit():
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 70, in validate_prescription_date
+    date_check = datetime.strptime(prescription_date.data, "%Y-%m-%d")
+TypeError: strptime() argument 1 must be str, not datetime.date
+2023-06-07 14:38:29,415 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:40:13,344 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:40:25,557 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 264, in doctor
-    return redirect(url_for(main.doctor_list, title="Doctor List", user=user, doctors=doctors, form=EmptyForm()))
-NameError: name 'main' is not defined
-2023-05-26 15:47:29,135 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:48:10,056 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 15:52:41,582 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:02:45,031 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:04:27,283 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:06:25,653 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:15:05,393 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:21:04,271 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:21:09,280 ERROR: Exception on /user/Mortimer/pharmacy/4 [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
+    if form.validate_on_submit():
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 76, in validate_refills_expiration
+    if refills_expiration.data < present.data():
+AttributeError: 'datetime.datetime' object has no attribute 'data'
+2023-06-07 14:40:54,840 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:48:19,430 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:50:41,116 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:51:17,967 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 355, in pharmacy
-    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 146, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
-    return self._load_template(name, globals)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/loaders.py", line 138, in load
-    code = environment.compile(source, name, filename)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
-    self.handle_exception(source=source_hint)
-  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/pharmacy.html", line 56, in template
-    {% endblock %}
-jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'.
-2023-05-26 16:21:26,609 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:25:24,915 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:26:20,450 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-26 16:26:36,996 ERROR: Exception on /user/Mortimer/doctor/3 [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
+    if form.validate_on_submit():
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+TypeError: AddMedicationForm.validate_last_filled() missing 1 required positional argument: 'prescription_date'
+2023-06-07 14:56:57,966 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 14:57:01,143 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 260, in doctor
-    name = doctor.doctor_name
-AttributeError: 'Doctor' object has no attribute 'doctor_name'
-2023-05-26 16:27:45,072 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 12:45:55,683 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 12:54:03,504 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 12:55:18,919 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 12:58:39,731 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 13:04:29,561 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 13:08:59,435 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 13:55:15,513 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:09:08,742 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:26:09,857 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:29:44,636 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:30:17,016 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:33:17,639 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:34:40,463 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:39:47,445 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:42:08,314 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:42:29,668 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 14:45:31,318 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
-2023-05-30 17:17:09,715 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
+    if form.validate_on_submit():
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 85, in validate_last_filled
+    if prescription_date.data and (prescription_date.data > last_filled.data):
+NameError: name 'prescription_date' is not defined

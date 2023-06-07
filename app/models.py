@@ -41,7 +41,7 @@ class User(UserMixin, db.Model):
     
     def doctor_list(self):
         my_doctors = Doctor.query.filter_by(user_id=self.id)
-        return my_doctors.order_by(Doctor.doctor_last_name.asc())
+        return my_doctors.order_by(Doctor.doctor_last_name.collate('nocase').asc())
     
     def doctor_choices(self):
         my_doctors = self.doctor_list().all()
@@ -57,7 +57,7 @@ class User(UserMixin, db.Model):
             
     def medication_list(self):
         my_meds = Medication.query.filter_by(user_id=self.id)
-        return my_meds.order_by(Medication.medication_name.asc())
+        return my_meds.order_by(Medication.medication_name.collate('nocase').asc())
     
     def medication_choices(self):
         my_medications = self.medication_list().all()
@@ -68,7 +68,7 @@ class User(UserMixin, db.Model):
 
     def pharmacy_list(self):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
-        return my_pharmacies.order_by(Pharmacy.pharmacy_name.asc())
+        return my_pharmacies.order_by(Pharmacy.pharmacy_name.collate('nocase').asc())
 
     def pharmacy_choices(self):
         my_pharmacies = self.pharmacy_list().all()

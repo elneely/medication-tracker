@@ -119,3 +119,9 @@ reminderAskBox.addEventListener("click", () => {
         reminderTrueDiv.style.display = "none";
     }
     });
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (reminderAskBox.checked == true) {
+        reminderTrueDiv.style.display = "block";
+    }
+});

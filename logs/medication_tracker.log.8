@@ -1,0 +1,110 @@
+2023-06-06 14:58:10,761 ERROR: Exception on /edit_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 65, in edit_profile
+    form.username.data = current_user.username.username
+AttributeError: 'str' object has no attribute 'username'
+2023-06-06 14:58:37,913 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 14:58:47,842 ERROR: Exception on /edit_profile [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 57, in edit_profile
+    current_user.username.username = form.username.data
+AttributeError: 'str' object has no attribute 'username'
+2023-06-06 14:59:09,612 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:01:30,118 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:41:05,163 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:42:53,085 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:44:13,802 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:46:41,585 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:47:36,280 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:48:34,983 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:49:45,225 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:50:50,983 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:51:28,030 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:54:43,974 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:54:51,878 ERROR: Exception on /user/Minimunchbear/edit_profile [POST] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 60, in edit_profile
+    return redirect(url_for('main.edit_profile'))
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/helpers.py", line 256, in url_for
+    return current_app.url_for(
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2031, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2020, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/home/erica/.local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'main.edit_profile'. Did you forget to specify values ['username']?
+2023-06-06 15:55:40,929 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:56:01,365 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:56:48,361 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:57:17,847 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:59:23,101 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 15:59:59,082 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:01:04,573 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:03:39,224 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:16:55,992 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:61]
+2023-06-06 16:16:58,696 ERROR: Exception on /user/Munchbear/user_profile [GET] [in /home/erica/.local/lib/python3.10/site-packages/flask/app.py:1741]
+Traceback (most recent call last):
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 49, in user_profile
+    return render_template('user_profile.html', title="User Profile",
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/erica/.local/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/erica/portfolio/medication_tracker/app/templates/user_profile.html", line 23, in block 'content'
+    <p>Password: **** <a href="{{ url_for('auth.change_password', username=current_user.username) }}"><button id="change-pword-btn" type="button">Change Password</button></a></p>
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2031, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/home/erica/.local/lib/python3.10/site-packages/flask/app.py", line 2020, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/home/erica/.local/lib/python3.10/site-packages/werkzeug/routing/map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.change_password' with values ['username']. Did you mean 'auth.login' instead?
