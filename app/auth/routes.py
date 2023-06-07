@@ -14,7 +14,7 @@ def login():
         return redirect(url_for('main.user', username=current_user.username))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data.lower()).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
@@ -37,7 +37,7 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, 
+        user = User(username=form.username.data.lower(), 
                     display_name=form.display_name.data, 
                     email=form.email.data)
         user.set_password(form.password.data)

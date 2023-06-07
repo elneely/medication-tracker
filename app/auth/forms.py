@@ -22,14 +22,27 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter_by(username=username.data.lower()).first()
         if user is not None:
-            raise ValidationError('Please use a different username.')
+            raise ValidationError('Please use a different username')
+        elif username.data.isspace() == True:
+            raise ValidationError('Usernames cannot be blank')
+        elif username.data.isalnum() == False:
+            raise ValidationError('Usernames can only contain letters and numbers')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = User.query.filter_by(email=email.data.lower()).first()
         if user is not None:
-            raise ValidationError('Please use a different email address.')
+            raise ValidationError('Please use a different email address')
+    
+    def validate_password(self, password):
+        if password.data.isspace() == True:
+            raise ValidationError('Passwords cannot be blank')
+        elif len(password.data) < 8:
+            raise ValidationError('Passwords must be at least 8 characters')
+        elif len(password.data.split()) > 1:
+            raise ValidationError('Passwords cannot contain a space')
+
 
 
 class ResetPasswordRequestForm(FlaskForm):
