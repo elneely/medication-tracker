@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from flask_wtf import FlaskForm
 from flask_login import current_user
@@ -205,7 +206,7 @@ class ManageMedicationsForm(FlaskForm):
 class AddDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    doctor_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="[0-9]{3}-[0-9]{3}-[0-9]{4}", message="Valid format is xxx-xxx-xxxx")])
+    doctor_phone_number = TelField('Telephone number')
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
@@ -222,8 +223,13 @@ class AddDoctorForm(FlaskForm):
         if doctor_last_name.data.isspace() == True:
             raise ValidationError('Doctor names cannot be blank')
     
-
-        
+    def validate_doctor_phone_number(self, doctor_phone_number):
+        pattern = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$'
+        result = re.match(pattern, doctor_phone_number.data)
+        if result is None:
+            raise ValidationError("Valid format is xxx-xxx-xxxx")
+            
+        #regex isn't quite working because it allows 123-345-44444, eg
 
    # def validate_referring_URL(self, referring_URL):
 
@@ -231,7 +237,7 @@ class AddDoctorForm(FlaskForm):
 class EditDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    doctor_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    doctor_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message="Valid format is xxx-xxx-xxxx")])
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
@@ -256,7 +262,12 @@ class EditDoctorForm(FlaskForm):
             name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
-        
+    
+    def validate_doctor_phone_number(self, doctor_phone_number):
+        pattern = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$'
+        result = re.match(pattern, doctor_phone_number.data)
+        if result is None:
+            raise ValidationError("Valid format is xxx-xxx-xxxx")
 
 
 class AddPharmacyForm(FlaskForm):

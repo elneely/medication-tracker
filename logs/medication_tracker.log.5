@@ -1,4 +1,24 @@
-2023-06-07 14:37:20,890 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 15:59:09,486 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 463, in __getattr__
+    return getattr(self.comparator, key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 1329, in __getattr__
+    return self._fallback_getattr(key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/properties.py", line 469, in _fallback_getattr
+    return getattr(self.__clause_element__(), key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1459, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'AnnotatedColumn' object nor 'Comparator' object has an attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -10,24 +30,37 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
-    if form.validate_on_submit():
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
-    return self.is_submitted() and self.validate(extra_validators=extra_validators)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
-    return super().validate(extra)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
-    if not field.validate(self, extra):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
-    validator(form, self)
-  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 70, in validate_prescription_date
-    date_check = datetime.strptime(prescription_date.data, "%Y-%m-%d")
-TypeError: strptime() argument 1 must be str, not datetime.date
-2023-06-07 14:38:29,415 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:40:13,344 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:40:25,557 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
+    form.selected_medications.choices = current_user.medication_choices()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
+    my_medications = self.medication_list().all()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
+    return my_meds.order_by(Medication.medication_name.lower().asc())
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
+2023-06-07 15:59:53,210 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 15:59:54,857 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 463, in __getattr__
+    return getattr(self.comparator, key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 1329, in __getattr__
+    return self._fallback_getattr(key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/properties.py", line 469, in _fallback_getattr
+    return getattr(self.__clause_element__(), key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1459, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'AnnotatedColumn' object nor 'Comparator' object has an attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -39,25 +72,36 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
-    if form.validate_on_submit():
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
-    return self.is_submitted() and self.validate(extra_validators=extra_validators)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
-    return super().validate(extra)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
-    if not field.validate(self, extra):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
-    validator(form, self)
-  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 76, in validate_refills_expiration
-    if refills_expiration.data < present.data():
-AttributeError: 'datetime.datetime' object has no attribute 'data'
-2023-06-07 14:40:54,840 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:48:19,430 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:50:41,116 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:51:17,967 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
+    form.selected_medications.choices = current_user.medication_choices()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
+    my_medications = self.medication_list().all()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
+    return my_meds.order_by(Medication.medication_name.lower().asc())
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
+2023-06-07 15:59:56,532 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 463, in __getattr__
+    return getattr(self.comparator, key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 1329, in __getattr__
+    return self._fallback_getattr(key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/properties.py", line 469, in _fallback_getattr
+    return getattr(self.__clause_element__(), key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1459, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'AnnotatedColumn' object nor 'Comparator' object has an attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -69,44 +113,14 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
-    if form.validate_on_submit():
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
-    return self.is_submitted() and self.validate(extra_validators=extra_validators)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
-    return super().validate(extra)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
-    if not field.validate(self, extra):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
-    validator(form, self)
-TypeError: AddMedicationForm.validate_last_filled() missing 1 required positional argument: 'prescription_date'
-2023-06-07 14:56:57,966 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 14:57:01,143 ERROR: Exception on /user/mortimer/add_medication [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
-Traceback (most recent call last):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 128, in add_medication
-    if form.validate_on_submit():
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
-    return self.is_submitted() and self.validate(extra_validators=extra_validators)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 329, in validate
-    return super().validate(extra)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/form.py", line 146, in validate
-    if not field.validate(self, extra):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 242, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
-    validator(form, self)
-  File "/home/erica/portfolio/medication_tracker/app/main/forms.py", line 85, in validate_last_filled
-    if prescription_date.data and (prescription_date.data > last_filled.data):
-NameError: name 'prescription_date' is not defined
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
+    form.selected_medications.choices = current_user.medication_choices()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
+    my_medications = self.medication_list().all()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
+    return my_meds.order_by(Medication.medication_name.lower().asc())
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
+2023-06-07 16:00:06,525 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:05:11,881 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]

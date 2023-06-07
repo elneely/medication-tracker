@@ -1,25 +1,4 @@
-2023-06-07 16:05:15,614 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
-Traceback (most recent call last):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
-    form.selected_medications.choices = current_user.medication_choices()
-  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
-    my_medications = self.medication_list().all()
-  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
-    return my_meds.order_by(Medication.medication_name.asc(collation="nocase"))
-TypeError: ColumnOperators.asc() got an unexpected keyword argument 'collation'
-2023-06-07 16:09:02,380 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:23:40,082 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:24:21,472 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 16:32:13,952 ERROR: Exception on /user/mortimer/doctor/11/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -50,66 +29,78 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
-2023-06-07 16:24:51,614 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 16:43:20,543 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:44:51,489 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:45:08,996 ERROR: Exception on /user/mortimer/doctor/2/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 317, in edit_doctor
-    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
-    rv = template.render(context)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 40, in block 'content'
-    <p>{{ form.delete_confirmation.label }}
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
-2023-06-07 16:28:47,285 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:29:20,201 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 16:46:46,487 ERROR: Exception on /user/mortimer/doctor/4/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 317, in edit_doctor
-    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 130, in _render
-    rv = template.render(context)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/base.html", line 62, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/erica/portfolio/medication_tracker/app/templates/doctor.html", line 40, in block 'content'
-    <p>{{ form.delete_confirmation.label }}
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 16:47:10,656 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:47:14,468 ERROR: Exception on /user/mortimer/doctor/4/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 16:48:16,470 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:48:27,487 ERROR: Exception on /user/mortimer/doctor/4/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 16:51:17,127 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:51:25,152 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 16:55:03,243 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:55:08,489 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1845, in finalize_request
+    response = self.make_response(rv)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2137, in make_response
+    raise TypeError(
+TypeError: The view function for 'main.edit_doctor' did not return a valid response. The function either returned None or ended without a return statement.
+2023-06-07 17:00:27,608 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 17:01:58,352 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 17:03:10,940 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
