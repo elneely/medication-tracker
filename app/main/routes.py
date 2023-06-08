@@ -56,11 +56,10 @@ def edit_profile(username):
     form = EditProfileForm(username, user.email)
     if form.validate_on_submit():
         user.display_name = form.display_name.data
-        user.email = form.email.data
-        user.username = form.username.data
+        user.email = form.email.data.lower()
+        user.username = form.username.data.lower()
         db.session.commit()
         new_name = user.username
-        flash("You have successfully changed your information")
         return redirect(url_for('main.user_profile', username=new_name))
     elif request.method == 'GET':
         form.username.data = user.username
@@ -242,24 +241,6 @@ def edit_medication(username, medication_id):
         form.reason.data=medication.reason
         form.medication_notes.data=medication.medication_notes
     return render_template('edit_medication.html', title="Edit Medication", user=user, medication=medication, form=form)
-"""Not sure this is necessary
-@bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
-@login_required
-def edit_profile(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    form = EditProfileForm(current_user.username)
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
-        db.session.commit()
-        flash(_('Your changes have been saved.'))
-        return redirect(url_for('main.edit_profile'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', user=user,form=form)
-"""
-
 
 @bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])
 @login_required
@@ -333,7 +314,7 @@ def edit_doctor(username, doctor_id):
         doctor.doctor_notes=form.doctor_notes.data
         db.session.commit()
         flash(f'You have successfully edited information for Dr. {form.doctor_last_name.data}.')
-        return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+        return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
     elif request.method == 'GET':
         form.doctor_first_name.data = doctor.doctor_first_name
         form.doctor_last_name.data = doctor.doctor_last_name
@@ -344,7 +325,7 @@ def edit_doctor(username, doctor_id):
         form.doctor_state.data = doctor.doctor_state
         form.doctor_zipcode.data = doctor.doctor_zipcode
         form.doctor_notes.data = doctor.doctor_notes
-        return render_template('edit_doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+    return render_template('edit_doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
 @bp.route('/user/<username>/add_pharmacy', methods=['GET', 'POST'])
 @login_required
@@ -415,7 +396,7 @@ def edit_pharmacy(username, pharmacy_id):
         pharmacy.pharmacy_notes=form.pharmacy_notes.data
         db.session.commit()
         flash(f'You have successfully edited information for {form.pharmacy_name.data}.')
-        return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+        return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
     elif request.method == 'GET':
         form.pharmacy_name.data = pharmacy.pharmacy_name
         form.pharmacy_phone_number.data = pharmacy.pharmacy_phone_number
@@ -425,5 +406,5 @@ def edit_pharmacy(username, pharmacy_id):
         form.pharmacy_state.data = pharmacy.pharmacy_state
         form.pharmacy_zipcode.data = pharmacy.pharmacy_zipcode
         form.pharmacy_notes.data = pharmacy.pharmacy_notes
-        return render_template('edit_pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+    return render_template('edit_pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
 
