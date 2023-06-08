@@ -1,25 +1,4 @@
-2023-06-07 16:05:15,614 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
-Traceback (most recent call last):
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
-    form.selected_medications.choices = current_user.medication_choices()
-  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
-    my_medications = self.medication_list().all()
-  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
-    return my_meds.order_by(Medication.medication_name.asc(collation="nocase"))
-TypeError: ColumnOperators.asc() got an unexpected keyword argument 'collation'
-2023-06-07 16:09:02,380 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:23:40,082 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:24:21,472 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 16:29:30,908 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -50,7 +29,8 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
-2023-06-07 16:24:51,614 ERROR: Exception on /user/mortimer/doctor/8/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 16:30:16,801 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:30:21,728 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()
@@ -81,8 +61,8 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 485, in getattr
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'app.main.forms.EditDoctorForm object' has no attribute 'delete_confirmation'
-2023-06-07 16:28:47,285 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 16:29:20,201 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 16:31:02,473 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:31:07,465 ERROR: Exception on /user/mortimer/doctor/10/edit [POST] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
     response = self.full_dispatch_request()

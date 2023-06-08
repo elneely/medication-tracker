@@ -1,15 +1,4 @@
-2023-06-07 15:00:06,718 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:21:12,979 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:24:38,118 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:36:05,897 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:37:22,146 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:39:21,257 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:44:29,418 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:45:31,563 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:51:03,318 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:54:34,835 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:57:49,071 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:57:50,476 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 15:59:09,486 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
     return getattr(self.comparator, key)
@@ -50,8 +39,8 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
     raise AttributeError(
 AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
-2023-06-07 15:58:06,302 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-07 15:58:09,058 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+2023-06-07 15:59:53,210 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 15:59:54,857 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
 Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
     return getattr(self.comparator, key)
@@ -88,8 +77,50 @@ Traceback (most recent call last):
   File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
     my_medications = self.medication_list().all()
   File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
-    return my_meds.order_by(Medication.medication_name.lower.asc())
+    return my_meds.order_by(Medication.medication_name.lower().asc())
   File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
     raise AttributeError(
 AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
-2023-06-07 15:59:05,282 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 15:59:56,532 ERROR: Exception on /user/mortimer/manage_medications [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1457, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 463, in __getattr__
+    return getattr(self.comparator, key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 1329, in __getattr__
+    return self._fallback_getattr(key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/properties.py", line 469, in _fallback_getattr
+    return getattr(self.__clause_element__(), key)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 1459, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'AnnotatedColumn' object nor 'Comparator' object has an attribute 'lower'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 79, in manage_medications
+    form.selected_medications.choices = current_user.medication_choices()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 63, in medication_choices
+    my_medications = self.medication_list().all()
+  File "/home/erica/portfolio/medication_tracker/app/models.py", line 60, in medication_list
+    return my_meds.order_by(Medication.medication_name.lower().asc())
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 465, in __getattr__
+    raise AttributeError(
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Medication.medication_name has an attribute 'lower'
+2023-06-07 16:00:06,525 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-07 16:05:11,881 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]

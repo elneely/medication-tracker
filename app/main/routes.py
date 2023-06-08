@@ -325,7 +325,7 @@ def edit_doctor(username, doctor_id):
         form.doctor_state.data = doctor.doctor_state
         form.doctor_zipcode.data = doctor.doctor_zipcode
         form.doctor_notes.data = doctor.doctor_notes
-        return render_template('edit_doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+    return render_template('edit_doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
 @bp.route('/user/<username>/add_pharmacy', methods=['GET', 'POST'])
 @login_required
@@ -406,5 +406,5 @@ def edit_pharmacy(username, pharmacy_id):
         form.pharmacy_state.data = pharmacy.pharmacy_state
         form.pharmacy_zipcode.data = pharmacy.pharmacy_zipcode
         form.pharmacy_notes.data = pharmacy.pharmacy_notes
-        return render_template('edit_pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+    return render_template('edit_pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
 

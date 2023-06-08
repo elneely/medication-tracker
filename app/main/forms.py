@@ -206,12 +206,12 @@ class ManageMedicationsForm(FlaskForm):
 class AddDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
     doctor_last_name = StringField('Last name', validators=[DataRequired(), Length(max=64)])
-    doctor_phone_number = TelField('Telephone number')
+    doctor_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message="Valid format is xxx-xxx-xxxx")])
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
-    doctor_state = StringField('State', validators=[Length(max=2)])
-    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    doctor_state = StringField('State', validators=[Length(max=2), Optional()])
+    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     referring_URL = HiddenField()
     submit = SubmitField('Submit')
@@ -222,17 +222,19 @@ class AddDoctorForm(FlaskForm):
             raise ValidationError("You already have a doctor with this name")
         if doctor_last_name.data.isspace() == True:
             raise ValidationError('Doctor names cannot be blank')
-    
-    def validate_doctor_phone_number(self, doctor_phone_number):
-        pattern = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$'
-        result = re.match(pattern, doctor_phone_number.data)
-        if result is None:
-            raise ValidationError("Valid format is xxx-xxx-xxxx")
-            
-        #regex isn't quite working because it allows 123-345-44444, eg
 
-   # def validate_referring_URL(self, referring_URL):
-
+    def validate_doctor_state(self, doctor_state):
+        if doctor_state.data.isalpha() == False:
+            raise ValidationError("Please enter a two letter state abbreviation")
+        
+    def validate_doctor_zipcode(self, doctor_zipcode):
+        if len(doctor_zipcode.data) < 5:
+            raise ValidationError("Zipcode must be a 5 digit number")
+        try:
+            zip = int(doctor_zipcode.data)
+        except ValueError:
+            raise ValidationError("Zipcode must be a 5 digit number") 
+        
 
 class EditDoctorForm(FlaskForm):
     doctor_first_name = StringField('First name (optional)', validators=[Length(max=64)])
@@ -241,8 +243,8 @@ class EditDoctorForm(FlaskForm):
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
-    doctor_state = StringField('State', validators=[Length(max=2)])
-    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    doctor_state = StringField('State', validators=[Length(max=2), Optional()])
+    doctor_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
@@ -262,22 +264,29 @@ class EditDoctorForm(FlaskForm):
             name = Doctor.query.filter_by(user_id=current_user.id, doctor_first_name=self.doctor_first_name.data, doctor_last_name=doctor_last_name.data).first()
             if name is not None:
                 raise ValidationError("You already have a doctor with this name")
-    
-    def validate_doctor_phone_number(self, doctor_phone_number):
-        pattern = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$'
-        result = re.match(pattern, doctor_phone_number.data)
-        if result is None:
-            raise ValidationError("Valid format is xxx-xxx-xxxx")
+ 
+    def validate_doctor_state(self, doctor_state):
+        if doctor_state.data.isalpha() == False:
+            raise ValidationError("Please enter a two letter state abbreviation")
+        
+    def validate_doctor_zipcode(self, doctor_zipcode):
+        if len(doctor_zipcode.data) < 5:
+            raise ValidationError("Zipcode must be a 5 digit number")
+        try:
+            zip = int(doctor_zipcode.data)
+        except ValueError:
+            raise ValidationError("Zipcode must be a 5 digit number")
+
 
 
 class AddPharmacyForm(FlaskForm):
     pharmacy_name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
-    pharmacy_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    pharmacy_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message="Valid format is xxx-xxx-xxxx")])
     pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     pharmacy_city = StringField('City', validators=[Length(max=64)])
-    pharmacy_state = StringField('State', validators=[Length(max=2)])
-    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    pharmacy_state = StringField('State', validators=[Length(max=2), Optional()])
+    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     referring_URL = HiddenField()
     submit = SubmitField('Submit')
@@ -289,15 +298,26 @@ class AddPharmacyForm(FlaskForm):
         if pharmacy_name.data.isspace() == True:
             raise ValidationError("You cannot leave a blank name.")
 
+    def validate_pharmacy_state(self, pharmacy_state):
+        if pharmacy_state.data.isalpha() == False:
+            raise ValidationError("Please enter a two letter state abbreviation")
+        
+    def validate_pharmacy_zipcode(self, pharmacy_zipcode):
+        if len(pharmacy_zipcode.data) < 5:
+            raise ValidationError("Zipcode must be a 5 digit number")
+        try:
+            zip = int(pharmacy_zipcode.data)
+        except ValueError:
+            raise ValidationError("Zipcode must be a 5 digit number")
 
 class EditPharmacyForm(FlaskForm):
     pharmacy_name = StringField('Name of Pharmacy', validators=[Length(max=64), DataRequired()])
-    pharmacy_phone_number = TelField('Telephone number') #not sure I have this input working with model
+    pharmacy_phone_number = TelField('Telephone number', validators=[Optional(), Regexp(regex="^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message="Valid format is xxx-xxx-xxxx")])
     pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     pharmacy_city = StringField('City', validators=[Length(max=64)])
-    pharmacy_state = StringField('State', validators=[Length(max=2)])
-    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5)])
+    pharmacy_state = StringField('State', validators=[Length(max=2), Optional()])
+    pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
@@ -313,6 +333,18 @@ class EditPharmacyForm(FlaskForm):
             if check_name is not None:
                 raise ValidationError("You already have a pharmacy with this name.")
 
+    def validate_pharmacy_state(self, pharmacy_state):
+        if pharmacy_state.data.isalpha() == False:
+            raise ValidationError("Please enter a two letter state abbreviation")
+        
+    def validate_pharmacy_zipcode(self, pharmacy_zipcode):
+        if len(pharmacy_zipcode.data) < 5:
+            raise ValidationError("Zipcode must be a 5 digit number")
+        try:
+            zip = int(pharmacy_zipcode.data)
+        except ValueError:
+            raise ValidationError("Zipcode must be a 5 digit number")
+        
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
