@@ -12,6 +12,7 @@ reminderAskBox.addEventListener("click", () => {
     }
     });
 
+/* This keeps the reminder area visible if there is an error on submit */
 document.addEventListener("DOMContentLoaded", () => {
     if (reminderAskBox.checked == true) {
         reminderTrueDiv.style.display = "block";
