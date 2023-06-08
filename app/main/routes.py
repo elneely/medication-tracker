@@ -247,7 +247,7 @@ def edit_medication(username, medication_id):
 def add_doctor(username):
     user = User.query.filter_by(username=username).first_or_404()
     referrer = request.referrer
-    form = AddDoctorForm(referring_URL=referrer)
+    form = AddDoctorForm()
     if form.validate_on_submit():
         doctor = Doctor(
             doctor_first_name=form.doctor_first_name.data,
@@ -264,7 +264,7 @@ def add_doctor(username):
         db.session.add(doctor)
         db.session.commit()
         flash(f'You have successfully added Dr. {form.doctor_last_name.data} to your doctor list.')
-        return redirect(form.referring_URL.data)
+        return redirect(url_for('main.doctor_list', username=username))
     return render_template('add_doctor.html', title='Add Doctor', user=user, form=form)
 
 @bp.route('/user/<username>/doctor_list', methods=['GET'])
@@ -282,7 +282,7 @@ def doctor(username, doctor_id):
     doctor = Doctor.query.filter_by(id=doctor_id).first_or_404()
     name = doctor.doctor_last_name
     referrer = request.referrer
-    form = DeleteDoctorForm(referring_URL=referrer)
+    form = DeleteDoctorForm()
     if form.validate_on_submit():
         if form.delete_confirmation.data == "delete-yes":
             medications = current_user.medication_list().all()
@@ -292,7 +292,7 @@ def doctor(username, doctor_id):
             db.session.delete(doctor)
             db.session.commit()
             flash(f'Dr. {name} has been deleted')
-            return redirect(form.referring_URL.data)
+            return redirect(url_for('main.doctor_list', username=username))
     return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
 @bp.route('/user/<username>/doctor/<doctor_id>/edit', methods=['GET', 'POST'])
@@ -332,7 +332,7 @@ def edit_doctor(username, doctor_id):
 def add_pharmacy(username):
     user = User.query.filter_by(username=username).first_or_404()
     referrer = request.referrer
-    form = AddPharmacyForm(referring_URL=referrer)
+    form = AddPharmacyForm()
     if form.validate_on_submit():
         pharmacy = Pharmacy(
             pharmacy_name=form.pharmacy_name.data,
@@ -348,7 +348,7 @@ def add_pharmacy(username):
         db.session.add(pharmacy)
         db.session.commit()
         flash(f'You have successfully added {form.pharmacy_name.data} to your pharmacy list.')
-        return redirect(form.referring_URL.data)
+        return redirect(url_for('main.pharmacy_list', username=username))
     return render_template('add_pharmacy.html', title='Add Pharmacy', user=user, form=form)
 
 @bp.route('/user/<username>/pharmacy_list', methods=['GET'])
@@ -366,7 +366,7 @@ def pharmacy(username, pharmacy_id):
     pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
     name = pharmacy.pharmacy_name
     referrer = request.referrer
-    form = DeletePharmacyForm(referring_URL=referrer)
+    form = DeletePharmacyForm()
     if form.validate_on_submit():
         if form.delete_confirmation.data == "delete-yes":
             medications = current_user.medication_list().all()
@@ -376,7 +376,7 @@ def pharmacy(username, pharmacy_id):
             db.session.delete(pharmacy)
             db.session.commit()
             flash(f'{name} has been deleted')
-            return redirect(form.referring_URL.data)
+            return redirect(url_for('main.pharmacy_list', username=username))
     return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
 
 @bp.route('/user/<username>/pharmacy/<pharmacy_id>/edit', methods=['GET', 'POST'])

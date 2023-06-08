@@ -212,10 +212,8 @@ class AddDoctorForm(FlaskForm):
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
     doctor_state = SelectField('State', validators=[Optional()], choices=states)
-    #doctor_state = StringField('State', validators=[Length(max=2), Optional()])
     doctor_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
-    referring_URL = HiddenField()
     submit = SubmitField('Submit')
 
     def validate_doctor_last_name(self, doctor_last_name):
@@ -290,7 +288,6 @@ class AddPharmacyForm(FlaskForm):
     pharmacy_state = SelectField('State', validators=[Optional()], choices=states)
     pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
-    referring_URL = HiddenField()
     submit = SubmitField('Submit')
 # not sure that last part works
     def validate_pharmacy_name(self, pharmacy_name):
@@ -356,11 +353,9 @@ class DeleteProfileForm(FlaskForm):
     submit = SubmitField('Permanently delete this account')
     
 class DeleteDoctorForm(FlaskForm):
-    referring_URL = HiddenField()
     delete_confirmation = RadioField('Are you certain you wish to delete this doctor?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
     submit = SubmitField('Permanently delete this doctor')
 
 class DeletePharmacyForm(FlaskForm):
-    referring_URL = HiddenField()
     delete_confirmation = RadioField('Are you certain you wish to delete this pharmacy?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
     submit = SubmitField('Permanently delete this pharmacy')
