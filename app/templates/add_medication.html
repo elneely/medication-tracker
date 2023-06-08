@@ -117,6 +117,8 @@
             {% include '_detailed_med_info.html' %}
         <p>
             {{ form.submit(id="submit-form") }}
+            <a href="{{ url_for('main.user', username=current_user.username) }}"><button id="cancel-add-med-btn" type="button">Cancel</button></a>
+   
         </p>
         
     </form>

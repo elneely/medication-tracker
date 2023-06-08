@@ -1,3 +1,4 @@
+/* JS file for add_medication.html
 /* These three scripts handle the doctor portion of the form */
 
 /*Html parts */

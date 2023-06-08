@@ -1,3 +1,7 @@
+/* JS file for doctor.html */
+
+/* This handles the delete confirmation section */
+
 const deleteDoctorButton = document.getElementById("delete-doctor-btn"); 
 const submitButton = document.getElementById("delete-doctor-submit");
 var deleteConfirmation = document.getElementById("delete-confirmation");

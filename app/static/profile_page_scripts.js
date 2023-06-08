@@ -1,3 +1,5 @@
+/* This holds the scripts for user_profile.html */
+
 const deleteProfileButton = document.getElementById("delete-profile-btn"); 
 const submitButton = document.getElementById("delete-profile-submit");
 var deleteConfirmation = document.getElementById("delete-confirmation");

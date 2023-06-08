@@ -184,6 +184,21 @@ nav a:hover {
 }
 
 
+/* Medication page */
+
+#edit-medication-btn {
+ 
+}
+
+#delete-medication-btn {
+    margin-left: 5%;
+
+}
+
+#delete-medication-submit {
+    display: none;
+}
+
 /* Manage Medications page */
 
 #pharmacy-list {

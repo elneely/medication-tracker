@@ -22,6 +22,8 @@
     
     <p>
         {{ form.submit() }}
+        <a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}"><button id="cancel-add-pharmacy-btn" type="button">Cancel</button></a>
+   
     </p>
 
     </form>

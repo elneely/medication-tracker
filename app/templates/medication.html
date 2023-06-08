@@ -39,7 +39,24 @@
     <p>Refill reminders {% if medication.reminder %}on - remind {{medication.reminder_length }} days in advance {% else %}off{% endif %}</p>
     <p>{% if medication.medication_notes %}Notes: {{ medication.medication_notes }}{% endif %}</p>
 </div></p>
-<a href="{{ url_for('main.edit_medication', username=current_user.username, medication_id=medication.id) }}"><button id="edit-medication-btn" type="button">Edit Information</button></a>
 
+<a href="{{ url_for('main.edit_medication', username=current_user.username, medication_id=medication.id) }}"><button id="edit-medication-btn" type="button">Edit Information</button></a><button id="delete-medication-btn">Delete Medication</button>
+<form action="" id="delete-medication-form" method="post">
+    {{ form.hidden_tag() }}
+    <div id="delete-confirmation-div">
+        <p>{{ form.delete_confirmation.label }}
+            {{form.delete_confirmation(style="list-style:none", id="delete-confirmation") }}
+            {% for error in form.delete_confirmation.errors %} 
+            <span class="error">{{ error }}</span>
+            {% endfor %} 
+        </p>
+    </div>
+    {{ form.submit(id="delete-medication-submit") }}
+</form>
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='medication_page_scripts.js') }}"></script>
 {% endblock %}
  

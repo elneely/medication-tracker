@@ -1,3 +1,4 @@
+/* This JS file holds the scripts for edit_medication.html */
 
 /* This script handles the reminder box */
 var reminderAskBox = document.getElementById("reminders-ask");

@@ -37,6 +37,8 @@
 
         <p>
             {{ form.submit() }}
+            <a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}"><button id="cancel-edit-medication-btn" type="button">Cancel</button></a>
+  
         </p>
     </form>
 </div>

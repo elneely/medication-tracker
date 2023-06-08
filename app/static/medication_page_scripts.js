@@ -1,11 +1,11 @@
-/* This holds the JS for pharmacy.html */
+/* This holds the JS for medication.html */
 
-const deletePharmacyButton = document.getElementById("delete-pharmacy-btn"); 
-const submitButton = document.getElementById("delete-pharmacy-submit");
+const deleteMedicationButton = document.getElementById("delete-medication-btn"); 
+const submitButton = document.getElementById("delete-medication-submit");
 var deleteConfirmation = document.getElementById("delete-confirmation");
 const deleteConfirmationDiv = document.getElementById("delete-confirmation-div");
 
-deletePharmacyButton.addEventListener("click", () => {
+deleteMedicationButton.addEventListener("click", () => {
     deleteConfirmationDiv.style.display = "block";
     submitButton.style.display = "block";
     submitButton.disabled = true;
