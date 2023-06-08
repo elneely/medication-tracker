@@ -9,6 +9,7 @@ from wtforms.validators import DataRequired, Length, ValidationError, \
     Optional, NumberRange, Regexp
 from wtforms.widgets import TextInput
 from app.models import User, Doctor, Pharmacy, Medication
+from app.main.select_options import states
 
 class EditProfileForm(FlaskForm):
     username = StringField(('Username'), validators=[DataRequired()])
@@ -210,7 +211,8 @@ class AddDoctorForm(FlaskForm):
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
-    doctor_state = StringField('State', validators=[Length(max=2), Optional()])
+    doctor_state = SelectField('State', validators=[Optional()], choices=states)
+    #doctor_state = StringField('State', validators=[Length(max=2), Optional()])
     doctor_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     referring_URL = HiddenField()
@@ -225,7 +227,7 @@ class AddDoctorForm(FlaskForm):
 
     def validate_doctor_state(self, doctor_state):
         if doctor_state.data.isalpha() == False:
-            raise ValidationError("Please enter a two letter state abbreviation")
+            raise ValidationError("Please select a state")
         
     def validate_doctor_zipcode(self, doctor_zipcode):
         if len(doctor_zipcode.data) < 5:
@@ -243,7 +245,7 @@ class EditDoctorForm(FlaskForm):
     doctor_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     doctor_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     doctor_city = StringField('City', validators=[Length(max=64)])
-    doctor_state = StringField('State', validators=[Length(max=2), Optional()])
+    doctor_state = SelectField('State', validators=[Optional()], choices=states)
     doctor_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     doctor_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
@@ -267,7 +269,7 @@ class EditDoctorForm(FlaskForm):
  
     def validate_doctor_state(self, doctor_state):
         if doctor_state.data.isalpha() == False:
-            raise ValidationError("Please enter a two letter state abbreviation")
+            raise ValidationError("Please select a state")
         
     def validate_doctor_zipcode(self, doctor_zipcode):
         if len(doctor_zipcode.data) < 5:
@@ -285,7 +287,7 @@ class AddPharmacyForm(FlaskForm):
     pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     pharmacy_city = StringField('City', validators=[Length(max=64)])
-    pharmacy_state = StringField('State', validators=[Length(max=2), Optional()])
+    pharmacy_state = SelectField('State', validators=[Optional()], choices=states)
     pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     referring_URL = HiddenField()
@@ -300,7 +302,7 @@ class AddPharmacyForm(FlaskForm):
 
     def validate_pharmacy_state(self, pharmacy_state):
         if pharmacy_state.data.isalpha() == False:
-            raise ValidationError("Please enter a two letter state abbreviation")
+            raise ValidationError("Please select a state")
         
     def validate_pharmacy_zipcode(self, pharmacy_zipcode):
         if len(pharmacy_zipcode.data) < 5:
@@ -316,7 +318,7 @@ class EditPharmacyForm(FlaskForm):
     pharmacy_address_line_1 = StringField('Address line 1', validators=[Length(max=64)])
     pharmacy_address_line_2 = StringField('Address line 2', validators=[Length(max=64)])
     pharmacy_city = StringField('City', validators=[Length(max=64)])
-    pharmacy_state = StringField('State', validators=[Length(max=2), Optional()])
+    pharmacy_state = SelectField('State', validators=[Optional()], choices=states)
     pharmacy_zipcode = StringField('Zipcode', validators=[Length(max=5), Optional()])
     pharmacy_notes = TextAreaField('Notes', validators=[Length(max=128)])
     submit = SubmitField('Submit')
@@ -335,7 +337,7 @@ class EditPharmacyForm(FlaskForm):
 
     def validate_pharmacy_state(self, pharmacy_state):
         if pharmacy_state.data.isalpha() == False:
-            raise ValidationError("Please enter a two letter state abbreviation")
+            raise ValidationError("Please select a state")
         
     def validate_pharmacy_zipcode(self, pharmacy_zipcode):
         if len(pharmacy_zipcode.data) < 5:
