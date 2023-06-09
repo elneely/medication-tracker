@@ -2,6 +2,7 @@
 
 const deleteProfileButton = document.getElementById("delete-profile-btn"); 
 const submitButton = document.getElementById("delete-profile-submit");
+const cancelButton = document.getElementById("cancel-delete-profile-btn");
 var deleteConfirmation = document.getElementById("delete-confirmation");
 var extraConfirmation = document.getElementById("extra-confirmation");
 const deleteConfirmationDiv = document.getElementById("delete-confirmation-div");
@@ -9,8 +10,9 @@ const extraConfirmationDiv = document.getElementById("extra-confirmation-div");
 
 deleteProfileButton.addEventListener("click", () => {
     deleteConfirmationDiv.style.display = "block";
+    cancelButton.style.display = "block";
     
-})
+});
 
 deleteConfirmation.addEventListener("change", (e) => {
     const value = e.target.value;
@@ -24,7 +26,7 @@ deleteConfirmation.addEventListener("change", (e) => {
         submitButton.style.display = "none";
         submitButton.disabled = true;
     }
-})
+});
 
 extraConfirmation.addEventListener("change", (e) => {
     const value = e.target.value;
@@ -33,4 +35,9 @@ extraConfirmation.addEventListener("change", (e) => {
     } else if (value == "certain-no") {
         submitButton.disabled = true;
     }
-})
+});
+
+cancelButton.addEventListener("click", () => {
+    location.replace(location.href);
+}
+);

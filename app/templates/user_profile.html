@@ -33,7 +33,7 @@
     {{ form.hidden_tag() }}
     <div id="delete-confirmation-div">
         <p>{{ form.delete_confirmation.label }}
-            {{form.delete_confirmation(style="list-style:none", id="delete-confirmation") }}
+            {{form.delete_confirmation(style="list-style:none", id="delete-confirmation", name="delete-confirmation") }}
             {% for error in form.delete_confirmation.errors %} 
             <span class="error">{{ error }}</span>
             {% endfor %} 
@@ -41,13 +41,16 @@
     </div>
     <div id="extra-confirmation-div">
         <p>{{ form.extra_confirmation.label }}
-            {{form.extra_confirmation(style="list-style:none", id="extra-confirmation") }}
+            {{form.extra_confirmation(style="list-style:none", id="extra-confirmation", name="extra-confirmation") }}
             {% for error in form.extra_confirmation.errors %} 
             <span class="error">{{ error }} </span>
             {% endfor %}
         </p>
     </div>
-    {{ form.submit(id="delete-profile-submit") }}
+    <div class = "button-container">
+        <div class = "inner-button">{{ form.submit(id="delete-profile-submit") }}</div>
+        <div class = "inner-button"><button id="cancel-delete-profile-btn" type="button">Cancel</button></div>
+    </div>
 </form>
 
 {% endblock %} 

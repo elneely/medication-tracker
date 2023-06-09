@@ -354,7 +354,7 @@ class DeleteDoctorForm(FlaskForm):
 
 class DeleteMedicationForm(FlaskForm):
     delete_confirmation = RadioField('Are you certain you wish to delete this medication?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
-    submit = SubmitField('Permanently delete this pharmacy')    
+    submit = SubmitField('Permanently delete this medication')    
 
 class DeletePharmacyForm(FlaskForm):
     delete_confirmation = RadioField('Are you certain you wish to delete this pharmacy?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
