@@ -1,3 +1,5 @@
+/* This file handles the JS for manage_medications.html */
+
 /* This is going to handle the check all box */
 
 var checkAllBox = document.getElementById("all-medications");

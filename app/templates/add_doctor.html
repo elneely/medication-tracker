@@ -21,6 +21,8 @@
     {% include '_doctor_form.html' %}
     <p>
         {{ form.submit() }}
+        <a href="{{ url_for('main.doctor_list', username=current_user.username) }}"><button id="cancel-add-doctor-btn" type="button">Cancel</button></a>
+  
     </p>
     
     </form>

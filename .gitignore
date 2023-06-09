@@ -1,5 +1,6 @@
 venv/
 migrations/
+logs/
 
 *.pyc
 __pycache__/

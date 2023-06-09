@@ -1,14 +1,12 @@
-/* JS file for doctor.html */
+/* This holds the JS for medication.html */
 
-/* This handles the delete confirmation section */
-
-const deleteDoctorButton = document.getElementById("delete-doctor-btn"); 
-const submitButton = document.getElementById("delete-doctor-submit");
-const cancelButton = document.getElementById("cancel-delete-doctor-btn");
+const deleteMedicationButton = document.getElementById("delete-medication-btn"); 
+const submitButton = document.getElementById("delete-medication-submit");
+const cancelButton = document.getElementById("cancel-delete-medication-btn");
 var deleteConfirmation = document.getElementById("delete-confirmation");
 const deleteConfirmationDiv = document.getElementById("delete-confirmation-div");
 
-deleteDoctorButton.addEventListener("click", () => {
+deleteMedicationButton.addEventListener("click", () => {
     deleteConfirmationDiv.style.display = "block";
     submitButton.style.display = "block";
     submitButton.disabled = true;
@@ -23,7 +21,6 @@ deleteConfirmation.addEventListener("change", (e) => {
         submitButton.disabled = true;
     }
 });
-
 cancelButton.addEventListener("click", () => {
     location.replace(location.href);
 }

@@ -54,7 +54,7 @@ class AddMedicationForm(FlaskForm):
     refills_expiration = DateField('Prescription Expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     medication_notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
-    doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
+    doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')])
     doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
     new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
     new_doctor_last = StringField('Last Name: ', validators=[Length(max=64)])
@@ -98,12 +98,8 @@ class AddMedicationForm(FlaskForm):
     
     def validate_reminder(self, reminder):
         if reminder.data == True:
-            if self.reminder_length.data is None:
-                raise ValidationError('You must set a reminder length')
-            if self.length.data is None:
-                raise ValidationError('You must specify the length of the prescription')
-            if self.last_filled.data is None:
-                raise ValidationError('You must enter when this prescription was last filled')
+            if (self.reminder_length.data or self.length.data or self.last_filled.data) is None:
+                raise ValidationError('You must set a reminder length, prescription length, and last filled date')
 
     def validate_reminder_length(self, reminder_length):
         if self.length.data and (reminder_length.data > self.length.data):
@@ -355,6 +351,10 @@ class DeleteProfileForm(FlaskForm):
 class DeleteDoctorForm(FlaskForm):
     delete_confirmation = RadioField('Are you certain you wish to delete this doctor?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
     submit = SubmitField('Permanently delete this doctor')
+
+class DeleteMedicationForm(FlaskForm):
+    delete_confirmation = RadioField('Are you certain you wish to delete this medication?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')
+    submit = SubmitField('Permanently delete this medication')    
 
 class DeletePharmacyForm(FlaskForm):
     delete_confirmation = RadioField('Are you certain you wish to delete this pharmacy?', choices=[('delete-no', 'No'), ('delete-yes', 'Yes')], default='delete-no')

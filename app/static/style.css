@@ -32,6 +32,9 @@ body {
     padding: 0;
 }
 
+.inner-button {
+    display: inline-block;
+}
 /* Navigation Bar */
 
 nav {
@@ -184,6 +187,24 @@ nav a:hover {
 }
 
 
+/* Medication page */
+
+#edit-medication-btn {
+ 
+}
+
+#delete-medication-btn {
+    margin-left: 5%;
+
+}
+
+#delete-medication-submit {
+    display: none;
+}
+
+#cancel-delete-medication-btn {
+    display: none;
+}
 /* Manage Medications page */
 
 #pharmacy-list {
@@ -294,6 +315,10 @@ tbody tr:nth-child(odd) {
     display: none;
 }
 
+#cancel-delete-doctor-btn {
+    display: none;
+}
+
 /* Pharmacy page */
 
 #edit-pharmacy-btn {
@@ -307,6 +332,9 @@ tbody tr:nth-child(odd) {
     display: none;
 }
 
+#cancel-delete-pharmacy-btn {
+    display: none;
+}
 
 /* User homepage */
 
@@ -344,5 +372,9 @@ tbody tr:nth-child(odd) {
     margin-left: 5%;
 }
 #delete-profile-submit {
+    display: none;
+}
+
+#cancel-delete-profile-btn {
     display: none;
 }

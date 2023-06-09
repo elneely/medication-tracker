@@ -3,9 +3,9 @@ from flask_login import current_user, login_required
 from app import db
 from app.models import User, Medication, Doctor, Pharmacy
 from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, \
-    DeleteDoctorForm, DeletePharmacyForm, DeleteProfileForm, EditDoctorForm, \
-    EditMedicationForm, EditPharmacyForm, EditProfileForm, EmptyForm, \
-    ManageMedicationsForm
+    DeleteDoctorForm, DeleteMedicationForm, DeletePharmacyForm, \
+    DeleteProfileForm, EditDoctorForm, EditMedicationForm, EditPharmacyForm, \
+    EditProfileForm, EmptyForm, ManageMedicationsForm
 from app.main import bp
 
 @bp.route('/')
@@ -187,7 +187,14 @@ def add_medication(username):
 def medication(username, medication_id):
     user = User.query.filter_by(username=username).first_or_404()
     medication = Medication.query.filter_by(id=medication_id).first_or_404()
-    form=EmptyForm()
+    name = medication.medication_name
+    form=DeleteMedicationForm()
+    if form.validate_on_submit():
+        if form.delete_confirmation.data == 'delete-yes':
+                db.session.delete(medication)
+                db.session.commit()
+                flash(f'{name} has been deleted')           
+        return redirect(url_for('main.manage_medications', username=username))
     return render_template('medication.html', title="Medication Information", user=user, medication=medication, form=form)
 
 @bp.route('/user/<username>/medication/<medication_id>/edit', methods=['GET', 'POST'])
