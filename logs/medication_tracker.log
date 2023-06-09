@@ -73,3 +73,8 @@ jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', 
 2023-06-09 15:25:04,420 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
 2023-06-09 15:26:57,356 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
 2023-06-09 15:29:08,865 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 15:32:25,562 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 15:35:02,792 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 15:35:20,860 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 15:37:45,357 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 15:38:19,669 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
