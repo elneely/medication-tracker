@@ -1,66 +1,44 @@
-2023-06-08 13:14:14,917 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 13:18:16,890 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 13:22:20,473 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 13:24:58,673 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:05:04,856 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:09:02,353 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:26:02,442 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:32:53,145 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:38:28,636 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:52:57,720 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:54:15,769 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:55:58,850 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 14:56:27,096 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:05:20,989 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:10:01,592 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:14:19,820 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:15:35,023 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:16:09,735 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:25:37,931 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:29:28,966 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:30:13,359 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:33:03,411 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:35:15,915 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:37:12,444 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:38:46,172 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:39:38,131 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:49:40,942 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:52:01,311 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:54:12,100 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:56:34,458 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 15:57:06,129 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:02:49,488 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:04:56,616 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:05:52,861 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:16:26,049 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:17:47,314 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:18:51,599 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:21:35,058 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:22:36,183 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:23:00,785 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:24:12,572 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:27:54,228 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:29:04,221 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:34:55,531 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:35:38,025 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:44:52,503 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 16:47:32,682 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:00:40,903 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:02:20,090 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:02:54,060 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:07:01,016 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:08:49,663 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:12:01,902 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:22:21,730 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:25:05,905 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:30:42,990 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:47:09,708 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:52:53,327 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:56:45,881 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 17:59:13,462 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 18:00:12,235 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 18:01:35,539 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 18:06:45,536 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-08 18:07:26,218 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-09 13:18:12,701 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
-2023-06-09 13:19:04,116 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:32:44,396 ERROR: Exception on /user/mortimer/add_medication [GET] [in /home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/erica/portfolio/medication_tracker/app/main/routes.py", line 183, in add_medication
+    return render_template('add_medication.html', title='Add Medication', user=user, form=form)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/flask/templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/erica/portfolio/medication_tracker/venv/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/erica/portfolio/medication_tracker/app/templates/add_medication.html", line 45, in template
+    {% else if form.doctor_choice.data == "new-doctor" %}
+jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'if'
+2023-06-09 13:34:24,774 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:34:52,220 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:35:35,292 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:38:18,775 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:39:04,798 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:40:18,510 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:48:14,727 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 13:59:22,329 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 14:02:21,823 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 14:04:30,345 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 14:09:53,783 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 14:11:11,860 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]
+2023-06-09 14:14:30,133 INFO: Medication tracker startup [in /home/erica/portfolio/medication_tracker/app/__init__.py:64]

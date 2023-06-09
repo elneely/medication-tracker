@@ -54,7 +54,7 @@ doctorChoice.addEventListener("click", () => {
     for (const doctorButton of doctorButtons) {
         if (doctorButton.checked) {
             typeOfDoctor = doctorButton.value;
-            sessionStorage.setItem("type", doctorButton.value)
+            sessionStorage.setItem("doctortype", doctorButton.value)
         }
     }
     if (typeOfDoctor == "current-doctor") {
@@ -79,6 +79,8 @@ const pharmacyChoice = document.getElementById("pharmacy-choice");
 const pharmacyOffers = document.getElementById("pharmacy-offers");
 const currentPharmacyDiv = document.getElementById("only-current-pharmacy")
 const newPharmacyDiv = document.getElementById("only-new-pharmacy")
+var currentPharmacyRadio = document.getElementById("current-pharmacy");
+var newPharmacyRadio = document.getElementById("new-pharmacy");
 var pharmacyBtn = document.getElementById("pharmacy-btn");
 var noPharmacyBtn = document.getElementById("no-pharmacy-btn");
 var pharmacyButtons = document.querySelectorAll('input[name="add-pharmacy"]');
@@ -111,6 +113,7 @@ pharmacyChoice.addEventListener("click", () => {
     for (const pharmacyButton of pharmacyButtons) {
         if (pharmacyButton.checked) {
             typeOfPharmacy = pharmacyButton.value;
+            sessionStorage.setItem("pharmacytype", pharmacyButton.value)
         }
     }
     if (typeOfPharmacy == "current-pharmacy") {
@@ -138,15 +141,15 @@ reminderAskBox.addEventListener("click", () => {
     });
 
 
-/* This keeps areas visible if there is an error on submit 
-This works but only the first time there is an error to correct - after that it 
-loses the value.  I think I'm wiping it in the wrong place.*/
+/* This keeps the reminder box area visible if there is an error on submit.  It
+also keeps the doctor/pharmacy area visible if there is an error on submit, but only 
+the first time - after that it loses the value.  Known bug.*/
 document.addEventListener("DOMContentLoaded", () => {
     if (reminderAskBox.checked == true) {
         reminderTrueDiv.style.display = "block";
     }
-    typeOfDoctor = sessionStorage.getItem("type")
-
+    typeOfDoctor = sessionStorage.getItem("doctortype");
+    sessionStorage.removeItem("doctortype");
 
     if (typeOfDoctor == "current-doctor") {
         doctorBtn.style.display = "none";
@@ -168,7 +171,25 @@ document.addEventListener("DOMContentLoaded", () => {
         doctorChoice.style.display = "block";
         doctorOffers.style.display = "block";
         newDoctorRadio.checked = true;
-    }
+    };
+
+    typeOfPharmacy = sessionStorage.getItem("pharmacytype");
+    sessionStorage.removeItem("pharmacytype");
+
+    if (typeOfPharmacy == "current-pharmacy") {
+        pharmacyBtn.style.display = "none";
+        noPharmacyBtn.style.display = "block";
+        currentPharmacyDiv.style.display = "block"; 
+        pharmacyChoice.style.display = "block";
+        newPharmacyDiv.style.display = "none";
+        newPharmacyName.disabled = true;
+        currentPharmacyRadio.checked = true;
+    } else if (typeOfPharmacy == "new-pharmacy") { 
+        newPharmacyDiv.style.display = "block";
+        currentPharmacyDiv.style.display = "none";
+        currentPharmacyChoice.value = "";
+
+    }; 
 });
 
 
