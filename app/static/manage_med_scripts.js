@@ -47,6 +47,7 @@ actionChoice.addEventListener("change", (e) => {
         submitButton.disabled = true;
         doctorSection.style.display = "none";
         pharmacySection.style.display = "none";
+        cancelButton.style.display = "block";
     } else {
         doctorSection.style.display = "none";
         pharmacySection.style.display = "none";
@@ -67,3 +68,9 @@ deleteConfirmation.addEventListener("change", (e) => {
         submitButton.disabled = true;
     }
 })
+const cancelButton = document.getElementById("cancel-manage-meds-btn");
+
+cancelButton.addEventListener("click", () => {
+    location.replace(location.href);
+}
+);

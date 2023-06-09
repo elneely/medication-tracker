@@ -81,9 +81,10 @@
                 {% endfor %} 
             </p>
         </div>
-        <p>
-            {{ form.submit(id="manage-meds-submit-button") }}
-        </p>
+        <div class = "button-container">
+            <div class = "inner-button">{{ form.submit(id="manage-meds-submit-button") }}</div>
+            <div class = "inner-button"><button id="cancel-manage-meds-btn" type="button">Cancel</button></div>
+        </div>
         </form>
 {% endblock %} 
 

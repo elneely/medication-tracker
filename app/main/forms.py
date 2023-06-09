@@ -54,7 +54,7 @@ class AddMedicationForm(FlaskForm):
     refills_expiration = DateField('Prescription Expiration Date: ', validators=[Optional()])
     reason = StringField('Reason for taking: ', validators=[Length(max=128)])
     medication_notes = TextAreaField('Notes: ', validators=[Length(max=1024)])
-    doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')])
+    doctor_choice = RadioField('', choices=[('current-doctor', 'Current Doctor'), ('new-doctor', 'New Doctor')], default='current-doctor')
     doctor_list =  SelectField('Choose a doctor: ', validators=[Optional()])
     new_doctor_first = StringField('First Name: ', validators=[Length(max=64)])
     new_doctor_last = StringField('Last Name: ', validators=[Length(max=64)])
@@ -197,7 +197,7 @@ class ManageMedicationsForm(FlaskForm):
 
     def validate_action_choice(self, action_choice):
         if action_choice.data == "default":
-            raise ValidationError("You have not chosen an action.")
+            raise ValidationError("You have not chosen an action.") 
 
 
 class AddDoctorForm(FlaskForm):

@@ -90,7 +90,9 @@ def manage_medications(username):
 # for each if clause
 # for each selected medication, pull the medication with that id number
 # perform appropriate modification
-        if form.action_choice.data == 'default':
+        if selected_medications == []:
+            flash('You have not selected any medications')
+        elif form.action_choice.data == 'default':
             flash('No action has been selected.')
         elif form.action_choice.data == 'change-doctor':
             for medication in selected_medications:
@@ -220,60 +222,25 @@ def edit_medication(username, medication_id):
     form.doctor_list.choices = current_user.doctor_choices()
     form.pharmacy_list.choices = current_user.pharmacy_choices()
     if form.validate_on_submit():
-        if medication.pharmacy_id is None and form.pharmacy_list.data is None:
-            pharmvar = True
-        if medication.pharmacy_id == 'None' and form.pharmacy_list.data == 'None':
-            pharmvar = True
-        elif medication.pharmacy_id is None or form.pharmacy_list.data is None:
-            pharmvar = False
-        elif medication.pharmacy_id == 'None' or form.pharmacy_list.data == 'None':
-            pharmvar = False
-        elif int(medication.pharmacy_id) == int(form.pharmacy_list.data):
-            pharmvar = True
-        else:
-            pharmvar = False
-
-        if (medication.medication_name == form.medication_name.data and
-                medication.brand_name == form.brand_name.data and
-                medication.dose == form.dose.data and
-                medication.frequency == form.frequency.data and
-                medication.prescription_date == form.prescription_date.data and
-                medication.last_filled == form.last_filled.data and
-                medication.short_term == form.short_term.data and
-                medication.reminder == form.reminder.data and
-                medication.reminder_length == form.reminder_length.data and 
-                medication.refills_remaining == form.refills_remaining.data and
-                medication.refills_expiration == form.refills_expiration.data and
-                medication.length == form.length.data and
-                medication.reason == form.reason.data and
-                medication.medication_notes == form.medication_notes.data):
-            tempvar = True
-        else:
-            tempvar = False
-        
-        if tempvar == True and pharmvar == True:
-            flash('You have made no changes')
-            return redirect(url_for('main.medication', username=username, medication=medication, medication_id=medication.id))       
-        else:
-            medication.medication_name=form.medication_name.data
-            medication.brand_name=form.brand_name.data
-            medication.dose=form.dose.data
-            medication.frequency=form.frequency.data
-            medication.prescription_date=form.prescription_date.data
-            medication.last_filled=form.last_filled.data
-            medication.short_term=form.short_term.data
-            medication.reminder=form.reminder.data
-            medication.reminder_length=form.reminder_length.data
-            medication.refills_remaining=form.refills_remaining.data
-            medication.refills_expiration=form.refills_expiration.data
-            medication.length=form.length.data
-            medication.reason=form.reason.data
-            medication.medication_notes=form.medication_notes.data
-            medication.doctor_id=form.doctor_list.data
-            medication.pharmacy_id=form.pharmacy_list.data
-            db.session.commit()
-            flash(f'You have successfully edited information for {form.medication_name.data}.')
-            return redirect(url_for('main.medication', username=username, medication=medication, medication_id=medication.id))
+        medication.medication_name=form.medication_name.data
+        medication.brand_name=form.brand_name.data
+        medication.dose=form.dose.data
+        medication.frequency=form.frequency.data
+        medication.prescription_date=form.prescription_date.data
+        medication.last_filled=form.last_filled.data
+        medication.short_term=form.short_term.data
+        medication.reminder=form.reminder.data
+        medication.reminder_length=form.reminder_length.data
+        medication.refills_remaining=form.refills_remaining.data
+        medication.refills_expiration=form.refills_expiration.data
+        medication.length=form.length.data
+        medication.reason=form.reason.data
+        medication.medication_notes=form.medication_notes.data
+        medication.doctor_id=form.doctor_list.data
+        medication.pharmacy_id=form.pharmacy_list.data
+        db.session.commit()
+        flash(f'Any changes you have made to {form.medication_name.data} have been saved')
+        return redirect(url_for('main.medication', username=username, medication=medication, medication_id=medication.id))
     elif request.method == 'GET':
         form.medication_name.data = medication.medication_name
         form.brand_name.data = medication.brand_name
@@ -352,18 +319,30 @@ def edit_doctor(username, doctor_id):
     doctor_name = doctor.full_name()
     form = EditDoctorForm(doctor_name)
     if form.validate_on_submit():
-        doctor.doctor_first_name=form.doctor_first_name.data
-        doctor.doctor_last_name=form.doctor_last_name.data
-        doctor.doctor_phone_number=form.doctor_phone_number.data
-        doctor.doctor_address_line_1=form.doctor_address_line_1.data
-        doctor.doctor_address_line_2=form.doctor_address_line_2.data
-        doctor.doctor_city=form.doctor_city.data
-        doctor.doctor_state=form.doctor_state.data
-        doctor.doctor_zipcode=form.doctor_zipcode.data
-        doctor.doctor_notes=form.doctor_notes.data
-        db.session.commit()
-        flash(f'You have successfully edited information for Dr. {form.doctor_last_name.data}.')
-        return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
+        if (doctor.doctor_first_name == form.doctor_first_name.data and
+                doctor.doctor_last_name == form.doctor_last_name.data and
+                doctor.doctor_phone_number == form.doctor_phone_number.data and
+                doctor.doctor_address_line_1 == form.doctor_address_line_1.data and
+                doctor.doctor_address_line_2 == form.doctor_address_line_2.data and
+                doctor.doctor_city == form.doctor_city.data and
+                doctor.doctor_state == form.doctor_state.data and
+                doctor.doctor_zipcode == form.doctor_zipcode.data and
+                doctor.doctor_notes == form.doctor_notes.data):
+            flash(f'You have made no changes to Dr. {form.doctor_last_name.data}.')
+            return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
+        else:   
+            doctor.doctor_first_name=form.doctor_first_name.data
+            doctor.doctor_last_name=form.doctor_last_name.data
+            doctor.doctor_phone_number=form.doctor_phone_number.data
+            doctor.doctor_address_line_1=form.doctor_address_line_1.data
+            doctor.doctor_address_line_2=form.doctor_address_line_2.data
+            doctor.doctor_city=form.doctor_city.data
+            doctor.doctor_state=form.doctor_state.data
+            doctor.doctor_zipcode=form.doctor_zipcode.data
+            doctor.doctor_notes=form.doctor_notes.data
+            db.session.commit()
+            flash(f'You have successfully edited information for Dr. {form.doctor_last_name.data}.')
+            return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
     elif request.method == 'GET':
         form.doctor_first_name.data = doctor.doctor_first_name
         form.doctor_last_name.data = doctor.doctor_last_name
@@ -435,17 +414,28 @@ def edit_pharmacy(username, pharmacy_id):
     pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
     form = EditPharmacyForm(pharmacy.pharmacy_name)
     if form.validate_on_submit():
-        pharmacy.pharmacy_name=form.pharmacy_name.data
-        pharmacy.pharmacy_phone_number=form.pharmacy_phone_number.data
-        pharmacy.pharmacy_address_line_1=form.pharmacy_address_line_1.data
-        pharmacy.pharmacy_address_line_2=form.pharmacy_address_line_2.data
-        pharmacy.pharmacy_city=form.pharmacy_city.data
-        pharmacy.pharmacy_state=form.pharmacy_state.data
-        pharmacy.pharmacy_zipcode=form.pharmacy_zipcode.data
-        pharmacy.pharmacy_notes=form.pharmacy_notes.data
-        db.session.commit()
-        flash(f'You have successfully edited information for {form.pharmacy_name.data}.')
-        return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
+        if (pharmacy.pharmacy_name == form.pharmacy_name.data and
+                pharmacy.pharmacy_phone_number == form.pharmacy_phone_number.data and
+                pharmacy.pharmacy_address_line_1 == form.pharmacy_address_line_1.data and
+                pharmacy.pharmacy_address_line_2 == form.pharmacy_address_line_2.data and
+                pharmacy.pharmacy_city == form.pharmacy_city.data and
+                pharmacy.pharmacy_state == form.pharmacy_state.data and
+                pharmacy.pharmacy_zipcode == form.pharmacy_zipcode.data and
+                pharmacy.pharmacy_notes == form.pharmacy_notes.data):
+            flash(f'You have made no changes to {form.pharmacy_name.data}')
+            return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
+        else:
+            pharmacy.pharmacy_name=form.pharmacy_name.data
+            pharmacy.pharmacy_phone_number=form.pharmacy_phone_number.data
+            pharmacy.pharmacy_address_line_1=form.pharmacy_address_line_1.data
+            pharmacy.pharmacy_address_line_2=form.pharmacy_address_line_2.data
+            pharmacy.pharmacy_city=form.pharmacy_city.data
+            pharmacy.pharmacy_state=form.pharmacy_state.data
+            pharmacy.pharmacy_zipcode=form.pharmacy_zipcode.data
+            pharmacy.pharmacy_notes=form.pharmacy_notes.data
+            db.session.commit()
+            flash(f'You have successfully edited information for {form.pharmacy_name.data}')
+            return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
     elif request.method == 'GET':
         form.pharmacy_name.data = pharmacy.pharmacy_name
         form.pharmacy_phone_number.data = pharmacy.pharmacy_phone_number
