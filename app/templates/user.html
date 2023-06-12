@@ -23,7 +23,15 @@
         
         <div class="reminder-container">
             <h2 class="reminders-title">Reminders</h2>
-            <div class="reminders">Reminders go here.</div>
+
+            {% if reminders %} 
+                <ul class="reminders">{%- for reminder in reminders -%} 
+                    <li>{{ reminder["name"] }} runs out on {{reminder["runs_out_date"]}}</li>
+                    {% endfor %} 
+                </ul>
+            {% else %} 
+                <p class="reminders">You have no reminders at the moment</p>
+            {% endif %} 
         </div>
         <div class="short-term-container">
             <h2 class="short-term-title">Short-term Medications</h2>
@@ -49,7 +57,6 @@
                     {% endfor %}
                     </tbody>
             </table>
-          
         </div>
         <div class="long-term-container">
             <h2 class="long-term-title">Long-term Medications</h2>

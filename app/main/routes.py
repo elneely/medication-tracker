@@ -21,8 +21,9 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = EmptyForm()
     medications = current_user.medication_list().all()
+    reminders = current_user.refill_list()
     return render_template('user.html', title="Summary", 
-                           user=user, medications=medications, form=form)
+                           user=user, medications=medications, form=form, reminders=reminders)
 
 @bp.route('/user/<username>/user_profile', methods=['GET', 'POST'])
 @login_required

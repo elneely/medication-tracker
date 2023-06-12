@@ -223,10 +223,6 @@ nav a:hover {
     display: none;
 }
 
-#cancel-manage-meds-btn {
-    display: none;
-}
-
 /* Table styles */
 
 td {
@@ -358,6 +354,15 @@ tbody tr:nth-child(odd) {
     margin-left: 25px;
     margin-right: 25px;
 } 
+
+.reminder-container ul {
+    list-style: inside;
+    padding-left: 0;
+}
+
+.reminder-container ul {
+    margin-bottom: 0px;
+}
 
 /* Profile page */
 

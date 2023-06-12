@@ -1,4 +1,5 @@
 from time import time
+from datetime import datetime, timedelta
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
@@ -65,6 +66,20 @@ class User(UserMixin, db.Model):
         for medication in my_medications:
             medication_choices.append(medication.id)
         return medication_choices
+
+    def refill_list(self):
+        medications = self.medication_list().all()
+        reminders = []
+        for medication in medications:
+            present = datetime.now()
+            if medication.reminder == True:
+                delta = timedelta(days=medication.length)
+                reminder_days = timedelta(days=medication.reminder_length)
+                run_out_date = medication.last_filled + delta
+                if (run_out_date - reminder_days) <= present.date():
+                    converted_run_out_date = run_out_date.strftime("%B %d, %Y")
+                    reminders.append({"name": medication.medication_name, "runs_out_date": converted_run_out_date})
+        return reminders
 
     def pharmacy_list(self):
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
