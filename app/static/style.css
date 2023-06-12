@@ -387,3 +387,57 @@ tbody tr:nth-child(odd) {
 #cancel-delete-profile-btn {
     display: none;
 }
+
+/* Help page */
+
+
+.accordion .help-section {
+    position: relative;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.accordion .section-label {
+    position: relative;
+}
+
+.accordion .section-label::before {
+    content: '+';
+    color: black;
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+
+}
+.accordion .section-container {
+    position: relative;
+    display: none;
+    text-align: justify;
+    overflow: hidden;
+    margin: 0px 25px;
+    transition: 0.5s;
+}
+
+.accordion .help-section.active .section-container {
+    display: block;
+}
+
+.accordion .help-section.active .section-label::before {
+    content: '-';
+}
+
+.accordion h2 {
+    background-color: rgb(245, 207, 158);
+}
+
+
+.sub-section-container {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+/* this is purely to see where the field names are - don't leave it this way */
+
+.field-name-help {
+    color:blue;
+}

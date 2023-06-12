@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %}
-<h1 class="header">Welcome to the Medication Tracker!</h1>
+<h1 class="header">Welcome to the 5W Medication Tracker!</h1>
 
 {% endblock %} 
 
@@ -16,5 +16,16 @@
 {% endblock %} 
 
 {% block content %} 
-    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.register') }}">register</a> to continue.
+<p> Welcome to the 5W Medication tracker, where you can keep track of 
+    <ul>
+        <li><strong>What</strong> medications you are taking</li>
+        <li><strong>Where</strong> you fill your medications</li>
+        <li><strong>Who</strong> prescribed your medications</li>
+        <li><strong>When</strong> you should take your medications</li>
+        <li><strong>Why</strong> you are taking these medications</li>
+    </ul>
+    and a variety of other pieces of information that you might find useful!
+</p>
+<p>If you have any questions, please feel free to consult the <a href="{{ url_for('main.help') }}">help page</a> for more information. 
+    Otherwise, please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.register') }}">register</a> to continue.</p>
 {% endblock %} 

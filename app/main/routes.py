@@ -15,6 +15,13 @@ def index():
         return redirect(url_for('main.user', username=current_user.username))
     return render_template('index.html', title='Home')
 
+@bp.route('/help')
+def help():
+    if current_user.is_authenticated:
+        user = User.query.filter_by(username=current_user.username).first_or_404()
+        return render_template('help.html', title="Help page", user=user)
+    return render_template('help.html', title="Help page")
+
 @bp.route('/user/<username>')
 @login_required
 def user(username):

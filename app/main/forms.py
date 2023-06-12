@@ -46,7 +46,7 @@ class AddMedicationForm(FlaskForm):
     frequency = StringField('Frequency: ', validators=[Length(max=64)])
     prescription_date = DateField('Prescription Date: ', validators=[Optional()])
     last_filled = DateField('Last Filled: ', validators=[Optional()])
-    short_term = BooleanField('Short term medication?')
+    short_term = BooleanField('Short-term medication?')
     length = IntegerField('Length of prescription: ', widget=TextInput(), validators=[Optional()])
     reminder = BooleanField('Refill reminders on?')
     reminder_length = IntegerField('Please remind me ', widget=TextInput(), validators=[NumberRange(min=0, max=365),Optional()])   
