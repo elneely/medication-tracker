@@ -24,7 +24,15 @@
 </div></p>
 <hr>
 <p><div id="refill-info-summary">
-    <p>Placeholder for refill reminder info.</p>
+    Refill Reminders:
+    {% if reminders %} 
+        <ul>
+            {% for reminder in reminders %} 
+                <li><a href="{{ url_for('main.medication', username=current_user.username, medication_id=reminder['id']) }}">{{ reminder["name"] }}</a>, {{ reminder["reminder_length"] }} days in advance</li>
+            {% endfor %}     
+        </ul>
+    {% else %}<p>You have not set any refill reminders</p>
+    {% endif %} 
 </div></p>
  <hr>
 

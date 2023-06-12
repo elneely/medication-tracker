@@ -30,6 +30,7 @@ def user(username):
 def user_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     form = DeleteProfileForm()
+    reminders = current_user.refill_list()
     if form.validate_on_submit():
         if form.delete_confirmation.data == 'delete-yes' and form.extra_confirmation.data == 'certain-yes':
             """
@@ -48,7 +49,7 @@ def user_profile(username):
         elif form.delete_confirmation.data == 'delete-no' or form.extra_confirmation.data == 'certain-no':
             flash('If you want to delete your account, you must confirm twice.')
     return render_template('user_profile.html', title="User Profile", 
-                           user=user, form=form)
+                           user=user, form=form, reminders=reminders)
 
 @bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
 @login_required

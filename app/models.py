@@ -78,7 +78,7 @@ class User(UserMixin, db.Model):
                 run_out_date = medication.last_filled + delta
                 if (run_out_date - reminder_days) <= present.date():
                     converted_run_out_date = run_out_date.strftime("%B %d, %Y")
-                    reminders.append({"name": medication.medication_name, "runs_out_date": converted_run_out_date})
+                    reminders.append({"id": medication.id, "name": medication.medication_name, "reminder_length": medication.reminder_length, "runs_out_date": converted_run_out_date})
         return reminders
 
     def pharmacy_list(self):
