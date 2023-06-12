@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header %} 
-    <h1 class="header">Detailed Medication Information - {{ medication.medication_name }}</h1>
+    <h1 class="header">Detailed Medication Information</h1>
 {% endblock %} 
 
 {% block notifications %} 
@@ -17,7 +17,7 @@
 {% block content %} 
     
 <p><div id="medication-info-summary">
-    <p>{{ medication.medication_name }} {% if medication.brand_name %}({{ medication.brand_name }}){% endif %}</p>
+    <h2>{{ medication.medication_name }} {% if medication.brand_name %}({{ medication.brand_name }}){% endif %}</h2>
     <p>{% if medication.dose and medication.frequency %} Dose: {{ medication.dose }}, {{ medication.frequency }}
         {% elif medication.dose %}{{ medication.dose }}
         {% elif medication.frequency %}{{ medication.frequency}}{% endif %} </p>
@@ -25,17 +25,19 @@
         {% elif medication.length and not medication.short_term %}Prescription Length: {{ medication.length }} days (Long-term medication){% endif %}
     </p>
     <p>{% if medication.reason %}Reason for taking: {{ medication.reason }}{% endif %}</p>
-    <p>{% if medication.doctor_id is integer and medication.prescription_date %}Prescribed by Dr. {{ medication.prescribing_doctor_name() }} on {{ medication.prescription_date.month }}-{{ medication.prescription_date.day }}-{{ medication.prescription_date.year}}
+    <p>{% if medication.doctor_id is integer and medication.prescription_date %}Prescribed by Dr. {{ medication.prescribing_doctor_name() }} on {{ medication.prescription_date.strftime("%B %d, %Y") }}
         {% elif medication.doctor_id is integer and not medication.prescription_date %}Prescribed by Dr. {{ medication.prescribing_doctor_name() }}
-        {% elif medication.prescription_date and not medication.doctor_id is not integer %}Prescribed on {{ medication.prescription_date }}{% endif %}  
+        {% elif medication.prescription_date and not medication.doctor_id is not integer %}Prescribed on {{ medication.prescription_date.strftime("%B %d, %Y") }}{% endif %}  
     </p>
-    <p>{% if medication.pharmacy_id is integer and medication.last_filled %}Last filled at {{ medication.filling_pharmacy() }} on {{ medication.last_filled.month }}-{{ medication.last_filled.day }}-{{medication.last_filled.year }}
+    <p>{% if medication.pharmacy_id is integer and medication.last_filled %}Last filled at {{ medication.filling_pharmacy() }} on {{ medication.last_filled.strftime("%B %d, %Y") }}
         {% elif medication.pharmacy_id is integer and not medication.last_filled %}Last filled at {{ medication.filling_pharmacy() }}
-        {% elif medication.last_filled and medication.pharmacy_id is not integer %}Last filled on {{ medication.last_filled}}{% endif %}
+        {% elif medication.last_filled and medication.pharmacy_id is not integer %}Last filled on {{ medication.last_filled.strftime("%B %d, %Y")}}{% endif %}
     </p>
-    <p>{% if medication.refills_remaining and medication.refills_expiration %}Refills remaining: {{ medication.refills_remaining }}, Refills expire: {{ medication.refills_expiration.month }}-{{ medication.refills_expiration.day }}-{{ medication.refills_expiration.year }}
-        {% elif medication.refills_remaining %}Refills remaining: {{ medication.refills_remaining }}
-        {% elif medication.refills_expiration %}Refills expire: {{ medication.refills_expiration.month }}-{{ medication.refills_expiration.day }}-{{ medication.refills_expiration.year }}{% endif %}</p>
+    <p>{% if medication.refills_remaining and medication.refills_expiration %}
+        Refills remaining: {{ medication.refills_remaining }}
+        <p>Refills expire: {{ medication.refills_expiration.strftime("%B %d, %Y") }}
+        {% elif medication.refills_remaining %}Refills remaining: {{ medication.refills_remaining }}</p>
+        {% elif medication.refills_expiration %}Refills expire: {{ medication.refills_expiration.strftime("%B %d, %Y") }}{% endif %}</p>
     <p>Refill reminders {% if medication.reminder %}on - remind {{medication.reminder_length }} days in advance {% else %}off{% endif %}</p>
     <p>{% if medication.medication_notes %}Notes: {{ medication.medication_notes }}{% endif %}</p>
 </div></p>
