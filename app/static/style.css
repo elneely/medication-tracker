@@ -390,7 +390,13 @@ tbody tr:nth-child(odd) {
 
 /* Help page */
 
-
+.accordion h2 {
+    padding-left: 5px;
+}
+/*
+.accordion h3 {
+    font-weight: normal;
+}*/
 .accordion .help-section {
     position: relative;
     margin-left: 25px;
@@ -416,13 +422,18 @@ tbody tr:nth-child(odd) {
     text-align: justify;
     overflow: hidden;
     margin: 0px 25px;
-    transition: 0.5s;
+
 }
+ 
 
 .accordion .help-section.active .section-container {
     display: block;
 }
-
+/*
+.accordion .help-section.active .section-label {
+    font-weight:bold;
+}
+*/
 .accordion .help-section.active .section-label::before {
     content: '-';
 }
