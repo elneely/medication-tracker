@@ -440,5 +440,6 @@ tbody tr:nth-child(odd) {
 /* this is purely to see where the field names are - don't leave it this way */
 
 .field-name-help {
-    color:blue;
+    color:rgb(8, 82, 124);
+    font-weight: bold;
 }
