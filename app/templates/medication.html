@@ -25,12 +25,12 @@
         {% elif medication.length and not medication.short_term %}Prescription Length: {{ medication.length }} days (Long-term medication){% endif %}
     </p>
     <p>{% if medication.reason %}Reason for taking: {{ medication.reason }}{% endif %}</p>
-    <p>{% if medication.doctor_id is integer and medication.prescription_date %}Prescribed by Dr. {{ medication.prescribing_doctor_name() }} on {{ medication.prescription_date.strftime("%B %d, %Y") }}
-        {% elif medication.doctor_id is integer and not medication.prescription_date %}Prescribed by Dr. {{ medication.prescribing_doctor_name() }}
+    <p>{% if medication.doctor_id is integer and medication.prescription_date %}Prescribed by <a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=medication.doctor_id) }}">Dr. {{ medication.prescribing_doctor_name() }}</a> on {{ medication.prescription_date.strftime("%B %d, %Y") }}
+        {% elif medication.doctor_id is integer and not medication.prescription_date %}Prescribed by <a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=medication.doctor_id) }}">Dr. {{ medication.prescribing_doctor_name() }}</a>
         {% elif medication.prescription_date and not medication.doctor_id is not integer %}Prescribed on {{ medication.prescription_date.strftime("%B %d, %Y") }}{% endif %}  
     </p>
-    <p>{% if medication.pharmacy_id is integer and medication.last_filled %}Last filled at {{ medication.filling_pharmacy() }} on {{ medication.last_filled.strftime("%B %d, %Y") }}
-        {% elif medication.pharmacy_id is integer and not medication.last_filled %}Last filled at {{ medication.filling_pharmacy() }}
+    <p>{% if medication.pharmacy_id is integer and medication.last_filled %}Last filled at <a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=medication.pharmacy_id) }}">{{ medication.filling_pharmacy() }}</a> on {{ medication.last_filled.strftime("%B %d, %Y") }}
+        {% elif medication.pharmacy_id is integer and not medication.last_filled %}Last filled at <a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=medication.pharmacy_id) }}">{{ medication.filling_pharmacy() }}</a>
         {% elif medication.last_filled and medication.pharmacy_id is not integer %}Last filled on {{ medication.last_filled.strftime("%B %d, %Y")}}{% endif %}
     </p>
     <p>{% if medication.refills_remaining and medication.refills_expiration %}

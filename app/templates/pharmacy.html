@@ -31,6 +31,17 @@
         {% endif %}{% if pharmacy.pharmacy_zipcode %}{{ pharmacy.pharmacy_zipcode }}{% endif %}</p>
         
     <p>{% if pharmacy.pharmacy_notes %}Notes: {{ pharmacy.pharmacy_notes }}{% endif %}</p>
+    <p>{% if medications %}Prescribed medications:
+        <ul>
+        {% for medication in medications %}<li><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
+        </li>{% endfor %} 
+        </ul>
+        {% else %}<p>You have no prescribed medications listed for this pharmacy.</p>
+        {% endif %} 
+    </p>
+
+        
+    <hr>
 </div></p>
 
 <a href="{{ url_for('main.edit_pharmacy', username=current_user.username, pharmacy_id=pharmacy.id) }}"><button id="edit-pharmacy-btn" type="button">Edit Information</button></a><button id="delete-pharmacy-btn">Delete Pharmacy</button>

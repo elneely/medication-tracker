@@ -31,6 +31,17 @@
         {% endif %}{% if doctor.doctor_zipcode %}{{ doctor.doctor_zipcode }}{% endif %}</p>
         
     <p>{% if doctor.doctor_notes %}Notes: {{ doctor.doctor_notes }}{% endif %}</p>
+    <p>{% if medications %}Prescribed medications:
+        <ul>
+        {% for medication in medications %}<li><a href="{{ url_for('main.medication', username=current_user.username, medication_id=medication.id) }}">{{ medication.medication_name }}</a>
+        </li>{% endfor %} 
+        </ul>
+        {% else %}<p>You have no prescribed medications listed for this doctor.</p>
+        {% endif %} 
+    </p>
+
+        
+    <hr>
 </div></p>
 
 <a href="{{ url_for('main.edit_doctor', username=current_user.username, doctor_id=doctor.id) }}"><button id="edit-doctor-btn" type="button">Edit Information</button></a><button id="delete-doctor-btn">Delete Doctor</button>
@@ -44,6 +55,7 @@
             {% endfor %} 
         </p>
     </div>
+
     <div class = "button-container">
         <div class = "inner-button">{{ form.submit(id="delete-doctor-submit") }}</div>
         <div class = "inner-button"><button id="cancel-delete-doctor-btn" type="button">Cancel</button></div>

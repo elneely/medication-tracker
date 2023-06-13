@@ -306,6 +306,11 @@ def doctor(username, doctor_id):
     user = User.query.filter_by(username=username).first_or_404()
     doctor = Doctor.query.filter_by(id=doctor_id).first_or_404()
     name = doctor.doctor_last_name
+    prescribed_medications = []
+    medications = current_user.medication_list().all()
+    for medication in medications:
+        if medication.doctor_id == doctor.id:
+            prescribed_medications.append(medication)
     referrer = request.referrer
     form = DeleteDoctorForm()
     if form.validate_on_submit():
@@ -318,7 +323,7 @@ def doctor(username, doctor_id):
             db.session.commit()
             flash(f'Dr. {name} has been deleted')
             return redirect(url_for('main.doctor_list', username=username))
-    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
+    return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form, medications=prescribed_medications)
 
 @bp.route('/user/<username>/doctor/<doctor_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -402,6 +407,11 @@ def pharmacy(username, pharmacy_id):
     user = User.query.filter_by(username=username).first_or_404()
     pharmacy = Pharmacy.query.filter_by(id=pharmacy_id).first_or_404()
     name = pharmacy.pharmacy_name
+    prescribed_medications = []
+    medications = current_user.medication_list().all()
+    for medication in medications:
+        if medication.pharmacy_id == pharmacy.id:
+            prescribed_medications.append(medication)
     referrer = request.referrer
     form = DeletePharmacyForm()
     if form.validate_on_submit():
@@ -414,7 +424,7 @@ def pharmacy(username, pharmacy_id):
             db.session.commit()
             flash(f'{name} has been deleted')
             return redirect(url_for('main.pharmacy_list', username=username))
-    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form)
+    return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form, medications=prescribed_medications)
 
 @bp.route('/user/<username>/pharmacy/<pharmacy_id>/edit', methods=['GET', 'POST'])
 @login_required
