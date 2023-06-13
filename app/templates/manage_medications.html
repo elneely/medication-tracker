@@ -38,8 +38,8 @@
                             <td>{% if medication.dose %}{{ medication.dose }}{% endif %}</td>
                             <td>{% if medication.length %}{{ medication.length }} days{% endif %}</td>
                             <td>{% if medication.refills_remaining %}{{ medication.refills_remaining }}{% endif %}</td>
-                            <td>{% if medication.doctor_id is integer %}{{ medication.prescribing_doctor_name() }}{% endif %}</td>
-                            <td>{% if medication.pharmacy_id is integer %}{{ medication.filling_pharmacy() }}{% endif %}</td>
+                            <td>{% if medication.doctor_id is integer %}<a href="{{ url_for('main.doctor', username=current_user.username, doctor_id=medication.doctor_id) }}">{{ medication.prescribing_doctor_name() }}</a>{% endif %}</td>
+                            <td>{% if medication.pharmacy_id is integer %}<a href="{{ url_for('main.pharmacy', username=current_user.username, pharmacy_id=medication.pharmacy_id) }}">{{ medication.filling_pharmacy() }}</a>{% endif %}</td>
                         </tr>
                     {% endfor %}
             </tbody>

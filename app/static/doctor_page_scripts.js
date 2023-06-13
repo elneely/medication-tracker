@@ -13,6 +13,7 @@ deleteDoctorButton.addEventListener("click", () => {
     submitButton.style.display = "block";
     submitButton.disabled = true;
     cancelButton.style.display = "block";
+    deleteDoctorButton.style.display = "none";
 });
 
 deleteConfirmation.addEventListener("change", (e) => {

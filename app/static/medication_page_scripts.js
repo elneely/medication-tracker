@@ -11,6 +11,7 @@ deleteMedicationButton.addEventListener("click", () => {
     submitButton.style.display = "block";
     submitButton.disabled = true;
     cancelButton.style.display = "block";
+    deleteMedicationButton.style.display = "none";
 });
 
 deleteConfirmation.addEventListener("change", (e) => {

@@ -36,7 +36,7 @@
 </div></p>
  <hr>
 
-<a href="{{ url_for('main.edit_profile', username=current_user.username) }}"><button id="edit-profile-btn" type="button">Edit Information</button></a><button id="delete-profile-btn">Delete Profile</button>
+<a href="{{ url_for('main.edit_profile', username=current_user.username) }}"><button id="edit-profile-btn" type="button">Edit Information</button></a><button id="delete-profile-btn">Delete Account</button>
 <form action="" id="delete-doctor-form" method="post">
     {{ form.hidden_tag() }}
     <div id="delete-confirmation-div">

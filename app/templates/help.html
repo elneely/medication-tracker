@@ -7,209 +7,360 @@
 {% block content %} 
 <div class="accordion">
 
-    <h2>Medication Questions</h2>
+    <h2 class="help-heading">User Questions</h2>
+    <div class="help-section">
+        <h3 class="section-label">How do I create an account?</h3>
+        <div class="section-container">
+            You can register for an account <a href="{{ url_for('auth.register') }}">here</a>.
+        </div>
+
+        <h3 class="section-label">How do I access my account information?</h3>
+        <div class="section-container">
+            Your account information can be accessed by navigating to your {% if user %}
+            <a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
+                profile page{% if user %}</a>{% endif %}. 
+        </div>
+
+        <h3 class="section-label">How can I change my account information?</h3>
+        <div class="section-container">
+            You can change your username, display name, email, and password from your {% if user %}
+            <a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
+                profile page{% if user %}</a>{% endif %}. 
+        </div>
+
+        <h3 class="section-label">How do I change my password?</h3>
+        <div class="section-container">
+            You can change your password from your {% if user %}
+            <a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
+                profile page{% if user %}</a>{% endif %} by clicking the "Change Password" button. 
+        </div>
+    
+        <h3 class="section-label">Help!  I've forgotten my password!</h3>
+        <div class="section-container">
+            You can request a password reset <a href="{{ url_for('auth.reset_password_request') }}">here</a>.
+        </div>
+
+        <h3 class="section-label">How do I delete my account?</h3>
+        <div class="section-container">
+            Go to your {% if user %}<a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
+                profile page{% if user %}</a>{% endif %}and press the "Delete Account" button. Two stages
+                of confirmation will appear; if you definitely want to delete your account just confirm twice and 
+                press the delete button. Your account and all of its information (medications, doctors, and pharmacies) 
+                will be deleted. 
+                
+                <p><strong>Note: this action cannot be undone.</strong></p>
+        </div>
+    </div>
+
+    <h2 class="help-heading">Medication Questions</h2>
 
     <div class="help-section">
         <h3 class="section-label">How do I add a medication?</h3>
         <div class="section-container">
-            Once you have navigated to the {% if user %}<a class="help-link" href="{{ url_for('main.add_medication', username=current_user.username) }}">Add Medication</a>{% else %}Add Medication{% endif %} page you will find a form 
-                where you can enter a great deal of information about your medication.
-                If it seems overwhelming, just remember that the <strong>only</strong> 
-                required information for a medication is its name. Anything else is 
+            You can add a medication by using the 
+                {% if user %}<a class="help-link" href="{{ url_for('main.add_medication', username=current_user.username) }}">{% endif %}
+                Add Medication{% if user %}</a>{% endif %} link in the menu.  The form allows you to enter
+                a great deal of information about your medication - if it seems overwhelming, just remember 
+                that the <strong>only</strong> required information for a medication is its name. Anything else is 
                 optional!
-            <p>So what information can you store on the form?</p>
-            <div class="sub-section-container">
-                <span class="field-help">
-                        <p><span class="field-name-help">Name:</span> The only required field on this form, this is for the 
-                        medication's name. Note that this does not have to be unique, 
-                        in case you have two different dosages of the same medication for some 
-                        reason, say. However, if you have two medications with the same name, 
-                        you might want to note the difference between them somewhere.
-                    </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Brand name:</span> Sometimes generic 
-                    medication names are long and hard to spell or pronounce. If you are in this 
-                    situation, you might want to add a brand name, which is usually shorter and easier to remember. 
-                    This is also helpful if the medical staff is inconsistent about which
-                    name they use; you won't be stuck trying to remember that Synthroid
-                    is Levothyroxine.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Dose:</span> What is the dosage of your medication? e.g., 500 mg, .75 mcg, 5mL,
-                    2 teaspoons, etc.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Frequency:</span> How often do you need to take this medication? e.g., Twice
-                    a day, Once at bedtime, Once every 7 days, etc.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Length:</span> How long is this prescription? If you are on a long-term medication 
-                    (sometimes called a maintenance medication) this could be 90 days. If not, it
-                    can range anywhere from 30 days to 1 day (although you probably don't need
-                    to enter it in the medication tracker if you only take it for one day, unless
-                    you really want to!)
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Short-term medication?:</span> On your user page your medications are divided into short-term 
-                    and long-term medications. This checkbox allows you to specify a medication 
-                    is short-term. If it is not checked, the medication is assumed to be 
-                    long-term.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Reason:</span> It is easy to lose track of what medication you are taking for what
-                    purpose. This allows you to make a little note to remind yourself of why you 
-                    are taking this medication.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Add Doctor:</span> This allows you to record what doctor has prescribed your medication,
-                    which can be handy to know if you have run out of refills! You can either select 
-                    a doctor you have previously used or you can add a new doctor. New doctors will
-                    automatically be added to your Doctor List. If you change your mind about adding 
-                    a doctor, just press the Don't Add Doctor button!
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Add Pharmacy:</span> This allows you to keep track of what pharmacy you filled your 
-                    prescription at. Just as for adding a doctor, you can select a pharmacy you have
-                    already used or you can add a new one; new ones will be added to your Pharmacy List. 
-                    If you change your mind about adding a pharmacy, press the Don't Add Pharmacy button 
-                    and it will go away!
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Prescription Date:</span> This is the date your doctor prescribed your medication. Not every
-                    medication label includes this information, but you can record it here if they do.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Last Filled:</span> This helps you keep track of when you most recently filled this 
-                    prescription. Note that if you don't keep this up to date, your refill reminders will 
-                    stop being helpful!
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Prescription Expiration Date:</span> Prescriptions don't last forever, so this helps you keep 
-                    track of when your prescription or refills expire. Sometimes your medication label will 
-                    also include when the medication itself expires (i.e., when it is past the date 
-                    you should be using it.) For most of us, the expiration date of the prescription is 
-                    more useful to keep track of, since you can't refill a prescription that has expired.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Number of refills remaining:</span> A crucial piece of information for long-term medications, 
-                    here you can keep track of how many refills you have left.
-                </p></span> 
-                <span class="field-help">
-                    <p><span class="field-name-help">Refill reminders on?:</span> If you would like to be reminded of when you need to refill 
-                    this medication, simply check this box and enter how many days in advance you wish to be 
-                    reminded. (3 days before you run out? 7 days?) If you do wish to be reminded, 
-                    you will also need to enter when the medication was last filled, how long the 
-                    prescription is for, and how many days in advance you want to be reminded. e.g., if 
-                    your prescription is 30 days long and you want to be reminded 4 days before you 
-                    run out, then your reminders will start 26 days after you last filled it.
-                </p></span> 
-                <span class="field-help"></span>
-                <p><span class="field-name-help">Notes:</span> This is for anything else you wish to record about this medication. Do you tend 
-                    to have side-effects from it? Do you need to take it with food or wait 30 minutes 
-                    before you eat? Anything is fair game for this field!
-                </p></span> 
-            </div> 
+            <p>So what information can you store about your medication? Click the sections below for more information 
+                on each part of the form.
+            </p>
+            <ul>
+                <li class="sub-label"><h4>Basic Information</h4></li>
+                    <div class="sub-section-container">
+                        <span class="field-help">
+                                <p><span class="field-name-help">Name:</span> The only required field on this form, this is for the 
+                                medication's name. Note that this does not have to be unique 
+                                in case you have two different dosages of the same medication for some 
+                                reason, say. However, if you have two medications with the same name 
+                                you might want to note the difference between them somewhere.
+                            </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Brand name:</span> Sometimes generic 
+                            medication names are long and hard to spell or pronounce. If you have one of them, 
+                            you might want to add a brand name since they are usually shorter and easier to remember. 
+                            This is also helpful if the medical staff is inconsistent about which
+                            name they use; you won't be stuck trying to remember that Synthroid
+                            is Levothyroxine.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Dose:</span> What is the dosage of your medication? e.g., 500 mg, .75 mcg, 5mL,
+                            2 teaspoons, etc.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Frequency:</span> How often do you need to take this medication? e.g., Twice
+                            a day, Once at bedtime, Once every 7 days, etc.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Length:</span> How long is this prescription? If you are on a long-term medication 
+                            (sometimes called a maintenance medication) this could be 90 days. If not, it
+                            can range anywhere from 30 days to 1 day (although you probably don't need
+                            to enter it in the medication tracker if you only take it for a single day, unless
+                            you really want to!)
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Short-term medication?:</span> On your user page your medications are divided into short-term 
+                            and long-term medications. This checkbox allows you to specify a medication 
+                            is short-term. If it is not checked, the medication is assumed to be 
+                            long-term.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Reason:</span> It is easy to lose track of what medication you are taking for what
+                            purpose. This allows you to make a little note to remind yourself of why you 
+                            are taking this medication.
+                        </p></span> 
+                    </div>    
+                <li class="sub-label"><h4>Adding a Doctor or Pharmacy</h4></li>
+                    <div class="sub-section-container">
+                        <span class="field-help">
+                            <p><span class="field-name-help">Add Doctor:</span> This allows you to record what doctor has prescribed your medication,
+                            which can be handy to know if you have run out of refills! You can either select 
+                            a doctor you have previously used or you can add a new doctor. New doctors will
+                            automatically be added to your doctor contact list. If you change your mind about adding 
+                            a doctor, just press the Don't Add Doctor button!
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Add Pharmacy:</span> This allows you to keep track of what pharmacy you filled your 
+                            prescription at. Just as for adding a doctor, you can select a pharmacy you have
+                            already used or you can add a new one; new ones will be added to your pharmacy contact list. 
+                            If you change your mind about adding a pharmacy, press the Don't Add Pharmacy button 
+                            and it will go away!
+                        </p></span> 
+                    </div>
+                  
+                <li class="sub-label"><h4>Details</h4></li>    
+                    <div class="sub-section-container">
+                        <span class="field-help">
+                            <p><span class="field-name-help">Prescription Date:</span> This is the date your doctor prescribed your medication. Not every
+                            medication label includes this information, but you can record it here if they do.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Last Filled:</span> This helps you keep track of when you last filled this 
+                            prescription. Note that if you don't keep this up to date your refill reminders will 
+                            stop being helpful!
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Prescription Expiration Date:</span> Prescriptions don't last forever, so this helps you keep 
+                            track of when your prescription or refills expire. Sometimes your medication label will 
+                            also include when the medication itself expires (i.e., when it is past the date 
+                            you should be using it.) For most of us the expiration date of the prescription is 
+                            more useful to keep track of, since you can't refill a prescription that has expired.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Number of refills remaining:</span> A crucial piece of information for long-term medications, 
+                            here you can keep track of how many refills you have left.
+                        </p></span> 
+                        <span class="field-help">
+                            <p><span class="field-name-help">Refill reminders on?:</span> If you would like to be reminded of when you need to refill 
+                            this medication, simply check this box and enter how many days in advance you wish to be 
+                            reminded. (3 days before you run out? 7 days?) If you do wish to be reminded, 
+                            you will also need to enter when the medication was last filled and how long the 
+                            prescription is for. e.g., if your prescription is 30 days long and you want to be 
+                            reminded 4 days before you run out, then your reminders will start 26 days after 
+                            you last filled it.
+                        </p></span> 
+                        <span class="field-help"></span>
+                        <p><span class="field-name-help">Notes:</span> This is for anything else you wish to record about this medication. Do you tend 
+                            to have side-effects from it? Do you need to take it with food or wait 30 minutes 
+                            before you eat? Anything is fair game for this field!
+                        </p></span> 
+                    </div>
+            </ul>
         </div>
-    </div>
-
-    <div class="help-section">
-        <h3 class="section-label">How do I edit a medication?</h3>
+        <h3 class="section-label">How do I see detailed information for one of my medications?</h3>
         <div class="section-container">
-            First navigate to the page for the specific medication you wish to edit, by clicking on its link either on
-            your {% if user %}<a href="{{ url_for('main.user', username=current_user.username) }}">home page</a>
-            {% else %}home page{% endif %} 
-            or the {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">Manage Medications</a>{% else %}Manage Medications {% endif %} page.
+            While a summary of your medications appears on your {% if user %}<a href="{{ url_for('main.user', username=current_user.username) }}">{% endif %}home page{%- if user -%}</a>
+            {%- endif -%}, you can see all of the details for it by clicking on its name either there or on the 
+                {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page.  
         </div>
-    </div>
-    <div class="help-section">
+
+        <h3 class="section-label">How do I edit the information for one of my medications?</h3>
+        <div class="section-container">
+            Go to the page for the specific medication you wish to edit by clicking on its link either on 
+                your {% if user %}<a href="{{ url_for('main.user', username=current_user.username) }}">{% endif %}home page
+                {%- if user -%}</a>{% endif %} or on the 
+                {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page. Press the "Edit Information" button and you will be 
+                able to edit the information for this medication. For information on any of the form fields, please 
+                consult the information under "How do I add a medication?" 
+            
+            <p>Note: the edit medication page only allows you to choose a currently existing doctor or 
+                pharmacy, not add a new one. If you have changed to a new doctor or pharmacy, please add them 
+                first (via the 
+                {% if user %}<a href="{{ url_for('main.add_doctor', username=current_user.username) }}">{% endif %}Add Doctor
+                    {%- if user -%}</a>{% endif %} or 
+                    {% if user %}<a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">{% endif %}Add Pharmacy
+                    {%- if user -%}</a>{% endif %}
+                 pages) and then edit your medication.
+            </p>  
+            <p>You can also add a doctor or pharmacy to multiple medications at once via the 
+                {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page.</p>
+        </div>
+
         <h3 class="section-label">How do I delete a medication?</h3>
         <div class="section-container">
-            There should be content here.
-        </div>
-    </div>
-    <div class="help-section">
+            Go to the page for the specific medication you wish to edit by clicking on its link either on 
+                your {% if user %}<a href="{{ url_for('main.user', username=current_user.username) }}">{% endif %}home page
+                {%- if user -%}</a>{% endif %} or on the 
+                {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page. Press the "Delete Medication" button and a 
+                confirmation will appear; if you definitely want to delete the medication just confirm and press the delete button.
+            
+            <p>You can also delete multiple medications at once via the {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page.</p>
+            </div>
+    
         <h3 class="section-label">How do I use the Manage Medications page?</h3>
         <div class="section-container">
-            There should be content here.
+            The {% if user %}<a href="{{ url_for('main.manage_medications', username=current_user.username) }}">{% endif %}
+                Manage Medications{% if user %}</a>{% endif %} page allows you to perform certain actions on multiple 
+                medications at once. By checking the boxes next to the medications you wish to modify you can choose to change
+                 the doctor, change the pharmacy, or even delete the medications. (If you choose the "Delete Medications" option you 
+                 will need to confirm your choice before they are deleted.) You can select or deselect all medications by 
+                 checking the top box.
+            
+            <p>Note: this page only allows you to choose a currently existing doctor or 
+            pharmacy, not add a new one. If you have changed to a new doctor or pharmacy, please add them 
+            first (via the 
+            {% if user %}<a href="{{ url_for('main.add_doctor', username=current_user.username) }}">{% endif %}Add Doctor{%- if user -%}
+            </a>{% endif %} or 
+                {% if user %}<a href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">{% endif %}Add Pharmacy
+                {%- if user -%}</a>{% endif %}
+                pages) and then apply them to your medications.
+        </p>  
         </div>
-    </div>
-    <div class="help-section">
+   
         <h3 class="section-label">How do I set and use refill reminders?</h3>
         <div class="section-container">
-            There should be content here.
+            Refill reminders can be set either when you add a medication or when you edit it. If you would like to be 
+            reminded of when you need to refill a particular medication, simply check the appropriate box on the
+             form and enter how many days in advance you wish to be reminded. You will also need to enter when the 
+             medication was last filled and how long the prescription is for. Refill reminders will appear on your 
+             {% if user %}<a href="{{ url_for('main.user', username=current_user.username) }}">{% endif %}home page{%- if user -%}
+             </a>{% endif %} at the appropriate times. 
+
+             <p>While refill reminders can only be changed from the information page for a specific medication, you 
+                can view all of your refill reminders on your {% if user %}<a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
+                    profile page{% if user %}</a>{% endif %}.
+             </p>
         </div>
     </div>
-    <h2>Doctor Questions</h2>
+    <h2 class="help-heading">Doctor Questions</h2>
     <div class="help-section">
         <h3 class="section-label">How do I add a doctor?</h3>
         <div class="section-container">
-            There should be content here.
+            You can add a doctor by using the 
+                {% if user %}<a class="help-link" href="{{ url_for('main.add_doctor', username=current_user.username) }}">{% endif %}
+                Add Doctor{% if user %}</a>{% endif %} link in the menu or the "Add New Doctor" button on your {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}
+                doctor contact list {%- if user -%}</a>{% endif %}.  
+            
+                <p>You can store basic contact information for your doctor, along with any notes that 
+                    you have (whether for remembering that this is your dentist or reminding 
+                    yourself that there is no parking by their office - whatever you might find useful!) The only required field is 
+                    "Last name," although each of your doctors is required to have a unique name, so if you have two with the same last 
+                    name you might wish to provide a first name or some other notation to distinguish them. (If
+                    you have two doctors with the same first and last names, you will need to add some 
+                    notation to distinguish them since otherwise there is no way to keep track of 
+                    which one is which!)</p> 
         </div>
-    </div>
-    <div class="help-section">
+
+        <h3 class="section-label">How do I see detailed information for one of my doctors?</h3>
+        <div class="section-container">
+            While a summary of the contact information for all of your doctors appears on your 
+            {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}doctor contact list
+                    {%- if user -%}</a>{% endif %}, you can see detailed information on a specific doctor 
+                    simply by clicking on the doctor's name.    
+        </div>    
+
         <h3 class="section-label">How do I edit the information for one of my doctors?</h3>
         <div class="section-container">
-            There should be content here.
+            Go to the page for the specific doctor you wish to edit by clicking on its link on 
+            your {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}
+                doctor contact list{% if user %}</a>{% endif %}. Press the "Edit Information" button and you will be 
+            able to edit the information for this doctor. For information on any of the form fields, please 
+            consult the information under "How do I add a doctor?" 
+        
         </div>
-    </div>
-    <div class="help-section">
+        
         <h3 class="section-label">How do I delete a doctor?</h3>
         <div class="section-container">
-            There should be content here.
+            Go to the page for the specific doctor you wish to edit by clicking on its link on 
+            your {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}
+                doctor contact list{%- if user -%}</a>{% endif %}. Press the "Delete Doctor" button and a 
+            confirmation will appear; if you definitely want to delete the doctor just confirm and press the delete button.
+            
+            <p>If you still have the doctor listed on any of your medications, don't worry - the medications will
+                automatically be updated.
+            </p>
         </div>
-    </div>
-    <div class="help-section">
+    
         <h3 class="section-label">How do I view the contact page for all of my doctors?</h3>
         <div class="section-container">
-            There should be content here.
+            The contact page for your doctors can be viewed by using the 
+            {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}View Doctors
+                {%- if user -%}</a>{% endif %} link in the side menu.  
         </div>
     </div>
  
-    <h2>Pharmacy Questions</h2>
+    <h2 class="help-heading">Pharmacy Questions</h2>
     <div class="help-section">
         <h3 class="section-label">How do I add a pharmacy?</h3>
         <div class="section-container">
-            There should be content here.
+            You can add a pharmacy by using the 
+                {% if user %}<a class="help-link" href="{{ url_for('main.add_pharmacy', username=current_user.username) }}">{% endif %}
+                Add Pharmacy{% if user %}</a>{% endif %} link in the menu or the "Add New Pharmacy" button on your {% if user %}<a href="{{ url_for('main.doctor_list', username=current_user.username) }}">{% endif %}
+                pharmacy contact list{% if user %}</a>{% endif %}.  
+            
+                <p>You can store basic contact information about your pharmacy, along with any notes that 
+                    you have (whether for remembering that they are always busy at lunch time or 
+                    that this is a mail-in pharmacy - whatever you might find useful!) The only required 
+                    field is "name", although each of your pharmacies is required to have a unique name; if 
+                    you have two with the same name, you will need to provide some notation to distinguish them 
+                    (e.g. "Awesome Pharmacy (Main Street)") since otherwise there is no way to keep track of 
+                    which one is which!)</p> 
         </div>
-    </div>
-    <div class="help-section">
+    
+        <h3 class="section-label">How do I see detailed information for one of my pharmacies?</h3>
+        <div class="section-container">
+            While a summary of the contact information for all of your pharmacies appears on your 
+            {% if user %}<a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">{% endif %}pharmacy contact list
+                    {%- if user -%}</a>{% endif %}, you can see detailed information on a specific pharmacy 
+                    simply by clicking on the pharmacy's name.    
+        </div>   
+
         <h3 class="section-label">How do I edit the information for one of my pharmacies?</h3>
         <div class="section-container">
-            There should be content here.
+            Go to the page for the specific pharmacy you wish to delete by clicking on its link on 
+            your {% if user %}<a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">{% endif %}
+                pharmacy contact list {%- if user -%}</a>{% endif %}. Press the "Edit Information" button and you will be 
+                able to edit the information for this pharmacy. For information on any of the form fields, please 
+                consult the information under "How do I add a pharmacy?" 
         </div>
-    </div>
-    <div class="help-section">
+    
         <h3 class="section-label">How do I delete a pharmacy?</h3>
         <div class="section-container">
-            There should be content here.
+            Go to the page for the specific pharmacy you wish to delete by clicking on its link on 
+            your {% if user %}<a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">{% endif %}
+                pharmacy contact list{%- if user -%}</a>{% endif %}. Press the "Delete Pharmacy" button and a 
+            confirmation will appear; if you definitely want to delete the pharmacy just confirm and press the delete button.
+            
+            <p>If you still have the pharmacy listed on any of your medications, don't worry - the medications will
+                automatically be updated.
+            </p>
         </div>
-    </div>
-    <div class="help-section">
+    
         <h3 class="section-label">How do I view the contact page for all of my pharmacies?</h3>
         <div class="section-container">
-            There should be content here.
+            The contact page for your pharmacies can be viewed by using the 
+            {% if user %}<a href="{{ url_for('main.pharmacy_list', username=current_user.username) }}">{% endif %}View Pharmacies
+                {%- if user -%}</a>{% endif %} link in the side menu.  
         </div>
     </div>
     
-    <h2>User Questions</h2>
-    <div class="help-section">
-        <h3 class="section-label">How do I create an account?</h3>
-        <div class="section-container">
-            There should be content here.
-        </div>
-    </div>
-    <div class="help-section">
-        <h3 class="section-label">How do I change my password?</h3>
-        <div class="section-container">
-            There should be content here.
-        </div>
-    </div>
-    <div class="help-section">
-        <h3 class="section-label">Help!  I've forgotten my password!</h3>
-        <div class="section-container">
-            There should be content here.
-        </div>
-    </div>
+    
 </div>
 
 {% endblock %} 

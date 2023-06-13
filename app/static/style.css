@@ -3,6 +3,7 @@
 
 body {
     background-color: antiquewhite;
+    font-family: serif;
 }
 
 .container {
@@ -96,6 +97,7 @@ nav a {
 
 nav a:hover {
     background-color: cornflowerblue;
+    color:black;
    
 }
 /* Notifications and Errors */
@@ -393,49 +395,37 @@ tbody tr:nth-child(odd) {
 .accordion h2 {
     padding-left: 5px;
 }
-/*
-.accordion h3 {
-    font-weight: normal;
-}*/
+
 .accordion .help-section {
     position: relative;
     margin-left: 25px;
     margin-right: 25px;
+    display: none;
 }
 
+.accordion .help-heading:hover, 
+.accordion .section-label:hover,
+.accordion .sub-label:hover {
+    background-color: rgb(245, 183, 102);
+    
+}
 .accordion .section-label {
     position: relative;
 }
 
-.accordion .section-label::before {
-    content: '+';
-    color: black;
-    position: absolute;
-    top: 50%;
-    right: -5px;
-    transform: translateY(-50%);
 
-}
 .accordion .section-container {
     position: relative;
     display: none;
     text-align: justify;
-    overflow: hidden;
     margin: 0px 25px;
+}
 
+.accordion li {
+    list-style: none;
 }
- 
-
-.accordion .help-section.active .section-container {
-    display: block;
-}
-/*
-.accordion .help-section.active .section-label {
-    font-weight:bold;
-}
-*/
-.accordion .help-section.active .section-label::before {
-    content: '-';
+.accordion .sub-section-container {
+    display: none;
 }
 
 .accordion h2 {
