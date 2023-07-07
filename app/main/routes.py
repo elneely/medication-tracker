@@ -8,6 +8,7 @@ from app.main.forms import AddDoctorForm, AddMedicationForm, AddPharmacyForm, \
     EditProfileForm, EmptyForm, ManageMedicationsForm
 from app.main import bp
 
+# Home page for unauthenticated users and redirect for authenticated users
 @bp.route('/')
 @bp.route('/index')
 def index():
@@ -15,6 +16,7 @@ def index():
         return redirect(url_for('main.user', username=current_user.username))
     return render_template('index.html', title='Home')
 
+# Help page
 @bp.route('/help')
 def help():
     if current_user.is_authenticated:
@@ -22,6 +24,7 @@ def help():
         return render_template('help.html', title="Help page", user=user)
     return render_template('help.html', title="Help page")
 
+# Home page for authenticated users
 @bp.route('/user/<username>')
 @login_required
 def user(username):
@@ -32,6 +35,7 @@ def user(username):
     return render_template('user.html', title="Summary", 
                            user=user, medications=medications, form=form, reminders=reminders)
 
+# User profile page
 @bp.route('/user/<username>/user_profile', methods=['GET', 'POST'])
 @login_required
 def user_profile(username):
@@ -58,6 +62,7 @@ def user_profile(username):
     return render_template('user_profile.html', title="User Profile", 
                            user=user, form=form, reminders=reminders)
 
+# Edit profile page (to make changes to user info)
 @bp.route('/user/<username>/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile(username):
@@ -77,6 +82,7 @@ def edit_profile(username):
             new_name = user.username
             flash('Your changes have been saved')
             return redirect(url_for('main.user_profile', username=new_name))
+# Pre-fill the page with user info
     elif request.method == 'GET':
         form.username.data = user.username
         form.display_name.data = user.display_name
@@ -85,6 +91,7 @@ def edit_profile(username):
     return render_template('edit_profile.html', title="Edit Profile", 
                            user=user, form=form)
 
+# Manage medications page
 @bp.route('/user/<username>/manage_medications', methods=['GET', 'POST'])
 @login_required
 def manage_medications(username):
@@ -131,7 +138,7 @@ def manage_medications(username):
 
     return render_template('manage_medications.html', title="Manage Medications", user=user, medications=medications, form=form)
 
-
+# Add medication page
 @bp.route('/user/<username>/add_medication', methods=['GET', 'POST'])
 @login_required
 def add_medication(username):
@@ -139,8 +146,8 @@ def add_medication(username):
     form.doctor_list.choices = current_user.doctor_choices()
     form.pharmacy_list.choices = current_user.pharmacy_choices()
     
-# if there's a new doctor, need to make the new doctor and submit it but then use
-# that new id number for the doctor id
+# if there's a new doctor, need to make the new doctor and submit it in order 
+# to use that new id number for the doctor id
 # if not, can just take it from form
 
     if form.validate_on_submit():
@@ -200,6 +207,7 @@ def add_medication(username):
         return redirect(url_for('main.user', username=username))
     return render_template('add_medication.html', title='Add Medication', user=user, form=form)
 
+# Detailed info page for a specific medication
 @bp.route('/user/<username>/medication/<medication_id>', methods=['GET', 'POST'])
 @login_required
 def medication(username, medication_id):
@@ -215,6 +223,7 @@ def medication(username, medication_id):
         return redirect(url_for('main.manage_medications', username=username))
     return render_template('medication.html', title="Medication Information", user=user, medication=medication, form=form)
 
+# Edit medication page
 @bp.route('/user/<username>/medication/<medication_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_medication(username, medication_id):
@@ -250,6 +259,7 @@ def edit_medication(username, medication_id):
         db.session.commit()
         flash(f'Any changes you have made to {form.medication_name.data} have been saved')
         return redirect(url_for('main.medication', username=username, medication=medication, medication_id=medication.id))
+# Pre-fill the form with info for the medication
     elif request.method == 'GET':
         form.medication_name.data = medication.medication_name
         form.brand_name.data = medication.brand_name
@@ -267,11 +277,11 @@ def edit_medication(username, medication_id):
         form.medication_notes.data=medication.medication_notes
     return render_template('edit_medication.html', title="Edit Medication", user=user, medication=medication, form=form)
 
+# Add doctor page
 @bp.route('/user/<username>/add_doctor', methods=['GET', 'POST'])
 @login_required
 def add_doctor(username):
     user = User.query.filter_by(username=username).first_or_404()
-    referrer = request.referrer
     form = AddDoctorForm()
     if form.validate_on_submit():
         doctor = Doctor(
@@ -292,6 +302,7 @@ def add_doctor(username):
         return redirect(url_for('main.doctor_list', username=username))
     return render_template('add_doctor.html', title='Add Doctor', user=user, form=form)
 
+# Contact list for doctors 
 @bp.route('/user/<username>/doctor_list', methods=['GET'])
 @login_required
 def doctor_list(username):
@@ -300,6 +311,7 @@ def doctor_list(username):
     doctors = current_user.doctor_list().all()
     return render_template('doctor_list.html', title="Doctor List", user=user, doctors=doctors, form=form)
 
+# Detailed info for a specific doctor
 @bp.route('/user/<username>/doctor/<doctor_id>', methods=['GET', 'POST'])
 @login_required
 def doctor(username, doctor_id):
@@ -311,7 +323,6 @@ def doctor(username, doctor_id):
     for medication in medications:
         if medication.doctor_id == doctor.id:
             prescribed_medications.append(medication)
-    referrer = request.referrer
     form = DeleteDoctorForm()
     if form.validate_on_submit():
         if form.delete_confirmation.data == "delete-yes":
@@ -325,6 +336,7 @@ def doctor(username, doctor_id):
             return redirect(url_for('main.doctor_list', username=username))
     return render_template('doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form, medications=prescribed_medications)
 
+# Edit doctor page
 @bp.route('/user/<username>/doctor/<doctor_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_doctor(username, doctor_id):
@@ -357,6 +369,7 @@ def edit_doctor(username, doctor_id):
             db.session.commit()
             flash(f'You have successfully edited information for Dr. {form.doctor_last_name.data}.')
             return redirect(url_for('main.doctor', username=username, doctor_id=doctor.id))
+# Pre-fill the form with info
     elif request.method == 'GET':
         form.doctor_first_name.data = doctor.doctor_first_name
         form.doctor_last_name.data = doctor.doctor_last_name
@@ -369,11 +382,11 @@ def edit_doctor(username, doctor_id):
         form.doctor_notes.data = doctor.doctor_notes
     return render_template('edit_doctor.html', title="Doctor Information", user=user, doctor=doctor, form=form)
 
+# Add pharmacy page
 @bp.route('/user/<username>/add_pharmacy', methods=['GET', 'POST'])
 @login_required
 def add_pharmacy(username):
     user = User.query.filter_by(username=username).first_or_404()
-    referrer = request.referrer
     form = AddPharmacyForm()
     if form.validate_on_submit():
         pharmacy = Pharmacy(
@@ -393,6 +406,7 @@ def add_pharmacy(username):
         return redirect(url_for('main.pharmacy_list', username=username))
     return render_template('add_pharmacy.html', title='Add Pharmacy', user=user, form=form)
 
+# Pharmacy contact list
 @bp.route('/user/<username>/pharmacy_list', methods=['GET'])
 @login_required
 def pharmacy_list(username):
@@ -401,6 +415,7 @@ def pharmacy_list(username):
     pharmacies = current_user.pharmacy_list().all()
     return render_template('pharmacy_list.html', title="Pharmacy List", user=user, pharmacies=pharmacies, form=form)
 
+# Detailed info for a specific pharmacy
 @bp.route('/user/<username>/pharmacy/<pharmacy_id>', methods=['GET', 'POST'])
 @login_required
 def pharmacy(username, pharmacy_id):
@@ -412,7 +427,6 @@ def pharmacy(username, pharmacy_id):
     for medication in medications:
         if medication.pharmacy_id == pharmacy.id:
             prescribed_medications.append(medication)
-    referrer = request.referrer
     form = DeletePharmacyForm()
     if form.validate_on_submit():
         if form.delete_confirmation.data == "delete-yes":
@@ -426,6 +440,7 @@ def pharmacy(username, pharmacy_id):
             return redirect(url_for('main.pharmacy_list', username=username))
     return render_template('pharmacy.html', title="Pharmacy Information", user=user, pharmacy=pharmacy, form=form, medications=prescribed_medications)
 
+# Edit pharmacy page
 @bp.route('/user/<username>/pharmacy/<pharmacy_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_pharmacy(username, pharmacy_id):
@@ -455,6 +470,7 @@ def edit_pharmacy(username, pharmacy_id):
             db.session.commit()
             flash(f'You have successfully edited information for {form.pharmacy_name.data}')
             return redirect(url_for('main.pharmacy', username=username, pharmacy_id=pharmacy.id))
+# Pre-fill form with info 
     elif request.method == 'GET':
         form.pharmacy_name.data = pharmacy.pharmacy_name
         form.pharmacy_phone_number.data = pharmacy.pharmacy_phone_number

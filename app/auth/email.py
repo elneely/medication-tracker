@@ -3,6 +3,7 @@ from app.email import send_email
 
 
 def send_password_reset_email(user):
+    # Send a password reset email
     token = user.get_reset_password_token()
     send_email('Reset Your Password',
                sender=current_app.config['ADMINS'][0],

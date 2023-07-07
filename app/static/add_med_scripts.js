@@ -20,11 +20,6 @@ var currentDoctorChoice = document.getElementById("current-doctor-choice");
 var newDoctorFirst = document.getElementById("new-doctor-first");
 var newDoctorLast = document.getElementById("new-doctor-last");
 
-
-/* This keeps the parts visible if there is an error on the page */
-
-
-
 /* Showing or hiding fields */
 
 doctorBtn.addEventListener("click", () => {

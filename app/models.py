@@ -8,6 +8,7 @@ from app import db
 from app import login
 
 class User(UserMixin, db.Model):
+    """This creates entries for the user table"""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     display_name = db.Column(db.String(64))
@@ -21,18 +22,22 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
     
     def set_password(self, password):
+        # Create password hash
         self.password_hash = generate_password_hash(password)
     
     def check_password(self, password):
+        # Check password hash
         return check_password_hash(self.password_hash, password)
 
     def get_reset_password_token(self, expires_in=600):
+        # Create a password reset token that expires in 10 minutes
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256')
         
     @staticmethod
     def verify_reset_password_token(token):
+        # Verify the reset password token
         try:
             id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
@@ -41,10 +46,13 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
     
     def doctor_list(self):
+        # Retrieve rows on the doctor table associated with a particular user
         my_doctors = Doctor.query.filter_by(user_id=self.id)
         return my_doctors.order_by(Doctor.doctor_last_name.collate('nocase').asc())
     
     def doctor_choices(self):
+        # Generate an ordered select list of doctors associated with a particular user 
+        # and order them by last name
         my_doctors = self.doctor_list().all()
         doctor_choices = [(None, '')]
         for doctor in my_doctors:
@@ -57,10 +65,14 @@ class User(UserMixin, db.Model):
         return doctor_choices
             
     def medication_list(self):
+        # Retrieve rows on the medication table associated with a particular user
+        # and order them by name
         my_meds = Medication.query.filter_by(user_id=self.id)
         return my_meds.order_by(Medication.medication_name.collate('nocase').asc())
     
     def medication_choices(self):
+        # Generate an ordered select list of medications associated with a particular user 
+        # and order them by name
         my_medications = self.medication_list().all()
         medication_choices = []
         for medication in my_medications:
@@ -68,6 +80,7 @@ class User(UserMixin, db.Model):
         return medication_choices
 
     def refill_list(self):
+        # Generate the list of medications a user should refill
         medications = self.medication_list().all()
         reminders = []
         for medication in medications:
@@ -82,10 +95,14 @@ class User(UserMixin, db.Model):
         return reminders
 
     def pharmacy_list(self):
+        # Retrieve rows on the pharmacy table associated with a particular user
+        # and order them by name
         my_pharmacies = Pharmacy.query.filter_by(user_id=self.id)
         return my_pharmacies.order_by(Pharmacy.pharmacy_name.collate('nocase').asc())
 
     def pharmacy_choices(self):
+        # Generate an ordered select list of medications associated with a particular user 
+        # and order them by name
         my_pharmacies = self.pharmacy_list().all()
         pharmacy_choices = [(None, '')]
         for pharmacy in my_pharmacies:
@@ -95,10 +112,11 @@ class User(UserMixin, db.Model):
     
 @login.user_loader
 def load_user(id):
+    # Load the authenticated user
     return User.query.get(int(id))
 
-
 class Medication(db.Model):
+    """This creates entries for the medication table"""
     id = db.Column(db.Integer, primary_key=True)
     medication_name = db.Column(db.String(128))
     brand_name = db.Column(db.String(64))
@@ -122,20 +140,17 @@ class Medication(db.Model):
         return self.medication_name
 
     def prescribing_doctor_name(self):
+        # This converts the prescribing doctor's id number into a formatted name
         doctor_record = Doctor.query.filter_by(id=self.doctor_id).first_or_404()
         return doctor_record.full_name()
 
     def filling_pharmacy(self):
+        # This converts the filling pharmacy's id number into a name
         pharmacy_record = Pharmacy.query.filter_by(id=self.pharmacy_id).first_or_404()
-        return pharmacy_record.pharmacy_name    
-    """I don't think I will need this, but let's wait to get everything working first
-    def selected_doctor(self):
-        if self.doctor_id:
-            return (self.doctor_id, self.prescribing_doctor_name())
-        else:
-            return (None, "")"""
+        return pharmacy_record.pharmacy_name   
 
 class Doctor(db.Model):
+    """This creates entries for the doctor table"""
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     doctor_first_name = db.Column(db.String(64))
@@ -153,6 +168,8 @@ class Doctor(db.Model):
         return 'Dr. {}'.format(self.doctor_last_name)
 
     def full_name(self):
+        # This generates the full name for a doctor, regardless of whether
+        # a user has provided a first name
         if self.doctor_first_name:
             doctor_name = self.doctor_first_name + " " + self.doctor_last_name
         else:
@@ -160,6 +177,7 @@ class Doctor(db.Model):
         return doctor_name
 
 class Pharmacy(db.Model):
+    """This creates entries for the pharmacy table"""
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pharmacy_name = db.Column(db.String(64))

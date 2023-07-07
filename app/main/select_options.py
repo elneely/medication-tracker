@@ -1,3 +1,5 @@
+"""This file contains the state select list for doctor and pharmacy addresses"""
+
 states = [('', ''),
     ('AK', 'Alaska'),
     ('AL', 'Alabama'),

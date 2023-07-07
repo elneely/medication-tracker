@@ -2,6 +2,7 @@ from flask import render_template
 from app import db
 from app.errors import bp
 
+# These handle common errors 
 
 @bp.app_errorhandler(401)
 def unauthorized_error(error):

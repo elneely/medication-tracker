@@ -10,6 +10,7 @@ from app.auth.email import send_password_reset_email
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # Log a user in
     if current_user.is_authenticated:
         return redirect(url_for('main.user', username=current_user.username))
     form = LoginForm()
@@ -20,7 +21,6 @@ def login():
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = url_for('main.user', username=current_user.username)
-        #next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(next_page)     
@@ -28,11 +28,13 @@ def login():
 
 @bp.route('/logout')
 def logout():
+    # Log a user out
     logout_user()
     return redirect(url_for('main.index'))
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+    # Register a new user
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()
@@ -50,6 +52,7 @@ def register():
 @bp.route('/<username>/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password(username):
+    # Allows a user to change their password
     user = User.query.filter_by(username=username).first_or_404()
     form = ChangePasswordForm()
     if form.validate_on_submit():
@@ -65,6 +68,7 @@ def change_password(username):
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
+    # Sends a password reset email to the user
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = ResetPasswordRequestForm()
@@ -80,6 +84,7 @@ def reset_password_request():
 
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
+    # Allows user to reset their password via the email token
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     user = User.verify_reset_password_token(token)
