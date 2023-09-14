@@ -43,7 +43,7 @@
         <h3 class="section-label">How do I delete my account?</h3>
         <div class="section-container">
             Go to your {% if user %}<a href="{{ url_for('main.user_profile', username=current_user.username) }}">{% endif %}
-                profile page{% if user %}</a>{% endif %}and press the "Delete Account" button. Two stages
+                profile page{% if user %}</a>{% endif %} and press the "Delete Account" button. Two stages
                 of confirmation will appear; if you definitely want to delete your account just confirm twice and 
                 press the delete button. Your account and all of its information (medications, doctors, and pharmacies) 
                 will be deleted. 

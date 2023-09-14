@@ -18,7 +18,7 @@
     
 <p><div id="doctor-info-summary">
     <p>Dr. {{ doctor.full_name() }}</p>
-    <p>Phone number: {{ doctor.doctor_phone_number }}</p>
+    <p>Phone number: {% if doctor.doctor_phone_number %}{{ doctor.doctor_phone_number }}{% endif %}</p>
     <p>Address: 
         {% if doctor.doctor_address_line_1 %}{{ doctor.doctor_address_line_1 }},{% endif %} 
         {% if doctor.doctor_address_line_2 %}{{ doctor.doctor_address_line_2 }},{% endif %} 

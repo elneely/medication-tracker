@@ -18,7 +18,7 @@
        
 <p><div id="pharmacy-info-summary">
     <p>{{ pharmacy.pharmacy_name }}</p>
-    <p>Phone number: {{ pharmacy.pharmacy_phone_number }}</p>
+    <p>Phone number: {% if pharmacy.pharmacy_phone_number %}{{ pharmacy.pharmacy_phone_number }}{% endif %}</p>
     <p>Address: 
         {% if pharmacy.pharmacy_address_line_1 %}{{ pharmacy.pharmacy_address_line_1 }},{% endif %} 
         {% if pharmacy.pharmacy_address_line_2 %}{{ pharmacy.pharmacy_address_line_2 }},{% endif %} 
