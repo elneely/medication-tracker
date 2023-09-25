@@ -1,7 +1,11 @@
 {% extends "base.html" %} 
 
 {% block header %} 
+    {% if current_user.display_name %}
+        <h1 class="header">Pharmacy List - {{ current_user.display_name }}</h1>
+    {% else %} 
         <h1 class="header">Pharmacy List</h1>
+    {% endif %} 
 {% endblock %} 
 
 {% block notifications %} 
